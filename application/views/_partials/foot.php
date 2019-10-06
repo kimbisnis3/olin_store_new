@@ -11,27 +11,20 @@
 		 <div class="container-fluid">
 				 <div class="row">
 						 <div class="col-md-3 footer-logo mb-lg-0 mb-4">
-								 <h2>
-										 <a href="index.html"> <span class="fa fa-vine" aria-hidden="true"></span>ersatile</a>
-								 </h2>
 								 <ul class="post-links">
-										 <li>Tas Sekolah</li>
-										 <li>Backpack</li>
-										 <li>Tas Sekolah</li>
-										 <li>Backpack</li>
-										 <li>Tas Sekolah</li>
+									 <h5 class="footer-top-title"><img src="<?php echo base_url() ?>assets/images/logo.jpg" class="img-logo"></h5>
+										 <li><a href="#">Backpack</a></li>
+										 <li><a href="#">Tas Sekolah</a></li>
+                     <li><a href="#">Backpack</a></li>
+										 <li><a href="#">Tas Sekolah</a></li>
 										 <li><i class="fa fa-envelope"></i> progrespromo@gmail.com</li>
 								 </ul>
 						 </div>
 						 <div class="col-md-3">
 								 <h5 class="footer-top-title">Produk</h5>
 								 <ul class="post-links">
-										 <li>Tas Sekolah</li>
-										 <li>Backpack</li>
-										 <li>Tas Sekolah</li>
-										 <li>Backpack</li>
-										 <li>Tas Sekolah</li>
-										 <li>Backpack</li>
+										 <li><a href="#">Tas Sekolah</a></li>
+										 <li><a href="#">Backpack</a></li>
 								 </ul>
 						 </div>
 						 <div class="col-md-3">
@@ -48,29 +41,15 @@
 										 <li><strong>Tentang Kami</strong></li>
 								 </ul>
 						 </div>
-						 <!-- <div class="col-lg-3">
-								 <h5 class="footer-top-title">contact information</h5>
-								 <ul class="d-flex flex-column">
-										 <li>
-												 <span class="fa fa-home mr-3"></span>
-												 <p class="d-inline">+4667 Woodland, California 916-983-6577.</p>
-										 </li>
-										 <li class="my-3">
-												 <span class="fa fa-envelope-open mr-3"></span>
-												 <a href="mailto:example@email.com" class="text-secondary">info@example.com</a>
-										 </li>
-										 <li>
-												 <span class="fa fa-phone mr-3"></span>
-												 <p class="d-inline">+456 123 7890</p>
-										 </li>
-								 </ul>
-						 </div> -->
 				 </div>
 		 </div>
  </div>
  <script src="<?php echo base_url(); ?>assets/js/jquery-2.2.3.min.js"></script>
  <script src="<?php echo base_url(); ?>assets/js/move-top.js"></script>
  <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
+ <script src="<?php echo base_url(); ?>assets/slick/slick.min.js"></script>
+ <script src="<?php echo base_url(); ?>assets/twentytwenty/js/jquery.event.move.js"></script>
+ <script src="<?php echo base_url(); ?>assets/twentytwenty/js/jquery.twentytwenty.js"></script>
  <script>
  		jQuery(document).ready(function ($) {
  				$(".scroll").click(function (event) {

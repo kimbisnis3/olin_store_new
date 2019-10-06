@@ -11,6 +11,41 @@
 	max-height : 30px;
 }
 
+.img-slide-small {
+	width : 470px !important;
+	height: 100px !important;
+}
+
+#offer {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+.img-diff-section {
+	padding-top: 25px !important;
+	padding-bottom: 25px !important;
+}
+
+.img-diff {
+	height: 500px !important
+}
+
+.text-why {
+	font-size: 25px;
+	font-weight: 600;
+	padding: 0px !important;
+}
+
+.text-star {
+	font-size: 30px;
+	color: yellow;
+	padding: 10px !important;
+}
+
+.section-teks-desc {
+	padding: 30px;
+}
+
 .icon-header {
 	color: #5EC6C5;
 	font-size: 18px !important;
@@ -975,7 +1010,7 @@ footer {
 .footer-top {
 	background-color: #5EC6C5;
 	color: #fff;
-	padding-top: 0 !important;
+	padding-top: 10px !important;
 	padding-bottom: 0 !important;
 }
 
@@ -1016,10 +1051,10 @@ ul.post-links li span {
 }
 
 ul.post-links li a {
-	color: #777;
-	font-size: 15px;
+	color: #fff;
+	font-size: 16px;
 	display: inline-block;
-	margin-bottom: 2px;
+	margin-bottom: 5px;
 }
 ul.post-links li a:hover {
     color: #000;
