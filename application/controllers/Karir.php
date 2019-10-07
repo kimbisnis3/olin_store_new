@@ -16,7 +16,11 @@ class Karir extends CI_Controller
 
     function index()
     {
-        // $data['ss_karir']        = $this->db->get_where('tconfigimage', array('kode' => 'ss_karir'))->result();
+        // $data['gb_karir_1']        = $this->db->get_where('tconfigimage', array('kode' => 'gb_karir_1'))->row();
+        // $data['gb_karir_2']        = $this->db->get_where('tconfigimage', array('kode' => 'gb_karir_2'))->row();
+        // $data['gb_karir_3']        = $this->db->get_where('tconfigimage', array('kode' => 'gb_karir_3'))->row();
+
+        $data['tx_karir']        = $this->db->get_where('tconfigtext', array('kode' => 'tx_karir'))->row();
 
         $data['menuaktif'] = $this->menuaktif;
         $this->load->view($this->indexpage,$data);

@@ -5,6 +5,7 @@
     <meta name="keywords" content="Versatile" />
     <link href="<?php echo base_url() ?>assets/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
     <link href="<?php echo base_url() ?>assets/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url() ?>assets/css/custom.css" type="text/css" rel="stylesheet" media="all">
     <link href="<?php echo base_url() ?>assets/css/font-awesome.css" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
