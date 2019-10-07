@@ -16,8 +16,10 @@ class Aboutus extends CI_Controller
 
     function index()
     {
-        $w['tipe'] = 'aboutus';
-        $data['data'] = $this->db->get_where($this->table,$w)->row();
+        // $data['ss_karir']        = $this->db->get_where('tconfigimage', array('kode' => 'ss_karir'))->result
+        $data['tx_about_head']   = $this->db->get_where('tconfigtext', array('kode' => 'tx_about_head'))->row();
+        $data['tx_about_body']  = $this->db->get_where('tconfigtext', array('kode' => 'tx_about_body'))->row();
+
         $data['menuaktif'] = $this->menuaktif;
         $this->load->view($this->indexpage,$data);
     }

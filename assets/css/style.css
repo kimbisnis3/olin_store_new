@@ -16,6 +16,12 @@
 	height: 100px !important;
 }
 
+.img-slide-large {
+	/* 1400x400 */
+	width : 1400px !important;
+	height: 400px !important;
+}
+
 #offer {
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
@@ -44,6 +50,10 @@
 
 .section-teks-desc {
 	padding: 30px;
+}
+
+.about-us-text {
+	padding: 20px !important;
 }
 
 .icon-header {

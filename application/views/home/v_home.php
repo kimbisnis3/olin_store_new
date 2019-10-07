@@ -97,6 +97,11 @@
     <?php $this->load->view('_partials/foot') ?>
 		<script type="text/javascript">
         $(function(){
+          $(".twentytwenty-container").twentytwenty({
+            no_overlay: true,
+            default_offset_pct: 0.5,
+          });
+          
           $(".regular").slick({
 		        dots: false,
 		        infinite: true,
@@ -104,10 +109,7 @@
 		        slidesToScroll: 3
 		      });
 
-          $(".twentytwenty-container").twentytwenty({
-            no_overlay: true,
-            default_offset_pct: 0.5,
-          });
+
         });
 		</script>
 </body>
