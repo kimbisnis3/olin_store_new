@@ -9,12 +9,13 @@
               <div class="col-md-4" style="border : 1px solid #d4cfcf">
                 <div class="large-2 columns">
                   <div class="twentytwenty-container">
-                    <img src="<?php echo base_url() ?>assets/images/before.png" class="img-diff"/>
-                    <img src="<?php echo base_url() ?>assets/images/after.png" class="img-diff"/>
+                    <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_before->image ?>" class="img-diff"/>
+                    <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_after->image ?>" class="img-diff"/>
                   </div>
                 </div>
               </div>
               <div class="col-md-8" style="border : 1px solid #d4cfcf">
+                <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_big->image ?>" class="img-big"/>
               </div>
             </div>
           </div>
@@ -35,21 +36,11 @@
         </section>
 				<div class="container-fluid">
 							<section class="regular slider row">
-								<div>
-									<img src="http://placehold.it/470x100?text=1"  class="img-slide-small">
-								</div>
-								<div>
-									<img src="http://placehold.it/470x100?text=1"  class="img-slide-small">
-								</div>
-								<div>
-									<img src="http://placehold.it/470x100?text=1"  class="img-slide-small">
-								</div>
-								<div>
-									<img src="http://placehold.it/470x100?text=1"  class="img-slide-small">
-								</div>
-								<div>
-									<img src="http://placehold.it/470x100?text=1"  class="img-slide-small">
-								</div>
+                <?php foreach ($ss as $i => $v): ?>
+                  <div>
+  									<img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$v->image ?>"  class="img-slide-small">
+  								</div>
+                <?php endforeach; ?>
 							</section>
 				</div>
 				<section class="offer-wthree py-lg-5 py-3" id="offer">
@@ -59,34 +50,34 @@
 								<div class="row">
 									<div class="col-md-4">
 										<div class="home-grid">
-											<span class="fa fa-info-circle" aria-hidden="true"></span>
-											<h4 class="home-title my-3">why choose us</h4>
+											<span class="<?php echo $icon1->image; ?>" aria-hidden="true"></span>
+											<h4 class="home-title my-3"><?php echo $icon1->ket; ?></h4>
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="home-grid">
-											<span class="fa fa-connectdevelop" aria-hidden="true"></span>
-											<h4 class="home-title my-3">what we do</h4>
+											<span class="<?php echo $icon2->image; ?>" aria-hidden="true"></span>
+											<h4 class="home-title my-3"><?php echo $icon2->ket; ?></h4>
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="home-grid">
-											<span class="fa fa-users" aria-hidden="true"></span>
-											<h4 class="home-title my-3">explore versatile</h4>
+											<span class="<?php echo $icon3->image; ?>" aria-hidden="true"></span>
+											<h4 class="home-title my-3"><?php echo $icon3->ket; ?></h4>
 										</div>
 									</div>
 								</div>
                 <div class="row justify-content-center" style="margin-top : 10px;">
 									<div class="col-md-4">
 										<div class="home-grid">
-											<span class="fa fa-connectdevelop" aria-hidden="true"></span>
-											<h4 class="home-title my-3">what we do</h4>
+											<span class="<?php echo $icon4->image; ?>" aria-hidden="true"></span>
+											<h4 class="home-title my-3"><?php echo $icon4->ket; ?></h4>
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="home-grid">
-											<span class="fa fa-users" aria-hidden="true"></span>
-											<h4 class="home-title my-3">explore versatile</h4>
+											<span class="<?php echo $icon5->image; ?>" aria-hidden="true"></span>
+											<h4 class="home-title my-3"><?php echo $icon5->ket; ?></h4>
 										</div>
 									</div>
 								</div>
@@ -101,7 +92,7 @@
             no_overlay: true,
             default_offset_pct: 0.5,
           });
-          
+
           $(".regular").slick({
 		        dots: false,
 		        infinite: true,

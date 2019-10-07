@@ -14,18 +14,11 @@
   <section>
     <div class="container-fluid">
       <section class="regular slider row">
-        <div>
-          <img src="http://placehold.it/1400x400?text=1" class="img-slide-large">
-        </div>
-        <div>
-          <img src="http://placehold.it/1400x400?text=2" class="img-slide-large">
-        </div>
-        <div>
-          <img src="http://placehold.it/1400x400?text=3" class="img-slide-large">
-        </div>
-        <div>
-          <img src="http://placehold.it/1400x400?text=4" class="img-slide-large">
-        </div>
+        <?php foreach ($ss_about as $i => $v): ?>
+          <div>
+            <img src="<?php echo prep_url(api_url()).$v->image ?>" class="img-slide-large">
+          </div>
+        <?php endforeach; ?>
       </section>
     </div>
   </section>

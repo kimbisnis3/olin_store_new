@@ -9,10 +9,10 @@
   $tx_header_bottom_3 = $this->db->get_where('tconfigtext', array('kode' => 'tx_header_bottom_3'))->row();
 
   //image
-  // $logoheader  = $this->db->get_where('tconfigimage', array('kode' => 'logoheader'))->row();
-  // $gb_header_1 = $this->db->get_where('tconfigimage', array('kode' => 'gb_header_1'))->row();
-  // $gb_header_2 = $this->db->get_where('tconfigimage', array('kode' => 'gb_header_2'))->row();
-	// $gb_header_3 = $this->db->get_where('tconfigimage', array('kode' => 'gb_header_3'))->row();
+  $logoheader  = $this->db->get_where('tconfigimage', array('kode' => 'logoheader'))->row();
+  $gb_header_1 = $this->db->get_where('tconfigimage', array('kode' => 'gb_header_1'))->row();
+  $gb_header_2 = $this->db->get_where('tconfigimage', array('kode' => 'gb_header_2'))->row();
+	$gb_header_3 = $this->db->get_where('tconfigimage', array('kode' => 'gb_header_3'))->row();
  ?>
  <div class="main-header">
  		<div class="header-top text-md-left text-center">
@@ -23,15 +23,15 @@
  											<strong><p class="text-capitalize"><?php echo $tx_header_top_1->teks; ?> <span class="year-header">2007</span></p></strong>
  									</li>
  									<li>
- 											<strong><p class="text-capitalize"><?php echo $tx_header_top_2->teks; ?> <img src="<?php echo base_url() ?>assets/images/crown.png" class="img-header"> </p></strong>
+ 											<strong><p class="text-capitalize"><?php echo $tx_header_top_2->teks; ?> <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_header_1->image ?>" class="img-header"> </p></strong>
  									</li>
  							</ul>
  							<ul class="social-icons">
  									<li>
- 											<strong><img src="<?php echo base_url() ?>assets/images/crown.png" class="img-header"> <?php echo $tx_header_top_3->teks; ?></strong>
+ 											<strong><img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_header_2->image ?>" class="img-header"> <?php echo $tx_header_top_3->teks; ?></strong>
  									</li>
  									<li>
- 											<strong><img src="<?php echo base_url() ?>assets/images/crown.png" class="img-header"> <?php echo $tx_header_top_4->teks; ?></strong>
+ 											<strong><img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_header_3->image ?>" class="img-header"> <?php echo $tx_header_top_4->teks; ?></strong>
  									</li>
  								</ul>
  						</div>
@@ -43,7 +43,7 @@
  							<div class="container-fluid">
  									<h1>
  											<a class="navbar-brand" href="index.html">
- 													<img src="<?php echo base_url() ?>assets/images/logo.jpg" class="img-logo">
+ 													<img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$logoheader->image ?>" class="img-logo">
  											</a>
  									</h1>
  									<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-toggle"
@@ -81,7 +81,7 @@
  				<div class="container-fluid">
  						<div class="row">
  								<div class="col-md-4">
- 										<span><img src="<?php echo base_url() ?>assets/images/wa.png" class="img-wa"> </span> <strong><?php echo $tx_header_bottom_1->teks ?></strong>
+ 										<span><img onerror='imgError(this)' src="<?php echo base_url() ?>assets/images/wa.png" class="img-wa"> </span> <strong><?php echo $tx_header_bottom_1->teks ?></strong>
  								</div>
  								<div class="col-md-7">
  										<i class="fa fa-envelope icon-header"></i> <span class="text-header-mid"><?php echo $tx_header_bottom_2->teks ?></span> <span class="vl"></span><i class="fa fa-map-marker icon-header"></i> <span class="text-header-mid"><?php echo $tx_header_bottom_3->teks ?> </span>

@@ -1,16 +1,16 @@
 <?php
   //text
-	$tx_footer  	= $this->db->get_where('tconfigtext', array('kode' => 'tx_footer'))->row();
+  $tx_footer  	 = $this->db->get_where('tconfigtext', array('kode' => 'tx_footer'))->row();
 
   //image
-  // $logofooter = $this->db->get_where('tconfigimage', array('kode' => 'logofooter'))->row();
+  $logofooter = $this->db->get_where('tconfigimage', array('kode' => 'logofooter'))->row();
  ?>
  <div class="footer-top py-lg-5 py-4">
 		 <div class="container-fluid">
 				 <div class="row">
 						 <div class="col-md-3 footer-logo mb-lg-0 mb-4">
 								 <ul class="post-links">
-									 <h5 class="footer-top-title"><img src="<?php echo base_url() ?>assets/images/logo.jpg" class="img-logo"></h5>
+									 <h5 class="footer-top-title"><img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$logofooter->image ?>" class="img-logo"></h5>
 										 <li>
                        <?php echo $tx_footer->teks ?>
                      </li>

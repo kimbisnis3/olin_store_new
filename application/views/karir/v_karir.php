@@ -6,13 +6,13 @@
   <section>
     <div class="container-fluid">
       <div class="row">
-        <img src="http://placehold.it/1400x400?text=1" class="img-karir">
+        <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_karir_1->image ?>" class="img-karir">
       </div>
       <div class="row">
-        <img src="http://placehold.it/1400x400?text=2" class="img-karir">
+        <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_karir_2->image ?>" class="img-karir">
       </div>
       <div class="row">
-        <img src="http://placehold.it/1400x400?text=3" class="img-karir">
+        <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_karir_3->image ?>" class="img-karir">
       </div>
     </div>
   </section>

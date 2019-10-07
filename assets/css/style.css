@@ -40,6 +40,11 @@
 	height: 500px !important
 }
 
+.img-big {
+	height: 100% !important;
+	width: 100% !important;
+}
+
 .text-why {
 	font-size: 25px;
 	font-weight: 600;
