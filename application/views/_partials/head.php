@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/slick/slick-theme.css"/>
     <link href="<?php echo base_url() ?>assets/twentytwenty/css/twentytwenty-no-compass.css" rel="stylesheet" type="text/css" />
-        <style>
+    <style>
         .selected {
             background-color: #00B5AD !important;
             color: #ffffff !important;
@@ -27,5 +27,5 @@
         .img-item {
             height: 25vh;
         }
-        </style>
+    </style>
 </head>

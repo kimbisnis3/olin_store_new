@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
 <?php $this->load->view('_partials/head') ?>
-
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <?php $this->load->view('_partials/topbar') ?>
       <section class="img-diff-section">
@@ -56,36 +54,36 @@
 				</div>
 				<section class="offer-wthree py-lg-5 py-3" id="offer">
 					<div class="container-fluid  py-sm-5">
-						<div class="row head-row-home text-center">
-							<div class="col-lg-12 mx-auto">
+						<div class="row head-row-home text-center justify-content-center">
+							<div class="col-lg-9 mx-auto">
 								<div class="row">
-									<div class="col-md-4 mx-auto">
+									<div class="col-md-4">
 										<div class="home-grid">
 											<span class="fa fa-info-circle" aria-hidden="true"></span>
 											<h4 class="home-title my-3">why choose us</h4>
 										</div>
 									</div>
-									<div class="col-md-4 mx-auto">
+									<div class="col-md-4">
 										<div class="home-grid">
 											<span class="fa fa-connectdevelop" aria-hidden="true"></span>
 											<h4 class="home-title my-3">what we do</h4>
 										</div>
 									</div>
-									<div class="col-md-4 mx-auto">
+									<div class="col-md-4">
 										<div class="home-grid">
 											<span class="fa fa-users" aria-hidden="true"></span>
 											<h4 class="home-title my-3">explore versatile</h4>
 										</div>
 									</div>
 								</div>
-                <div class="row" style="margin-top : 10px;">
-									<div class="col-md-4 mx-auto">
+                <div class="row justify-content-center" style="margin-top : 10px;">
+									<div class="col-md-4">
 										<div class="home-grid">
 											<span class="fa fa-connectdevelop" aria-hidden="true"></span>
 											<h4 class="home-title my-3">what we do</h4>
 										</div>
 									</div>
-									<div class="col-md-4 mx-auto">
+									<div class="col-md-4">
 										<div class="home-grid">
 											<span class="fa fa-users" aria-hidden="true"></span>
 											<h4 class="home-title my-3">explore versatile</h4>
@@ -96,8 +94,6 @@
 						</div>
 					</div>
 				</section>
-    <!-- // Register modal -->
-    <!-- js -->
     <?php $this->load->view('_partials/foot') ?>
 		<script type="text/javascript">
         $(function(){

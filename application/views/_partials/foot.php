@@ -1,11 +1,9 @@
-<!--information-starts-->
 <?php
-	// $desc  	= $this->db->get_where('tconfigtext', array('tipe' => 'elfoot_ket'))->row();
-	// $hp  	= $this->db->get_where('tconfigtext', array('tipe' => 'elfoot_hp'))->row();
-	// $email  = $this->db->get_where('tconfigtext', array('tipe' => 'elfoot_email'))->row();
-	// $fb  	= $this->db->get_where('tconfigtext', array('tipe' => 'socmed_fb'))->row();
-	// $tw  	= $this->db->get_where('tconfigtext', array('tipe' => 'socmed_tw'))->row();
-	// $go  	= $this->db->get_where('tconfigtext', array('tipe' => 'socmed_go'))->row();
+  //text
+	$tx_footer  	= $this->db->get_where('tconfigtext', array('kode' => 'tx_footer'))->row();
+
+  //image
+  // $logofooter = $this->db->get_where('tconfigimage', array('kode' => 'logofooter'))->row();
  ?>
  <div class="footer-top py-lg-5 py-4">
 		 <div class="container-fluid">
@@ -13,11 +11,9 @@
 						 <div class="col-md-3 footer-logo mb-lg-0 mb-4">
 								 <ul class="post-links">
 									 <h5 class="footer-top-title"><img src="<?php echo base_url() ?>assets/images/logo.jpg" class="img-logo"></h5>
-										 <li><a href="#">Backpack</a></li>
-										 <li><a href="#">Tas Sekolah</a></li>
-                     <li><a href="#">Backpack</a></li>
-										 <li><a href="#">Tas Sekolah</a></li>
-										 <li><i class="fa fa-envelope"></i> progrespromo@gmail.com</li>
+										 <li>
+                       <?php echo $tx_footer->teks ?>
+                     </li>
 								 </ul>
 						 </div>
 						 <div class="col-md-3">
