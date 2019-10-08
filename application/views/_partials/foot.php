@@ -33,8 +33,8 @@
 						 <div class="col-md-3">
 								 <h5 class="footer-top-title">Login</h5>
 								 <ul class="post-links">
-										 <li><strong>Karir</strong></li>
-										 <li><strong>Tentang Kami</strong></li>
+										 <li><strong><a href="<?php echo base_url() ?>karir">Karir</a></strong></li>
+										 <li><strong><a href="<?php echo base_url() ?>aboutus">Tentang Kami</a></strong></li>
 								 </ul>
 						 </div>
 				 </div>

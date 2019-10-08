@@ -60,10 +60,8 @@
  									<div class="collapse navbar-collapse navbar-toggle" id="navbarNavAltMarkup1">
  											<div class="navbar-nav secondfix ml-lg-auto">
  													<ul class="navbar-nav text-center">
- 															<li class="nav-item menu-home  mr-lg-3">
- 																	<a class="nav-link" href="<?php echo base_url() ?>"><i class="fa fa-home"></i> Home
- 																			<span class="sr-only">(current)</span>
- 																	</a>
+ 															<li class="nav-item menu-home mr-lg-3">
+ 																	<a class="nav-link" href="<?php echo base_url() ?>"><i class="fa fa-home"></i> Home</a>
  															</li>
  															<li class="nav-item menu-produk mr-lg-4">
  																	<a class="nav-link" href="<?php echo base_url() ?>produk">Produk</a>
