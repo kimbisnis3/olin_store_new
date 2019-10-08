@@ -13,6 +13,13 @@
   $gb_header_1 = $this->db->get_where('tconfigimage', array('kode' => 'gb_header_1'))->row();
   $gb_header_2 = $this->db->get_where('tconfigimage', array('kode' => 'gb_header_2'))->row();
 	$gb_header_3 = $this->db->get_where('tconfigimage', array('kode' => 'gb_header_3'))->row();
+
+  function activelink($link)
+  {
+    if ($this->uri->segment('1') == $link) {
+      echo "active";
+    }
+  }
  ?>
  <div class="main-header">
  		<div class="header-top text-md-left text-center">
@@ -42,7 +49,7 @@
  					<nav class="navbar second navbar-expand-lg navbar-light pagescrollfix">
  							<div class="container-fluid">
  									<h1>
- 											<a class="navbar-brand" href="index.html">
+ 											<a class="navbar-brand" href="<?php echo base_url() ?>">
  													<img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$logoheader->image ?>" class="img-logo">
  											</a>
  									</h1>
@@ -53,22 +60,22 @@
  									<div class="collapse navbar-collapse navbar-toggle" id="navbarNavAltMarkup1">
  											<div class="navbar-nav secondfix ml-lg-auto">
  													<ul class="navbar-nav text-center">
- 															<li class="nav-item active  mr-lg-3">
+ 															<li class="nav-item menu-home  mr-lg-3">
  																	<a class="nav-link" href="<?php echo base_url() ?>"><i class="fa fa-home"></i> Home
  																			<span class="sr-only">(current)</span>
  																	</a>
  															</li>
- 															<li class="nav-item mr-lg-4">
- 																	<a class="nav-link" href="about.html">Produk</a>
+ 															<li class="nav-item menu-produk mr-lg-4">
+ 																	<a class="nav-link" href="<?php echo base_url() ?>produk">Produk</a>
  															</li>
- 															<li class="nav-item mr-lg-4">
- 																	<a class="nav-link" href="about.html">Design Sendiri</a>
+ 															<li class="nav-item menu-custom mr-lg-4">
+ 																	<a class="nav-link" href="<?php echo base_url() ?>custom">Design Sendiri</a>
  															</li>
- 															<li class="nav-item mr-lg-4">
- 																	<a class="nav-link" href="contact.html">Karir</a>
+ 															<li class="nav-item menu-karir mr-lg-4">
+ 																	<a class="nav-link" href="<?php echo base_url() ?>karir">Karir</a>
  															</li>
- 															<li class="nav-item">
- 																	<a class="nav-link" href="contact.html">Tentang Kami</a>
+ 															<li class="nav-item menu-aboutus">
+ 																	<a class="nav-link" href="<?php echo base_url() ?>aboutus">Tentang Kami</a>
  															</li>
  													</ul>
  											</div>
