@@ -64,7 +64,7 @@
  																	<a class="nav-link" href="<?php echo base_url() ?>"><i class="fa fa-home"></i> Home</a>
  															</li>
  															<li class="nav-item menu-produk mr-lg-4">
- 																	<a class="nav-link" href="<?php echo base_url() ?>produk">Produk</a>
+ 																	<a class="nav-link" href="<?php echo base_url() ?>product">Produk</a>
  															</li>
  															<li class="nav-item menu-custom mr-lg-4">
  																	<a class="nav-link" href="<?php echo base_url() ?>custom">Design Sendiri</a>

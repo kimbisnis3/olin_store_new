@@ -1,42 +1,60 @@
+</html>
 <!DOCTYPE html>
-<html>
-<?php $this->load->view('_partials/head.php'); ?>
-<body class="fadeIn animated">
-    <?php $this->load->view('_partials/topbar.php'); ?>
-    <div class="breadcrumbs">
-        <div class="container">
-            <div class="breadcrumbs-main">
-                <ol class="breadcrumb">
-                    <li><a href="<?php echo base_url() ?>">Home</a></li>
-                    <li class="active">Custom</li>
-                </ol>
+<html lang="zxx">
+<?php $this->load->view('_partials/head') ?>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <?php $this->load->view('_partials/topbar') ?>
+      <section style="padding : 10px !important">
+        <div class="container-fluid">
+          <img src="https://via.placeholder.com/1400x500" data-magnify-src="https://via.placeholder.com/1400x500" class="img-slide-produk">
+        </div>
+      </section>
+      <section class="offer-wthree py-lg-5 py-3" id="offer">
+        <div class="container-fluid  py-sm-5">
+          <div class="row head-row-home text-center justify-content-center">
+            <div class="col-lg-9 mx-auto">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="pagecutom-grid">
+                    <img src="https://via.placeholder.com/200x200" style="width : 100%;">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="pagecutom-grid">
+                    <img src="https://via.placeholder.com/200x200" style="width : 100%;">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="pagecutom-grid">
+                    <img src="https://via.placeholder.com/200x200" style="width : 100%;">
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    <div class="konten">
-        <div class="container">
-            <!-- <iframe src="<?php echo prep_url('http://demo.gongsoft.com/plugin/customdesign/editor.php?product=10') ?>" height="600px" width="100%" style="margin-top : 25px !important;"></iframe> -->
-            <iframe id="iframe" src="<?php echo prep_url('http://localhost/lumise_custom/editor.php?product=3') ?>" height="600px" width="100%" style="margin-top : 25px !important;"></iframe>
-        </div>
-    </div>
-    <?php $this->load->view('_partials/foot.php'); ?>
+      </section>
+    <?php $this->load->view('_partials/foot') ?>
 </body>
 <script>
-    $(function(){
-			var f=$('#iframe')
-			f.load(function(){ 
-                f.contents().find(`
-                    name,
-                    price , 
-                    desc,
-                    #lumise-change-product,
-                    #lumise-top-tools,
-                    .how-calculate,
-                    .lumise-prints,
-                    [data-tab="bug"],
-                    [data-type="quantity"]
-                `).remove()
-			})
-		})
+$(document).ready(function() {
+  $('.img-slide-produk').magnify();
+});
+    // $(function(){
+		// 	var f=$('#iframe')
+		// 	f.load(function(){
+    //             f.contents().find(`
+    //                 name,
+    //                 price ,
+    //                 desc,
+    //                 #lumise-change-product,
+    //                 #lumise-top-tools,
+    //                 .how-calculate,
+    //                 .lumise-prints,
+    //                 [data-tab="bug"],
+    //                 [data-type="quantity"]
+    //             `).remove()
+		// 	})
+		// })
 </script>
 </html>

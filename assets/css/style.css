@@ -74,6 +74,20 @@
 	font-weight: 500;
 }
 
+.list-product {
+	padding: 10px !important
+}
+
+.img-list-produk {
+	width : 100% !important;
+	height : 200px !important
+}
+
+.img-slide-produk {
+	width : 100% !important;
+	height : 400px !important
+}
+
 .vl {
   border-left: 2px solid black;
   height: 100px;
@@ -544,6 +558,11 @@ h5.w3pvt-title {
 /* home grid */
 .home-grid {
 	padding: 2em 1em 1.2em;
+	border: 1px solid #d4cfcf;
+}
+
+.pagecutom-grid {
+	/* padding: 2em 1em 1.2em; */
 	border: 1px solid #d4cfcf;
 }
 

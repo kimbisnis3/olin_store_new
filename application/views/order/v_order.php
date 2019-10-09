@@ -1,55 +1,47 @@
 <!DOCTYPE html>
-<html>
-<?php $this->load->view('_partials/head.php'); ?>
-<body class="fadeIn animated">
-  <?php $this->load->view('_partials/topbar.php'); ?>
-      <div class="breadcrumbs" style="margin-bottom: 25px !important;">
-        <div class="container">
-          <div class="breadcrumbs-main">
-            <ol class="breadcrumb">
-              <li><a href="<?php echo base_url() ?>">Home</a></li>
-              <li class="active">Data Pesanan</li>
-            </ol>
-          </div>
+<html lang="zxx">
+<?php $this->load->view('_partials/head') ?>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <?php $this->load->view('_partials/topbar') ?>
+    <section style="min-height : 50vh !important">
+    <div class="container" style="margin-top: 25px !important">
+      <div class="ckeck-top heading">
+        <h2 class="judul-page">Data Pesanan</h2>
+      </div>
+    </div>
+    <div class="konten" >
+      <!-- <div class="container" style="margin-bottom: 20px !important;">
+        <div class="row">
+          <button class="btn btn-teal btn-flat" onclick="add_data()"><i class="fa fa-plus"></i> Tambah</button>
+        </div>
+      </div> -->
+      <div class="container">
+        <div class="row">
+          <table id="table" class="table-custom" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th width="5%"></th>
+                <th width="5%">No</th>
+                <th>ID</th>
+                <th>Kode</th>
+                <th>Tanggal</th>
+                <th>Agen</th>
+                <th>Layanan</th>
+                <th>Pengiriman</th>
+                <th>Keterangan</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="container" style="margin-top: 25px !important">
-        <div class="ckeck-top heading">
-          <h2 class="judul-page">Data Pesanan</h2>
-        </div>
-      </div>
-      <div class="konten">
-        <!-- <div class="container" style="margin-bottom: 20px !important;">
-          <div class="row">
-            <button class="btn btn-teal btn-flat" onclick="add_data()"><i class="fa fa-plus"></i> Tambah</button>
-          </div>
-        </div> -->
-        <div class="container">
-          <div class="row">
-            <table id="table" class="table-custom" cellspacing="0" width="100%">
-              <thead>
-                <tr>
-                  <th width="5%"></th>
-                  <th width="5%">No</th>
-                  <th>ID</th>
-                  <th>Kode</th>
-                  <th>Tanggal</th>
-                  <th>Agen</th>
-                  <th>Layanan</th>
-                  <th>Pengiriman</th>
-                  <th>Keterangan</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <?php $this->load->view('_partials/foot.php'); ?>
-    </body>
-<script src="<?php echo base_url()?>assets/pace/pace.js"></script>
+    </div>
+    </section>
+    <?php $this->load->view('_partials/foot') ?>
+
+</body>
 <script>
     var path = 'order';
     var apiurl = "<?php echo base_url('') ?>" + path;
@@ -70,8 +62,8 @@
                 "orderable": false,
                 "data": null,
                 "defaultContent": ''
-            }, 
-            { "data": "no" }, 
+            },
+            { "data": "no" },
             { "data": "id" , "visible" : false},
             { "data": "kode" },
             { "data": "tgl" },
@@ -145,5 +137,4 @@
     }
 
 </script>
-
 </html>

@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/slick/slick-theme.css"/>
     <link href="<?php echo base_url() ?>assets/twentytwenty/css/twentytwenty-no-compass.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/magnify/css/magnify.css"/>
+
     <style>
         .selected {
             background-color: #00B5AD !important;
@@ -30,3 +32,9 @@
         }
     </style>
 </head>
+<?php
+$d = array(
+    'kode_ref'    => session_id(),
+);
+$this->session->set_userdata($d);
+?>

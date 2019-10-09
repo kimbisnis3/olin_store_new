@@ -50,7 +50,7 @@ class Product extends CI_Controller
     }
 
     function detail()
-    { 
+    {
         $kode = $this->input->get('q');
         $data['kode'] = $kode;
         $q = "SELECT
