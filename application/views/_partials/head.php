@@ -1,5 +1,8 @@
+<?php
+    $tx_titlepage = $this->db->get_where('tconfigtext', array('kode' => 'tx_titlepage'))->row();
+?>
 <head>
-    <title>Parbik Tas Custom</title>
+    <title><?php echo $tx_titlepage->teks ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8" />
     <meta name="keywords" content="Versatile" />
