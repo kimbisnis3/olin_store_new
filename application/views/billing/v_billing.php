@@ -1,48 +1,14 @@
 <!DOCTYPE html>
 <html>
 <?php $this->load->view('_partials/head.php'); ?>
-<body class="fadeIn animated"> 
+<body class="fadeIn animated">
     <?php $this->load->view('_partials/topbar.php'); ?>
-    <div class="breadcrumbs" style="margin-bottom: 25px !important;">
-        <div class="container">
-            <div class="breadcrumbs-main">
-                <ol class="breadcrumb">
-                    <li><a href="<?php echo base_url() ?>">Home</a></li>
-                    <li class="active">Billing</li>
-                </ol>
-            </div>
-        </div>
-    </div>
     <div class="container" style="margin-top: 25px !important">
         <div class="ckeck-top heading">
             <h2 class="judul-page">Billing</h2>
         </div>
     </div>
-	<div class="konten"> 
-		<!-- <div class="container step step-1">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row" style="margin-bottom: 20px !important;">
-                        <div class="col-md-3">
-                            <label for="">Nama</label>
-                            <input type="text" class="form-control" name="nama">
-                        </div>
-                        <div class="col-md-3">
-                            <label for="">Alamat</label>
-                            <input type="text" class="form-control" name="alamat">
-                        </div>
-                        <div class="col-md-3">
-                            <label for="">Telp</label>
-                            <input type="text" class="form-control" name="telp">
-                        </div>
-                        <div class="col-md-3">
-                            <label for="">Email</label>
-                            <input type="text" class="form-control" name="email">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+	<div class="konten">
         <div class="container step step-1">
             <div class="row">
                 <!-- <div class="col-md-2"></div> -->
@@ -272,10 +238,10 @@
 	        type: "GET",
 	        dataType: "JSON",
 	        success: function(data) {
-                $('[name="nama_penerima"]').val(data.nama); 
-                $('[name="telp_penerima"]').val(data.telp); 
-                $('[name="email_penerima"]').val(data.email); 
-                $('[name="alamat_penerima"]').val(data.alamat); 
+                $('[name="nama_penerima"]').val(data.nama);
+                $('[name="telp_penerima"]').val(data.telp);
+                $('[name="email_penerima"]').val(data.email);
+                $('[name="alamat_penerima"]').val(data.alamat);
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {
                 console.log('Error on process');
@@ -292,7 +258,7 @@
             data : {
                 nama_penerima   : $('[name="nama_penerima"]').val(),
                 telp_penerima   : $('[name="telp_penerima"]').val(),
-                email_penerima  : $('[name="email_penerima"]').val(), 
+                email_penerima  : $('[name="email_penerima"]').val(),
                 alamat_penerima : $('[name="alamat_penerima"]').val() ,
                 provinsito      : $('[name="provinsi"]').val(),
                 cityto          : $('[name="kota"]').val(),
@@ -312,7 +278,7 @@
                     console.log('sukses')
                     showNotif('Sukses', 'Pesanan Berhasil Dilakukan, Segera Masukan Data Pembayaran', 'success')
                     btnproc('.btn-konfirmasi',0)
-                    setTimeout(function(){ 
+                    setTimeout(function(){
                         location.href = '<?php echo base_url() ?>payment';
                     }, 2000);
 
@@ -320,7 +286,7 @@
                     showNotif('Error', 'Internal Error', 'danger')
                     btnproc('.btn-konfirmasi',0)
                 }
-                
+
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {
                 console.log('Error on process');
@@ -335,7 +301,7 @@
       	Pace.bar.render();
         //validation form here
 
-        let page_datakirim = 1; 
+        let page_datakirim = 1;
         if(page == page_datakirim && $('[name="nama_penerima"]').val() == '') {
             $('[name="nama_penerima"]').focus()
             showNotif('Perhatian', 'Lengkapi Data', 'warning')
@@ -357,7 +323,7 @@
             return false
         }
 
-        let page_ongkir = 2; 
+        let page_ongkir = 2;
         if(page == page_ongkir && $('[name="layanan"]').val() == '') {
             $('[name="layanan"]').focus()
             showNotif('Perhatian', 'Lengkapi Data', 'warning')
@@ -390,7 +356,7 @@
             return false
         }
 
-        let page_bank = 3; 
+        let page_bank = 3;
         if(page == page_bank && $('[name="bank"]').val() == '') {
             $('[name="bank"]').focus()
             showNotif('Perhatian', 'Lengkapi Data', 'warning')
@@ -482,7 +448,7 @@
         } else {
             $('.btn-prev').removeClass('invisible')
         }
-        
+
     }
 
     function changekirim() {
@@ -603,7 +569,7 @@
         } else {
             console.log('empty')
         }
-        
+
     }
 
     function getservice() {
@@ -636,20 +602,20 @@
             let i = _.findIndex(arr_parse, {
                 'service': $('#service').val(),
             })
-            let ongkos  = (arr_parse[i].cost[0].value); 
-            let etd     = (arr_parse[i].cost[0].etd); 
+            let ongkos  = (arr_parse[i].cost[0].value);
+            let etd     = (arr_parse[i].cost[0].etd);
             let berattotal = $('#berattotal').val()
             $('#biaya').val(ongkos * berattotal)
             $('#kodekurir').val(arr_parse[i].service)
-        } 
-        
+        }
+
     }
 
     function getselect(prop, classoption, val, caption, arr) {
 	    $(`${prop}`).after(function() { $(`.${classoption}`).remove() });
 		$(`${prop}`).val('');
         $(`${prop}`).trigger('change');
-        
+
         // $(`${prop}`).append(`<option class="${classoption}" value="">-</option>`);
         $.each(arr, function (i, v) {
             $(`${prop}`).append(`<option class="${classoption}" value="${v[val]}">${v[caption]}</option>`);

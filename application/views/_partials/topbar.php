@@ -93,7 +93,7 @@
  								</div>
  								<div class="col-md-1">
  										<div class="float-right">
- 											<strong>Login</strong>
+ 											<a href="<?php echo base_url(); ?>login"> <strong>Login</strong></a>
  										</div>
  								</div>
  						</div>

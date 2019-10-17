@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/slick/slick-theme.css"/>
     <link href="<?php echo base_url() ?>assets/twentytwenty/css/twentytwenty-no-compass.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/magnify/css/magnify.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/toastr/toastr.css" />
 
     <style>
         .selected {

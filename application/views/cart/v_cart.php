@@ -8,76 +8,51 @@
 </style>
 <body class="fadeIn animated">
     <?php $this->load->view('_partials/topbar.php'); ?>
-    <div class="breadcrumbs">
+    <div class="checkout">
         <div class="container">
-            <div class="breadcrumbs-main">
-                <ol class="breadcrumb">
-                    <li><a href="<?php echo base_url() ?>">Home</a></li>
-                    <li class="active">Cart</li>
-                </ol>
+            <div class="ckeck-top heading">
+                <h2>SHOPPING CART</h2>
+            </div>
+            <div class="ckeckout-top">
+                <div class="cart-items">
+                    <div class="row" style="margin-bottom: 20px !important;">
+                        <div class="col-md-6">
+                            <h3>My Cart Items (<span class="total_items"></span>)</h3>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="pull-right">
+                                <button class="btn btn-md btn-merah btn-flat btn-clear-cart" onclick="remove_cart('all')"><i class="fa fa-trash"></i> Clear Cart</button>
+                                <button class="btn btn-md btn-hijau btn-flat btn-checkout" onclick="checkout()"><i class="fa fa-shopping-cart"></i></i> Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table-custom">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Product</th>
+                                <th>Harga</th>
+                                <th>Jumlah</th>
+                                <th>Subtotal</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="tr-total">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td align="center">Total</td>
+                                <td class="total-cart" align="right"> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="checkout">
-		<div class="container">
-			<div class="ckeck-top heading">
-				<h2>SHOPPING CART</h2>
-			</div>
-			<div class="ckeckout-top">
-			<div class="cart-items">
-                <div class="row" style="margin-bottom: 20px !important;">
-                    <div class="col-md-6">
-                        <h3>My Cart Items (<span class="total_items"></span>)</h3>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="pull-right">
-                            <button class="btn btn-md btn-merah btn-flat btn-clear-cart" onclick="remove_cart('all')"><i class="fa fa-trash"></i> Clear Cart</button>
-                            <button class="btn btn-md btn-hijau btn-flat btn-checkout" onclick="checkout()"><i class="fa fa-shopping-cart"></i></i> Checkout</button>
-                        </div>
-                    </div>
-                </div>                
-            <table class="table-custom">
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Product</th>
-                        <th>Harga</th>
-                        <th>Jumlah</th>
-                        <th>Subtotal</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody class="body-tb">
-                <!-- <?php foreach ($this->cart->contents() as $i => $v): ?>
-                    <tr class="tr-tb">
-                        <td><img style="width: 100px !important;" src="<?php echo prep_url(api_url()).'/uploads/img1.png' ?>" class="img-responsive" alt=""></td>
-                        <td><?php echo $v['name'] ?></td>
-                        <td align="right">Rp. <?php echo number_format($v['price']) ?></td>
-                        <td align="center"><?php echo $v['qty'] ?></td>
-                        <td align="right">Rp. <?php echo number_format($v['subtotal'])  ?></td>
-                        <td align="center"><button class="btn btn-md "  onclick="remove_cart('<?php echo $v['rowid']  ?>')"><i class="fa fa-times"></i></button></td>
-                    </tr>
-                <?php endforeach; ?> -->
-                </tbody>
-                <tbody>
-                    <tr class="tr-total">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td align="center">Total</td>
-                        <td class="total-cart" align="right"> </td>
-                    </tr>
-                </tbody>
-            </table>
-			</div>  
-		 </div>
-		</div>
-    </div>
-    
     <?php $this->load->view('_partials/foot.php'); ?>
     <script src="<?php echo base_url()?>assets/pace/pace.js"></script>
-    
 </body>
 <script>
     var total_all_items = <?php echo $this->cart->total_items() ?>;
@@ -92,7 +67,7 @@
             window.location = '<?php echo base_url() ?>billing';
         }
     }
-    
+
     function load_cart() {
         $('.tr-tb').remove();
         $.ajax({
@@ -200,8 +175,8 @@
 
     function btn_action(x) {
         if(x == 0) {
-            $('.btn-checkout').addClass('invisible') 
-            $('.btn-clear-cart').addClass('invisible') 
+            $('.btn-checkout').addClass('invisible')
+            $('.btn-clear-cart').addClass('invisible')
         } else {
             $('.btn-checkout').removeClass('invisible')
             $('.btn-clear-cart').removeClass('invisible')

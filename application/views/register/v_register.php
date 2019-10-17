@@ -5,11 +5,10 @@
     .box-input {
       max-width: 40%;
       margin: 35px auto;
-      border : 2px solid #53e074 !important; 
+      border : 2px solid #53e074 !important;
       padding : 30px;
       border-radius: 16px;
     }
-    
 
     .box-button {
       max-width: 60%;
@@ -19,7 +18,7 @@
     }
 
     .neon {
-      border : 2px solid #53e074 !important; 
+      border : 2px solid #53e074 !important;
       animation: hue 20s infinite linear;
     }
 
@@ -27,7 +26,7 @@
         from {
           filter: hue-rotate(0deg);
         }
-        
+
         to {
           filter: hue-rotate(-360deg);
         }
@@ -35,16 +34,6 @@
   </style>
   <body class="fadeIn animated">
     <?php $this->load->view('_partials/topbar.php'); ?>
-    <div class="breadcrumbs">
-      <div class="container">
-        <div class="breadcrumbs-main">
-          <ol class="breadcrumb">
-            <li><a href="<?php echo base_url() ?>">Home</a></li>
-            <li class="active">Register</li>
-          </ol>
-        </div>
-      </div>
-    </div>
     <div class="konten">
       <div class="box-button container">
         <div class="row">
@@ -133,7 +122,7 @@
     </div>
     <?php $this->load->view('_partials/foot.php'); ?>
   </body>
-  
+
   <script>
 
     $(document).ready(function(){
@@ -201,20 +190,23 @@
         data: $('#form-register').serializeArray(),
         success: function (data) {
           if (data.status == 'success') {
-            showNotif(data.header, data.msg, data.class)
+            // showNotif(data.header, data.msg, data.class)
+            toastr.success(data.msg)
             $('.form-control').prop('readonly', false)
             btnproc('#btn-sign-up', 0)
             // location.href = "<?php echo base_url() ?>";
             $('#form-register')[0].reset();
             setTimeout(function(){ login_modal() }, 1500);
           } else {
-            showNotif(data.header, data.msg, data.class)
+            // showNotif(data.header, data.msg, data.class)
+            toastr.danger(data.msg)
             $('.form-control').prop('readonly', false)
             btnproc('#btn-sign-up', 0)
           }
         },
         error: function (jqXHR, textStatus, errorThrown) {
           $('.form-control').prop('readonly', false)
+          toastr.danger(data.msg)
           btnproc('#btn-sign-up', 0)
         }
       });

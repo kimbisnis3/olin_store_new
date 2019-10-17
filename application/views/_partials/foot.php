@@ -47,6 +47,7 @@
  <script src="<?php echo base_url(); ?>assets/twentytwenty/js/jquery.event.move.js"></script>
  <script src="<?php echo base_url(); ?>assets/twentytwenty/js/jquery.twentytwenty.js"></script>
  <script src="<?php echo base_url(); ?>assets/magnify/js/jquery.magnify.js"></script>
+ <script src="<?php echo base_url() ?>assets/toastr/toastr.min.js"></script>
  <script>
  		jQuery(document).ready(function ($) {
  				$(".scroll").click(function (event) {
