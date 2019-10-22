@@ -7,8 +7,8 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
+          <h5 class="modal-title text-hijau"></h5>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-hijau"></h4>
         </div>
         <div class="modal-body">
           <div class="box-body pad">
@@ -74,8 +74,8 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+            <h5 class="modal-title">Daftar Order</h5>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Daftar Order</h4>
           </div>
           <div class="modal-body">
                 <div class="table-responsive mailbox-messages">
@@ -106,29 +106,14 @@
         </div>
       </div>
       </div>  <!-- END MODAL ORDER-->
-      <div class="breadcrumbs" style="margin-bottom: 25px !important;">
+
+      <section class="pt-1 mt-3">
         <div class="container">
-          <div class="breadcrumbs-main">
-            <ol class="breadcrumb">
-              <li><a href="<?php echo base_url() ?>">Home</a></li>
-              <li class="active">Payment</li>
-            </ol>
-          </div>
+          <button class="btn btn-teal btn-flat" onclick="add_data()"><i class="fa fa-plus"></i> Tambah</button>
         </div>
-      </div>
-      <div class="container" style="margin-top: 25px !important">
-        <div class="ckeck-top heading">
-          <h2 class="judul-page">Payment</h2>
-        </div>
-      </div>
-      <div class="konten">
-        <div class="container" style="margin-bottom: 20px !important;">
-          <div class="row">
-            <button class="btn btn-teal btn-flat" onclick="add_data()"><i class="fa fa-plus"></i> Tambah</button>
-          </div>
-        </div>
+      </section>
+      <section class="p-3 mb-5">
         <div class="container">
-          <div class="row">
             <table id="table" class="table-custom" cellspacing="0" width="100%">
               <thead>
                 <tr>
@@ -149,9 +134,8 @@
               <tbody>
               </tbody>
             </table>
-          </div>
         </div>
-      </div>
+      </section>
       <?php $this->load->view('_partials/foot.php'); ?>
     </body>
 <script src="<?php echo base_url()?>assets/pace/pace.js"></script>
@@ -188,12 +172,12 @@
                 "data": {},
             },
             "columns": [
-                { "data": "id", "visible" : false }, 
-                { "data": "id", "note" : "numbers" }, 
+                { "data": "id", "visible" : false },
+                { "data": "id", "note" : "numbers" },
                 { "data": "id" , "visible" : false},
                 { "data": "kode" , "visible" : false},
                 { "data": "posted" , "visible" : false},
-                { "data": "tgl" }, 
+                { "data": "tgl" },
                 { "data": "mcustomer_nama" , "visible" : false },
                 { "data": "ref_jual" },
                 { "data": "mjenbayar_nama" },
@@ -281,7 +265,8 @@
       kode = table.cell(idx, 3).data();
       let validasiValue = table.cell(idx, 4).data();
       if (validasiValue == 't') {
-        showNotif('Perhatian', 'Data Sudah Tervalidasi', 'warning')
+        // showNotif('Perhatian', 'Data Sudah Tervalidasi', 'warning')
+        toastr.warning("Data Sudah Tervalidasi")
         return false;
       }
       if (idx == -1) {
@@ -311,7 +296,7 @@
           $('.modal-title').text('Edit Data');
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          showNotif('Fail', 'Internal Error', 'danger');
+          toastr.danger("Internal Error")
         }
       });
     }
@@ -324,9 +309,10 @@
 
         let ref_jenbayar = $('[name="ref_jenbayar"]').val()
         let total = $('[name="kurang"]').val()
-        
+
         if (('<?php echo $this->session->userdata('ref_jenc') ?>' == '2019000004') && (ref_jenbayar == 'GX0003') && ($('#bayar').val() < (total / 2))) {
-            showNotif('Perhatian', 'Pembayaran Tidak Boleh Kurang dari 50%', 'danger');
+            // showNotif('Perhatian', 'Pembayaran Tidak Boleh Kurang dari 50%', 'danger');
+            toastr.warning("Pembayaran Tidak Boleh Kurang dari 50%")
             return false
         }
         $('[name="ref_jenbayar_mask"]').val($('[name="ref_jenbayar"]').val())
@@ -340,16 +326,19 @@
                 if (data.sukses == 'success') {
                     $('#modal-data').modal('hide');
                     refresh();
-                    showNotif('Sukses', 'Data Berhasil Ditambahkan', 'success')
-                    showNotif('', 'Kode Unik Anda ' + data.kodeunik, 'success')
+                    // showNotif('Sukses', 'Data Berhasil Ditambahkan', 'success')
+                    // showNotif('', 'Kode Unik Anda ' + data.kodeunik, 'success')
+                    toastr.success('Data Berhasil Ditambahkan')
+                    toastr.success('Kode Unik Anda ' + data.kodeunik)
                 } else if (data.sukses == 'fail') {
                     $('#modal-data').modal('hide');
                     refresh();
-                    showNotif('Sukses', 'Tidak Ada Perubahan', 'success')
+                    // showNotif('Sukses', 'Tidak Ada Perubahan', 'success')
+                    toastr.danger('Internal Error')
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                showNotif('Fail', 'Internal Error', 'danger')
+                toastr.danger('Internal Error')
             }
         });
     }
@@ -397,7 +386,7 @@
               "defaultContent": "<button id='pilih-order' class='btn btn-sm btn-success btn-flat'><i class='fa fa-check'></i></button>"
           }],
           "columns": [
-            { "data": "no" }, 
+            { "data": "no" },
             { "data": "id" , "visible" : false},
             { "data": "kode" , "visible" : true},
             { "data": "ref_cust" , "visible" : false},

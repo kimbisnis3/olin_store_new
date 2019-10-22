@@ -75,6 +75,9 @@
  															<li class="nav-item menu-aboutus">
  																	<a class="nav-link" href="<?php echo base_url() ?>aboutus">Tentang Kami</a>
  															</li>
+                              <li class="nav-item menu-cart">
+ 																	<a class="nav-link text-primary" href="<?php echo base_url() ?>cart"><i class="fa fa-shopping-cart"></i> (<span class="total_items"></span>) </a>
+ 															</li>
  													</ul>
  											</div>
  									</div>
@@ -93,7 +96,13 @@
  								</div>
  								<div class="col-md-1">
  										<div class="float-right">
- 											<a href="<?php echo base_url(); ?>login"> <strong>Login</strong></a>
+                      <?php if ($this->session->userdata('in') == 1) {
+                        echo "<a href='".base_url()."login/logout'> <strong>Logout</strong></a>";
+                      } else {
+                        echo "<a href='".base_url()."login'> <strong>Login</strong></a>";
+                      }
+                      ?>
+
  										</div>
  								</div>
  						</div>

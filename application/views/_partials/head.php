@@ -17,6 +17,8 @@
     <link href="<?php echo base_url() ?>assets/twentytwenty/css/twentytwenty-no-compass.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/magnify/css/magnify.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/toastr/toastr.css" />
+    <link href="<?php echo base_url() ?>assets/pace/pace.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <style>
         .selected {

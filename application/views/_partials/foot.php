@@ -40,6 +40,48 @@
 				 </div>
 		 </div>
  </div>
+ <input type="hidden" id="sess_in" value="<?php echo $this->session->userdata('in')?>">
+  <div class="modal fade" id="modal-data" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header no-border">
+          <h4 class="modal-title text-hijau label-login">Masuk</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="box-body pad">
+            <form id="form-login">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" name="user">
+                  </div>
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="pass">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="row" style="margin-bottom : 10px ;!important">
+            <div class="col-md-12">
+              <button class="btn btn-hijau btn-md btn-block" id="btn-sign-in"><i class="fa fa-sign-in"></i> Sign In</button>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-12" style="text-align: center !important">
+              Belum punya akun ? <span class="text-hijau"><a href="<?php echo base_url() ?>register">Daftar</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
  <script src="<?php echo base_url(); ?>assets/js/jquery-2.2.3.min.js"></script>
  <script src="<?php echo base_url(); ?>assets/js/move-top.js"></script>
  <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
@@ -48,6 +90,16 @@
  <script src="<?php echo base_url(); ?>assets/twentytwenty/js/jquery.twentytwenty.js"></script>
  <script src="<?php echo base_url(); ?>assets/magnify/js/jquery.magnify.js"></script>
  <script src="<?php echo base_url() ?>assets/toastr/toastr.min.js"></script>
+
+ <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+ <script src="<?php echo base_url()?>assets/select2/dist/js/select2.full.min.js"></script>
+ <script src="<?php echo base_url()?>assets/js/imagezoom.js"></script>
+ <script defer src="<?php echo base_url()?>assets/js/jquery.flexslider.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js" integrity="sha256-VeNaFBVDhoX3H+gJ37DpT/nTuZTdjYro9yBruHjVmoQ=" crossorigin="anonymous"></script>
+ <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+ <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
+
  <script>
  		jQuery(document).ready(function ($) {
  				$(".scroll").click(function (event) {
@@ -135,14 +187,16 @@
 			data: $('#form-login').serialize(),
 			success: function (data) {
 				if (data.status == 'success') {
-					showNotif(data.caption, data.msg, data.class)
+					// showNotif(data.caption, data.msg, data.class)
+          toastr.success(data.msg)
 					$('[name="user"]').prop('readonly', false)
 					$('[name="pass"]').prop('readonly', false)
 					location.reload();
 					btnproc('#btn-sign-in', 0)
 					location.href = "<?php echo base_url() ?>";
 				} else {
-					showNotif(data.caption, data.msg, data.class)
+					// showNotif(data.caption, data.msg, data.class)
+          toastr.error(data.msg)
 					$('[name="user"]').prop('readonly', false)
 					$('[name="pass"]').prop('readonly', false)
 					btnproc('#btn-sign-in', 0)
@@ -177,7 +231,8 @@
 			data: $('#form-login').serialize(),
 			success: function (data) {
 				if (data.status == 'success') {
-					showNotif(data.caption, data.msg, data.class)
+					// showNotif(data.caption, data.msg, data.class)
+          toastr.success(data.msg)
 					$('[name="user"]').prop('readonly', false)
 					$('[name="pass"]').prop('readonly', false)
 					location.reload();
@@ -188,7 +243,8 @@
 						location.href = "<?php echo base_url() ?>";
 					}
 				} else {
-					showNotif(data.caption, data.msg, data.class)
+					// showNotif(data.caption, data.msg, data.class)
+          toastr.error(data.msg)
 					$('[name="user"]').prop('readonly', false)
 					$('[name="pass"]').prop('readonly', false)
 					btnproc('#btn-sign-in', 0)
@@ -202,14 +258,14 @@
 		});
 	}
 
-    function login_modal() {
-    	$('.label-login').html('Masuk');
+  function login_modal() {
+    $('.label-login').html('Masuk');
 		$('#modal-data').modal('show');
 		$('#btn-sign-in').attr('onclick','login_cart("all")');
 	}
 
 	function login_modal_cart() {
-		$('.label-login').html('Masuk Untuk Checkout');
+		$('.label-login').html('Masuk');
 		$('#modal-data').modal('show');
 		$('#btn-sign-in').attr('onclick','login_cart("cart")');
     }

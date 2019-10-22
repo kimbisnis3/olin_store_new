@@ -10,14 +10,11 @@
     <?php $this->load->view('_partials/topbar.php'); ?>
     <div class="checkout">
         <div class="container">
-            <div class="ckeck-top heading">
-                <h2>SHOPPING CART</h2>
-            </div>
             <div class="ckeckout-top">
                 <div class="cart-items">
                     <div class="row" style="margin-bottom: 20px !important;">
                         <div class="col-md-6">
-                            <h3>My Cart Items (<span class="total_items"></span>)</h3>
+                            <h4>My Cart Items (<span class="total_items"></span>)</h4>
                         </div>
                         <div class="col-md-6">
                             <div class="pull-right">
@@ -37,6 +34,8 @@
                                 <th></th>
                             </tr>
                         </thead>
+                        <tbody class="body-tb">
+                        </tbody>
                         <tbody>
                             <tr class="tr-total">
                                 <td></td>
@@ -117,7 +116,8 @@
                 total_items(data.total_items)
                 total_cart(data.total_price)
                 load_cart()
-                showNotif('Sukses', 'Produk Diubah', 'success')
+                // showNotif('Sukses', 'Produk Diubah', 'success')
+                toastr.success('Produk Diubah')
                 $('.btn-delete-cart').prop('disabled',false);
               }
           },
@@ -143,7 +143,8 @@
               total_items(data.total_items)
               total_cart(data.total_price)
               load_cart()
-              showNotif('Sukses', data.respon, 'success')
+              // showNotif('Sukses', data.respon, 'success')
+              toastr.success(data.respon)
               $('.btn-delete-cart').prop('disabled',true);
             }
           },

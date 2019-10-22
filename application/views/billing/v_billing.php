@@ -3,12 +3,7 @@
 <?php $this->load->view('_partials/head.php'); ?>
 <body class="fadeIn animated">
     <?php $this->load->view('_partials/topbar.php'); ?>
-    <div class="container" style="margin-top: 25px !important">
-        <div class="ckeck-top heading">
-            <h2 class="judul-page">Billing</h2>
-        </div>
-    </div>
-	<div class="konten">
+	<div class="konten py-5">
         <div class="container step step-1">
             <div class="row">
                 <!-- <div class="col-md-2"></div> -->
@@ -204,7 +199,7 @@
         <div class="containter btn-step" style="margin-top: 25px !important;">
             <div class="ckeck-top heading">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 text-center">
                         <button type="button" class="btn btn-md btn-merah btn-prev" onclick="prev_page()"><i class="fa fa-arrow-left"></i> Sebelumnya</button>
                         <button type="button" class="btn btn-md btn-teal btn-next" onclick="next_page()">Selanjutnya <i class="fa fa-arrow-right"></i></button>
                     </div>
@@ -276,21 +271,22 @@
 	        success: function(data) {
                 if (data.sukses == 'success') {
                     console.log('sukses')
-                    showNotif('Sukses', 'Pesanan Berhasil Dilakukan, Segera Masukan Data Pembayaran', 'success')
+                    // showNotif('Sukses', 'Pesanan Berhasil Dilakukan, Segera Masukan Data Pembayaran', 'success')
+                    toastr.success("Pesanan Berhasil Dilakukan, Segera Masukan Data Pembayaran")
                     btnproc('.btn-konfirmasi',0)
                     setTimeout(function(){
                         location.href = '<?php echo base_url() ?>payment';
                     }, 2000);
 
                 } else {
-                    showNotif('Error', 'Internal Error', 'danger')
+                    toastr.error("Internal Error")
                     btnproc('.btn-konfirmasi',0)
                 }
 
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {
                 console.log('Error on process');
-                showNotif('Error', 'Internal Error', 'danger')
+                toastr.error("Internal Error")
                 btnproc('.btn-konfirmasi',0)
 	        }
 	    });
@@ -304,62 +300,63 @@
         let page_datakirim = 1;
         if(page == page_datakirim && $('[name="nama_penerima"]').val() == '') {
             $('[name="nama_penerima"]').focus()
-            showNotif('Perhatian', 'Lengkapi Data', 'warning')
+            // showNotif('Perhatian', 'Lengkapi Data', 'warning')
+            toastr.warning("Lengkapi Data")
             return false
         }
         if(page == page_datakirim && $('[name="telp_penerima"]').val() == '') {
             $('[name="telp_penerima"]').focus()
-            showNotif('Perhatian', 'Lengkapi Data', 'warning')
+            toastr.warning("Lengkapi Data")
             return false
         }
         if(page == page_datakirim && $('[name="email_penerima"]').val() == '') {
             $('[name="email_penerima"]').focus()
-            showNotif('Perhatian', 'Lengkapi Data', 'warning')
+            toastr.warning("Lengkapi Data")
             return false
         }
         if(page == page_datakirim && $('[name="alamat_penerima"]').val() == '') {
             $('[name="alamat_penerima"]').focus()
-            showNotif('Perhatian', 'Lengkapi Data', 'warning')
+            toastr.warning("Lengkapi Data")
             return false
         }
 
         let page_ongkir = 2;
         if(page == page_ongkir && $('[name="layanan"]').val() == '') {
             $('[name="layanan"]').focus()
-            showNotif('Perhatian', 'Lengkapi Data', 'warning')
+            toastr.warning("Lengkapi Data")
             return false
         }
         if(page == page_ongkir && $('[name="kirim"]').val() == '') {
             $('[name="kirim"]').focus()
-            showNotif('Perhatian', 'Lengkapi Data', 'warning')
+            toastr.warning("Lengkapi Data")
             return false
         }
 
         if(page == page_ongkir && $('[name="provinsi"]').val() == '' && $('#kirim').val() == 'GX0002') {
             $('[name="provinsi"]').focus()
-            showNotif('Perhatian', 'Lengkapi Data', 'warning')
+            toastr.warning("Lengkapi Data")
             return false
         }
         if(page == page_ongkir && $('[name="kota"]').val() == '' && $('#kirim').val() == 'GX0002') {
             $('[name="kota"]').focus()
-            showNotif('Perhatian', 'Lengkapi Data', 'warning')
+            toastr.warning("Lengkapi Data")
             return false
         }
         if(page == page_ongkir && $('[name="kurir"]').val() == '' && $('#kirim').val() == 'GX0002') {
             $('[name="kurir"]').focus()
-            showNotif('Perhatian', 'Lengkapi Data', 'warning')
+            toastr.warning("Lengkapi Data")
             return false
         }
         if(page == page_ongkir && $('[name="service"]').val() == '' && $('#kirim').val() == 'GX0002') {
             $('[name="service"]').focus()
-            showNotif('Perhatian', 'Lengkapi Data', 'warning')
+            toastr.warning("Lengkapi Data")
             return false
         }
 
         let page_bank = 3;
         if(page == page_bank && $('[name="bank"]').val() == '') {
             $('[name="bank"]').focus()
-            showNotif('Perhatian', 'Lengkapi Data', 'warning')
+            toastr.warning("Lengkapi Data")
             return false
         }
 
