@@ -2,21 +2,6 @@
 <html>
   <?php $this->load->view('_partials/head.php'); ?>
   <style>
-    .box-input {
-      max-width: 30%;
-      margin: 35px auto;
-      border : 2px solid #53e074 !important;
-      padding : 30px;
-      border-radius: 16px;
-    }
-
-    .box-button {
-      max-width: 60%;
-      margin: 35px auto;
-      padding : 30px;
-      border-radius: 16px;
-    }
-
     .neon {
       border : 2px solid #53e074 !important;
       animation: hue 20s infinite linear;
@@ -34,8 +19,42 @@
   </style>
   <body class="fadeIn animated">
     <?php $this->load->view('_partials/topbar.php'); ?>
-    <div class="x">
-      <div class="box-input container neon box-user">
+    <section class="section-x mt-3">
+      <div class="container p-3">
+        <div class="box-input neon box-user p-3 col-md-4 col-sm-6 col-xs-6 mx-auto">
+          <div class="col-md-12">
+            <form id="form-register">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 class="text-hijau text-user text-center"> </h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" name="user">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="pass">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <button class="btn btn-hijau btn-md btn-block" id="btn-log-in" onclick="login()"><i
+                    class="fa fa-sign-in"></i> Login</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="box-input container neon box-user">
       <div class="row">
         <div class="col-md-12">
           <div class="pull-right">
@@ -67,8 +86,8 @@
                 class="fa fa-sign-in"></i> Login</button>
           </div>
         </div>
-      </div>
-    </div>
+      </div> -->
+    </section>
     <?php $this->load->view('_partials/foot.php'); ?>
   </body>
 

@@ -2,21 +2,6 @@
 <html>
   <?php $this->load->view('_partials/head.php'); ?>
   <style>
-    .box-input {
-      max-width: 40%;
-      margin: 35px auto;
-      border : 2px solid #53e074 !important;
-      padding : 30px;
-      border-radius: 16px;
-    }
-
-    .box-button {
-      max-width: 60%;
-      margin: 35px auto;
-      padding : 30px;
-      border-radius: 16px;
-    }
-
     .neon {
       border : 2px solid #53e074 !important;
       animation: hue 20s infinite linear;
@@ -34,92 +19,98 @@
   </style>
   <body class="fadeIn animated">
     <?php $this->load->view('_partials/topbar.php'); ?>
-    <div class="konten">
-      <div class="box-button container">
-        <div class="row">
-          <div class="col-md-6">
-            <button class="btn btn-biru btn-lg btn-block" onclick="open_cust()"><i class="fa fa-user"></i> Daftar Sebagai Customer</button>
-          </div>
-          <div class="col-md-6">
-            <button class="btn btn-teal btn-lg btn-block" onclick="open_reseller()"><i class="fa fa-users"></i> Daftar Sebagai Reseller</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="x">
-      <div class="box-input container neon box-user">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="pull-right">
-            <h4 class="text-hijau text-user"> </h4>
-          </div>
-        </div>
-      </div>
-        <form id="form-register">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Nama</label>
-                <input type="text" class="form-control" name="nama">
-                <input type="hidden" class="form-control" name="jencust">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Telp</label>
-                <input type="text" class="form-control" name="telp">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Email</label>
-                <input type="text" class="form-control" name="email">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Alamat</label>
-                <input type="text" class="form-control" name="alamat">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Username</label>
-                <input type="text" class="form-control" name="user">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" name="pass">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Ketik Ulang Password</label>
-                <input type="password" class="form-control" name="typepass">
-              </div>
-            </div>
-          </div>
-        </form>
+  <section class="section-x mb-5">
+    <div class="container p-3">
+      <div class="box-button p-3 col-md-6 mx-auto">
         <div class="row">
           <div class="col-md-12">
-            <button class="btn btn-hijau btn-md btn-block" id="btn-sign-up" onclick="register()"><i
-                class="fa fa-sign-in"></i> Register</button>
+            <div class="row">
+              <div class="col-md-6 pb-3">
+                <button class="btn btn-biru btn-block" onclick="open_cust()"><i class="fa fa-user"></i> Daftar Sebagai Customer</button>
+              </div>
+              <div class="col-md-6 pb-3">
+                <button class="btn btn-teal btn-block" onclick="open_reseller()"><i class="fa fa-users"></i> Daftar Sebagai Reseller</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="container">
+      <div class="box-input neon box-user p-3 col-md-6 mx-auto">
+        <div class="col-md-12">
+          <form id="form-register">
+            <div class="row">
+              <div class="col-md-12">
+                <h4 class="text-hijau text-user text-center"> </h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Nama</label>
+                  <input type="text" class="form-control" name="nama">
+                  <input type="hidden" class="form-control" name="jencust">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Telp</label>
+                  <input type="text" class="form-control" name="telp">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="text" class="form-control" name="email">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Alamat</label>
+                  <input type="text" class="form-control" name="alamat">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Username</label>
+                  <input type="text" class="form-control" name="user">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" class="form-control" name="pass">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Ketik Ulang Password</label>
+                  <input type="password" class="form-control" name="typepass">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <button class="btn btn-hijau btn-md btn-block" id="btn-sign-up" onclick="register()"><i
+                class="fa fa-sign-in"></i> Register</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
     <?php $this->load->view('_partials/foot.php'); ?>
   </body>
 

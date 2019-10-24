@@ -3,10 +3,9 @@
 <?php $this->load->view('_partials/head.php'); ?>
 <body class="fadeIn animated">
     <?php $this->load->view('_partials/topbar.php'); ?>
-	<div class="konten py-5">
+	<section class="section-x py-5">
         <div class="container step step-1">
             <div class="row">
-                <!-- <div class="col-md-2"></div> -->
                 <div class="col-md-12">
                     <div class="row" style="margin-bottom: 20px !important;">
                         <div class="col-md-3">
@@ -27,7 +26,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-md-2"></div> -->
             </div>
         </div>
         <div class="container step step-2">
@@ -146,47 +144,45 @@
             </div>
         </div>
 
+        <!-- <div class="container step step-4">
+          <table class="table-custom" id="table" style="width :100% !important; overflow-x:auto !important;">
+              <thead>
+                  <tr>
+                      <th>Item</th>
+                      <th>Product</th>
+                      <th>Harga</th>
+                      <th>Jumlah</th>
+                      <th>Subtotal</th>
+                  </tr>
+              </thead>
+              <tbody class="body-tb">
+              </tbody>
+              <tfoot>
+                  <tr class="tr-total">
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td align="center">Total</td>
+                      <td class="total-cart"> </td>
+                  </tr>
+                  <tr class="tr-total">
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td align="center">Biaya Kirim</td>
+                      <td class="bykirim"> </td>
+                  </tr>
+                  <tr class="tr-total">
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td align="center">Total Biaya</td>
+                      <td class="totbiaya"> </td>
+                  </tr>
+              </tfoot>
+          </table>
+        </div> -->
         <div class="container step step-4">
-			<div class="row">
-            <table class="table-custom">
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Product</th>
-                        <th>Harga</th>
-                        <th>Jumlah</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody class="body-tb">
-                </tbody>
-                <tbody>
-                    <tr class="tr-total">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td align="center">Total</td>
-                        <td class="total-cart" align="right"> </td>
-                    </tr>
-                    <tr class="tr-total">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td align="center">Biaya Kirim</td>
-                        <td class="bykirim" align="right"> </td>
-                    </tr>
-                    <tr class="tr-total">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td align="center">Total Biaya</td>
-                        <td class="totbiaya" align="right"> </td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
-        </div>
-        <div class="container step step-5">
             <!-- page konfimasi, kode unik  -->
             <div class="row">
                 <div class="col-md-4"></div>
@@ -206,25 +202,26 @@
                 </div>
             </div>
         </div>
-	</div>
+	</section>
 	<?php $this->load->view('_partials/foot.php'); ?>
 </body>
 <script src="<?php echo base_url()?>assets/pace/pace.js"></script>
 <script>
     var page = 1;
-    var maxpage = 5;
+    var maxpage = 4;
     var minpage = 1;
     var arr_barang = [];
     $(document).ready(function() {
         getsessdata()
         initstep()
-        load_cart()
         Pace.stop()
         btn_direct()
         getprov()
         getbank()
         getlayanan()
         getkirim()
+        // load_cart()
+        // getdata()
     })
 
     function getsessdata() {
@@ -371,7 +368,6 @@
             $('.btn-next').removeClass('invisible')
         }
 
-
         let b = $('#biaya').val()
         let bykirim = b.length == 0 ? 0 : parseInt(b)
         let tot_cart = $('#carttotal').val()
@@ -412,7 +408,7 @@
           data: {},
           success: function(data) {
             arr_barang = data;
-            $.each(data.content, function( i, v ) {
+            $.each(data.data, function( i, v ) {
                 $('.body-tb').append(`
                     <tr class="tr-tb fadeIn animated">
                         <td align="center">${showimage(v.image)}</td>
@@ -432,6 +428,37 @@
                 console.log('gagal')
           }
       });
+    }
+
+    function getdata()
+    {
+      table = $('#table').DataTable({
+          "processing": true,
+          "scrollX": true,
+          "paging": false,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": false,
+          "info": false,
+          "ajax": {
+              "url": `<?php echo base_url(); ?>cart/content_cart`,
+              "type": "POST",
+              "data": {},
+          },
+          "columns": [
+              { "data": "id", "visible" : false },
+              { "render" : (data,type,row,meta) => { return `${showimage(row.image)}` }},
+              { "data": "name" },
+              { "render" : (data,type,row,meta) => { return `${numeral(row.price).format('0,0')}` }},
+              { "render" : (data,type,row,meta) => { return `<input style="height : 30px !important; width : 30px !important;" id="qty-${row.rowid}" type="text" value="${row.qty}">` }},
+              { "render" : (data,type,row,meta) => { return `${numeral(row.subtotal).format('0,0')}` }},
+          ]
+      });
+    }
+
+    function refresh() {
+      table.ajax.reload(null, false);
+      idx = -1;
     }
 
     function btn_direct(){

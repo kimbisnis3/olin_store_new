@@ -3,32 +3,26 @@
 <?php $this->load->view('_partials/head') ?>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <?php $this->load->view('_partials/topbar') ?>
-      <section>
+      <section class="section-x mt-3">
         <div class="container-fluid">
           <section class="regular slider row">
-            <div>
-              <img src="https://via.placeholder.com/1000x500" class="img-slide-produk">
-            </div>
-            <div>
-              <img src="https://via.placeholder.com/1000x500" class="img-slide-produk">
-            </div>
-            <div>
-              <img src="https://via.placeholder.com/1000x500" class="img-slide-produk">
-            </div>
+            <?php foreach ($ktg as $i => $v): ?>
+              <div>
+                <img src="<?php echo prep_url(api_url()).$v->image ?>" class="img-slide-produk">
+              </div>
+            <?php endforeach; ?>
           </section>
         </div>
       </section>
       <section class="section-list-produk">
         <div class="container-fluid">
-          <div class="list-product">
-            <img src="https://via.placeholder.com/400x500" class="img-list-produk">
-          </div>
-          <div class="list-product">
-            <img src="https://via.placeholder.com/400x500" class="img-list-produk">
-          </div>
-          <div class="list-product">
-            <img src="https://via.placeholder.com/400x500" class="img-list-produk">
-          </div>
+          <?php foreach ($ktg as $i => $v): ?>
+            <div class="list-product">
+              <a href="<?php echo base_url(); ?>product/pr_list?q=<?php echo $v->kode ?>">
+                <img src="<?php echo prep_url(api_url()).$v->image ?>" class="img-list-produk">
+              </a>
+            </div>
+          <?php endforeach; ?>
         </div>
 			</section>
     <?php $this->load->view('_partials/foot') ?>
@@ -36,30 +30,11 @@
 <script>
     $(function(){
       $(".regular").slick({
-        dots: true,
+        dots: false,
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1
       });
     });
-    function add_cart(kode) {
-        $.ajax({
-          url: `<?php echo base_url() ?>cart/add`,
-          type: "POST",
-          dataType: "JSON",
-          data: {
-              kode: kode,
-          },
-          success: function(data) {
-            if (data.sukses == 'success') {
-              total_items(data.total_items)
-              showNotif('Sukses', 'Produk Ditambahkan Ke Keranjang', 'success')
-            }
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-                console.log('gagal')
-          }
-      });
-    }
 </script>
 </html>

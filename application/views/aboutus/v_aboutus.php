@@ -50,10 +50,10 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8 p-1">
           <div class="mapouter">
             <div class="gmap_canvas">
-              <iframe id="gmap_canvas" src="https://maps.google.com/maps?q=solo%20square&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" style="width : 890px !important; height : 500px !important"></iframe>
+              <iframe id="gmap_canvas" src="https://maps.google.com/maps?q=solo%20square&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" style="width : 100% !important; height : 500px !important"></iframe>
             </div>
           </div>
         </div>

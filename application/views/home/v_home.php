@@ -34,19 +34,29 @@
             </div>
           </div>
         </section>
-				<div class="container-fluid">
-							<section class="regular slider row">
-                <?php foreach ($ss as $i => $v): ?>
-                  <div>
-  									<img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$v->image ?>"  class="img-slide-small">
-  								</div>
-                <?php endforeach; ?>
-							</section>
+				<div class="container-fluid slide-pc">
+					<section class="regular slider row">
+            <?php foreach ($ss as $i => $v): ?>
+              <div>
+                <!-- <img onerror='imgError(this)' src="<?php //echo prep_url(api_url()).$v->image ?>"  style="height : 10vh !important"> -->
+  							<img onerror='imgError(this)' src="<?php echo base_url()?>assets/tas.png" class="img-slide-small">
+  						</div>
+            <?php endforeach; ?>
+					</section>
 				</div>
-				<section class="offer-wthree py-lg-5 py-3" id="offer">
+        <div class="container-fluid slide-mobile">
+					<section class="regular-mobile slider row">
+            <?php foreach ($ss as $i => $v): ?>
+              <div>
+  							<img onerror='imgError(this)' src="<?php echo base_url()?>assets/tas.png" class="img-slide-small">
+  						</div>
+            <?php endforeach; ?>
+					</section>
+				</div>
+				<section class="offer-wthree py-lg-5 py-3 mt-3 mb-3" id="offer">
 					<div class="container-fluid  py-sm-5">
 						<div class="row head-row-home text-center justify-content-center">
-							<div class="col-lg-9 mx-auto">
+							<div class="col-lg-9 col-md-9 col-sm-6 col-xs-4 mx-auto">
 								<div class="row">
 									<div class="col-md-4">
 										<div class="home-grid">
@@ -97,6 +107,13 @@
 		        dots: false,
 		        infinite: true,
 		        slidesToShow: 3,
+		        slidesToScroll: 3
+		      });
+
+          $(".regular-mobile").slick({
+		        dots: false,
+		        infinite: true,
+		        slidesToShow: 1,
 		        slidesToScroll: 3
 		      });
 

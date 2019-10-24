@@ -4,6 +4,7 @@
 
   //image
   $logofooter = $this->db->get_where('tconfigimage', array('kode' => 'logofooter'))->row();
+  $ktg = $this->db->get('mkategori')->result();
  ?>
  <div class="footer-top py-lg-5 py-4">
 		 <div class="container-fluid">
@@ -19,8 +20,9 @@
 						 <div class="col-md-3">
 								 <h5 class="footer-top-title">Produk</h5>
 								 <ul class="post-links">
-										 <li><a href="#">Tas Sekolah</a></li>
-										 <li><a href="#">Backpack</a></li>
+                   <?php foreach ($ktg as $i => $v): ?>
+                     <li><a href="<?php echo base_url(); ?>product/pr_list?q=<?php echo $v->kode ?>"><?php echo $v->nama ?></a></li>
+                   <?php endforeach; ?>
 								 </ul>
 						 </div>
 						 <div class="col-md-3">

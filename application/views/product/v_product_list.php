@@ -6,6 +6,17 @@
     height: 200px;
     width: 100%;
   }
+  .link-href {
+    color: black !important;
+    text-decoration: none !important;
+  }
+
+  .link-href:hover
+  {
+       color: black !important;
+       text-decoration:none !important;
+       cursor:pointer !important;
+  }
 </style>
   <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
       <?php $this->load->view('_partials/topbar') ?>
@@ -16,7 +27,9 @@
                   <div class="col-md-3 p-3">
                       <div class="card item-flat border-0">
                           <div class="card-header text-center border-0">
-                                <?php echo $v['namabarang'] ?>
+                            <a href="<?php echo base_url(); ?>product/detail?q=<?php echo $v['kodebarang'] ?>" class="link-href">
+                              <?php echo $v['namabarang'] ?>
+                            </a>
                           </div>
                           <div class="card-body text-center p-1">
                               <img src="<?php echo prep_url(api_url()).$v['gambardesign'] ?>" alt="" class="img-fluid img-produk">

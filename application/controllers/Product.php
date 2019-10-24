@@ -44,13 +44,15 @@ class Product extends CI_Controller
             LEFT JOIN mgudang ON mgudang.kode = msatbrg.ref_gud
             WHERE
                 msatbrg.def = 't'";
-        $data['product'] = $this->db->query($q)->result();
-        $data['menuaktif'] = $this->menuaktif;
+        $data['product']  = $this->db->query($q)->result();
+        $data['ktg']      = $this->db->get('mkategori')->result();
+        $data['menuaktif']= $this->menuaktif;
         $this->load->view($this->indexpage,$data);
     }
 
-    function load()
+    function pr_list()
     {
+        $ref_ktg = $this->input->get('q');
         $q = "SELECT
                 msatbrg. ID,
                 msatbrg.konv,
@@ -77,10 +79,11 @@ class Product extends CI_Controller
             LEFT JOIN msatuan ON msatuan.kode = msatbrg.ref_sat
             LEFT JOIN mgudang ON mgudang.kode = msatbrg.ref_gud
             WHERE
-                msatbrg.def = 't'";
+                msatbrg.def = 't'
+            AND mbarang.ref_ktg = '$ref_ktg'";
         $data['product'] = $this->db->query($q)->result_array();
         $data['menuaktif'] = $this->menuaktif;
-        $this->load->view('product/v_product_x',$data);
+        $this->load->view('product/v_product_list',$data);
     }
 
     function detail()

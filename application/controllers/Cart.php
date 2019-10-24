@@ -62,7 +62,7 @@ class Cart extends CI_Controller
             'image'   => $res->gambardesign,
             'berat'   => $res->beratkg,
         );
-        
+
         $result = $this->cart->insert($data);
         $r['sukses']= $result ? 'success' : 'fail' ;
         $r['total_items']= $this->cart->total_items() ;
@@ -76,12 +76,25 @@ class Cart extends CI_Controller
         foreach($this->cart->contents() as $i => $v) {
             $berat += $v['berat'] * $v['qty'];
         }
+        $result = $this->cart->contents();
+        $list       = [];
+        foreach ($result as $i => $r) {
+            $row['name']    = $r['name'];
+            $row['price']   = $r['price'];
+            $row['image']   = $r['image'];
+            $row['qty']     = $r['qty'];
+            $row['berat']   = $r['berat'] * $r['qty'];
+            $row['subtotal']= $r['subtotal'];
+            $row['id']      = $r['id'];
+            $row['rowid']   = $r['rowid'];
+            $list[] = $row;
+        }
         echo json_encode(
             array(
-                'content'     => $this->cart->contents(), 
-                'total_items' => $this->cart->total_items(), 
-                'total_price' => $this->cart->total(), 
-                'berattotal'  => $berat 
+                'data'        => $list,
+                'total_items' => $this->cart->total_items(),
+                'total_price' => $this->cart->total(),
+                'berattotal'  => $berat
         ));
     }
 

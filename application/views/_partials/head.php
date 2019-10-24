@@ -36,6 +36,32 @@
         .img-item {
             height: 25vh;
         }
+
+        .section-x {
+          min-height : 55vh !important;
+        }
+
+        .img-slide-small {
+        	width : 100% !important;
+        	height: 100px !important;
+        }
+
+        .img-slide-small-mobile {
+        	width : 100% !important;
+        	height: 100px !important;
+        }
+
+        @media screen and (max-width: 600px) {
+          .slide-pc {
+            display: none !important;
+          }
+        }
+
+        @media screen and (min-width: 600px) {
+          .slide-mobile {
+            display: none !important;
+          }
+        }
     </style>
 </head>
 <?php
