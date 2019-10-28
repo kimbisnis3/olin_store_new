@@ -1,3 +1,3 @@
 <?php
-$this->dbtwo = $this->load->database('two', TRUE);   
+  $this->dblumise = $this->load->database('lumise', TRUE);
 ?>

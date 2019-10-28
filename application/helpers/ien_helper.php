@@ -17,6 +17,11 @@ if (!function_exists('status')) {
         return 'localhost/olin/agen/';
     }
 
+    function lumise_url() {
+      // return 'https://';
+        return 'http://localhost/lumise_new/';
+    }
+
     function ien($text)
     {
         if ($text=='') {
@@ -25,7 +30,7 @@ if (!function_exists('status')) {
         else {
             $text = $text;
         }
-       
+
         return $text;
     }
 
@@ -37,7 +42,7 @@ if (!function_exists('status')) {
         else {
             $text = date('Y-m-d', strtotime($text));
         }
-       
+
         return $text;
     }
 
@@ -49,7 +54,7 @@ if (!function_exists('status')) {
         else {
             $text = $this->input->post($text);
         }
-       
+
         return $text;
     }
 
@@ -68,14 +73,14 @@ if (!function_exists('status')) {
         else {
             $data = '<span class="label label-success">'.$labeltrue.'</span>';
         }
-       
+
         return $data;
     }
 
     //IMAGE MANIPULATION
 
     function showimage($i){
-         
+
         if ($i == NULL){
             $i = "(Noimage)";
         } else {
@@ -125,7 +130,7 @@ if (!function_exists('status')) {
         }
         return $img;
 
-        
+
     }
 
     function imghandler($img,$maxw)
@@ -143,38 +148,38 @@ if (!function_exists('status')) {
         }
         return $img;
 
-        
+
     }
 
     function slug($text)
     {
         // replace non letter or digits by -
         $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
-    
+
         // trim
         $text = trim($text, '-');
-    
+
         // transliterate
         $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-    
+
         // lowercase
         $text = strtolower($text);
-    
+
         // remove unwanted characters
         $text = preg_replace('~[^-\w]+~', '', $text);
-    
+
         if (empty($text))
         {
             return 'n-a';
         }
-    
+
         return $text;
     }
 
     function id_date($date)
     {
         if ($date != NULL) {
-            
+
         $indonesian_month = array("Jan", "Feb", "Mar",
             "Apr", "Mei", "Jun",
             "Jul", "Agt", "Sep",
@@ -186,10 +191,10 @@ if (!function_exists('status')) {
 
         return $result;
     }else {
-        
+
     }
     }
-    
+
     function indonesian_date($date)
     {
         // fungsi atau method untuk mengubah tanggal ke format indonesia
@@ -208,7 +213,7 @@ if (!function_exists('status')) {
     function normal_date($date)
     {
         if ($date != NULL) {
-            
+
         $indonesian_month = array("Jan", "Feb", "Mar",
             "Apr", "May", "Jun",
             "Jul", "Aug", "Sep",
@@ -230,7 +235,7 @@ if (!function_exists('status')) {
         else {
             $text = '<span class="label label-success">Aktif</span>';
         }
-       
+
         return $text;
     }
 
