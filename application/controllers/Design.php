@@ -40,7 +40,7 @@ class Design extends CI_Controller {
                           mbarang. ID idbarang,
                           mbarang.kode kodebarang,
                           mbarang.nama namabarang,
-                          mmodesign.gambar gambardesign,
+                          mmodesign.gambar gambardesign
                       FROM
                           msatbrg
                       LEFT JOIN mbarang ON mbarang.kode = msatbrg.ref_brg
@@ -52,20 +52,23 @@ class Design extends CI_Controller {
                       LEFT JOIN mgudang ON mgudang.kode = msatbrg.ref_gud
                       WHERE
                           mbarang.kode ='$kodebrg'";
-        $res_cart = $this->db->query($q)->row();
-        $data_cart = array(
-            'id'      => $res_cart->kodebarang,
-            'qty'     => 1,
-            'price'   => $res_cart->harga,
-            'name'    => $res_cart->namabarang,
-            'image'   => $res_cart->gambardesign,
-            'berat'   => $res_cart->beratkg,
-          );
+          $res_cart = $this->db->query($q_cart)->row();
+          $data_cart = array(
+              'id'      => $res_cart->kodebarang,
+              'qty'     => 1,
+              'price'   => $res_cart->harga,
+              'name'    => $res_cart->namabarang,
+              'image'   => $res_cart->gambardesign,
+              'berat'   => $res_cart->beratkg,
+            );
         }
-        $add_cart = $this->cart->insert($data);
-        $r['sukses']      = $add_cart ? 'success' : 'fail' ;
-        $r['total_items'] = $this->cart->total_items() ;
-        echo json_encode($r);
+        $add_cart = $this->cart->insert($data_cart);
+        // $r['sukses']      = $add_cart ? 'success' : 'fail' ;
+        // $r['total_items'] = $this->cart->total_items() ;
+        // echo json_encode($this->cart->contents());
+        if ($add_cart) {
+          redirect(base_url('cart'));
+        }
     }
 
     function ceksess()

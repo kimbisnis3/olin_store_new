@@ -18,7 +18,7 @@ if (!function_exists('status')) {
     }
 
     function lumise_url() {
-      // return 'https://';
+        // return 'https://';
         return 'http://localhost/lumise_new/';
     }
 

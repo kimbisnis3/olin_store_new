@@ -44,8 +44,9 @@ class Product extends CI_Controller
             LEFT JOIN mgudang ON mgudang.kode = msatbrg.ref_gud
             WHERE
                 msatbrg.def = 't'";
+        $q_kategori = "SELECT * FROM mkategori WHERE kode != 'GX0003'";
         $data['product']  = $this->db->query($q)->result();
-        $data['ktg']      = $this->db->get('mkategori')->result();
+        $data['ktg']      = $this->db->query($q_kategori)->result();
         $data['menuaktif']= $this->menuaktif;
         $this->load->view($this->indexpage,$data);
     }
