@@ -28,18 +28,18 @@
                       <div class="card item-flat border-0">
                           <div class="card-header text-center border-0">
                             <a href="<?php echo base_url(); ?>product/detail?q=<?php echo $v['kodebarang'] ?>" class="link-href">
-                              <?php echo $v['namabarang'] ?>
+                              <strong><?php echo $v['namabarang'] ?></strong>
                             </a>
                           </div>
                           <div class="card-body text-center p-1">
                               <img src="<?php echo prep_url(api_url()).$v['gambardesign'] ?>" alt="" class="img-fluid img-produk">
                           </div>
-                          <div class="card-footer text-center p-1 border-0">
+                          <!-- <div class="card-footer text-center p-1 border-0">
                               <h5>Rp. <?php echo number_format($v['harga']) ?></h5>
-                          </div>
-                          <div class="card-footer p-0">
+                          </div> -->
+                          <!-- <div class="card-footer p-0">
                               <button type="button" class="btn btn-info btn-block item-flat" onclick="add_cart('<?php echo $v['kodebarang'] ?>')"><i></i> Add to Cart</button>
-                          </div>
+                          </div> -->
                       </div>
                   </div>
                   <?php } ?>
