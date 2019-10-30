@@ -24,7 +24,7 @@ class Home extends CI_Controller
         $data['icon3']     = $this->db->get_where('tconfigimage', array('tipe' => 'icon3'))->row();
         $data['icon4']     = $this->db->get_where('tconfigimage', array('tipe' => 'icon4'))->row();
         $data['icon5']     = $this->db->get_where('tconfigimage', array('tipe' => 'icon5'))->row();
-        $data['ss']        = $this->db->get_where('tconfigimage', array('kode' => 'ss'))->result();
+        $data['ss']        = $this->db->get_where('tconfigimage', array('tipe' => 'ss'))->result();
         $q = "SELECT
                 msatbrg. ID,
                 msatbrg.konv,
