@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <?php $this->load->view('_partials/head') ?>
+<style media="screen">
+  .img-icon-mini {
+    width: 100% !important;
+    height: 100% !important;
+  }
+</style>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <?php $this->load->view('_partials/topbar') ?>
       <section class="img-diff-section">
@@ -38,8 +44,8 @@
 					<section class="regular slider row">
             <?php foreach ($ss as $i => $v): ?>
               <div>
-                <!-- <img onerror='imgError(this)' src="<?php //echo prep_url(api_url()).$v->image ?>"  style="height : 10vh !important"> -->
-  							<img onerror='imgError(this)' src="<?php echo base_url()?>assets/tas.png" class="img-slide-small">
+                <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$v->image ?>" class="img-slide-small">
+  							<!-- <img onerror='imgError(this)' src="<?php echo base_url()?>assets/tas.png" class="img-slide-small"> -->
   						</div>
             <?php endforeach; ?>
 					</section>
@@ -48,7 +54,8 @@
 					<section class="regular-mobile slider row">
             <?php foreach ($ss as $i => $v): ?>
               <div>
-  							<img onerror='imgError(this)' src="<?php echo base_url()?>assets/tas.png" class="img-slide-small">
+                <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$v->image ?>" class="img-slide-small">
+  							<!-- <img onerror='imgError(this)' src="<?php echo base_url()?>assets/tas.png" class="img-slide-small"> -->
   						</div>
             <?php endforeach; ?>
 					</section>
@@ -60,19 +67,22 @@
 								<div class="row">
 									<div class="col-md-4">
 										<div class="home-grid">
-											<span class="<?php echo $icon1->image; ?>" aria-hidden="true"></span>
+											<!-- <span class="<?php echo $icon1->image; ?>" aria-hidden="true"></span> -->
+                      <img src="<?php echo prep_url(api_url()).$icon1->image ?>" class="img-icon-mini">
 											<h4 class="home-title my-3"><?php echo $icon1->ket; ?></h4>
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="home-grid">
-											<span class="<?php echo $icon2->image; ?>" aria-hidden="true"></span>
+											<!-- <span class="<?php echo $icon2->image; ?>" aria-hidden="true"></span> -->
+                      <img src="<?php echo prep_url(api_url()).$icon2->image ?>" class="img-icon-mini">
 											<h4 class="home-title my-3"><?php echo $icon2->ket; ?></h4>
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="home-grid">
-											<span class="<?php echo $icon3->image; ?>" aria-hidden="true"></span>
+											<!-- <span class="<?php echo $icon3->image; ?>" aria-hidden="true"></span> -->
+                      <img src="<?php echo prep_url(api_url()).$icon3->image ?>" class="img-icon-mini">
 											<h4 class="home-title my-3"><?php echo $icon3->ket; ?></h4>
 										</div>
 									</div>
@@ -80,13 +90,15 @@
                 <div class="row justify-content-center" style="margin-top : 10px;">
 									<div class="col-md-4">
 										<div class="home-grid">
-											<span class="<?php echo $icon4->image; ?>" aria-hidden="true"></span>
+											<!-- <span class="<?php echo $icon4->image; ?>" aria-hidden="true"></span> -->
+                      <img src="<?php echo prep_url(api_url()).$icon4->image ?>" class="img-icon-mini">
 											<h4 class="home-title my-3"><?php echo $icon4->ket; ?></h4>
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="home-grid">
-											<span class="<?php echo $icon5->image; ?>" aria-hidden="true"></span>
+											<!-- <span class="<?php echo $icon5->image; ?>" aria-hidden="true"></span> -->
+                      <img src="<?php echo prep_url(api_url()).$icon5->image ?>" class="img-icon-mini">
 											<h4 class="home-title my-3"><?php echo $icon5->ket; ?></h4>
 										</div>
 									</div>
