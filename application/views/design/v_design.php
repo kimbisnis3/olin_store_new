@@ -37,7 +37,7 @@
                   <div class="col-md-3 p-3">
                       <div class="card item-flat border-0">
                           <div class="card-header text-center border-0">
-                            <a href="<?php echo base_url(); ?>product/detail?q=<?php echo $v['kodebarang'] ?>" class="link-href">
+                            <a href="<?php echo base_url(); ?>design/detail?q=<?php echo $v['kodebarang'] ?>" class="link-href">
                               <?php echo $v['namabarang'] ?>
                             </a>
                           </div>

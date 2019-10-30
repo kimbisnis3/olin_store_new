@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <?php $this->load->view('_partials/head.php'); ?>
-<!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/flexslider/demo.css" /> -->
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/flexslider/flexslider.css" />
 <style media="screen">
   .img-produk {
@@ -15,20 +14,16 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-6 col-sm-6">
-              <img onerror="imgError(this)" src="<?php echo prep_url(api_url()).$pr->gambardesign ?>" data-imagezoom="true" class="img-produk"/>
-              <!-- <div class="flexslider">
+              <!-- <img onerror="imgError(this)" src="<?php echo prep_url(api_url()).$pr->gambardesign ?>" data-imagezoom="true" class="img-produk"/> -->
+              <div class="flexslider">
                 <ul class="slides">
-                  <li data-thumb="<?php echo base_url() ?>assets/images/after.png">
-        	    	    <img src="<?php echo base_url() ?>assets/images/after.png" data-imagezoom="true" class="img-produk"/>
-        	    		</li>
-                  <li data-thumb="<?php echo base_url() ?>assets/images/crown.png">
-        	    	    <img src="<?php echo base_url() ?>assets/images/crown.png" data-imagezoom="true" class="img-produk"/>
-        	    		</li>
-                  <li data-thumb="<?php echo base_url() ?>assets/images/before.png">
-        	    	    <img src="<?php echo base_url() ?>assets/images/before.png" data-imagezoom="true" class="img-produk"/>
-        	    		</li>
+                  <?php foreach ($img as $i => $v): ?>
+                    <li data-thumb="<?php echo prep_url(api_url()).$v->image ?>">
+          	    	    <img src="<?php echo prep_url(api_url()).$v->image ?>" data-imagezoom="true" class="img-produk"/>
+          	    		</li>
+                  <?php endforeach; ?>
                 </ul>
-              </div> -->
+              </div>
             </div>
             <div class="col-md-6 col-sm-6">
               <h3 class="my-2"><?php echo $pr->namabarang ?></h3>
@@ -57,16 +52,11 @@
     <script src="<?php echo base_url()?>assets/flexslider/jquery.flexslider.js"></script>
 </body>
 <script>
-    // $(window).load(function() {
-    //   $('.flexslider').flexslider({
-    //     animation: "slide",
-    //     controlNav: false
-    //   });
-    // });
 
     $(function(){
       SyntaxHighlighter.all();
     });
+
     $(window).load(function(){
       $('.flexslider').flexslider({
         animation: "slide",
