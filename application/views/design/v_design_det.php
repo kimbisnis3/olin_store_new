@@ -42,6 +42,7 @@
                   <i class="fa fa-cart-plus fa-lg mr-2"></i>
                   Add to Cart
                 </button>
+                <a type="button" href="<?php echo base_url(); ?>design/start?product_id=<?php echo $v['id_prod_lumise'] ?>" class="btn btn-info btn-block item-flat btn-link"><i></i> Design</a>
               </div>
             </div>
           </div>
