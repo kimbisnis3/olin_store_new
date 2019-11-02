@@ -23,7 +23,7 @@
       <div class="container p-3">
         <div class="box-input neon box-user p-3 col-md-4 col-sm-6 col-xs-6 mx-auto">
           <div class="col-md-12">
-            <form id="form-register">
+            <form id="form-login">
               <div class="row">
                 <div class="col-md-12">
                   <h4 class="text-hijau text-user text-center"> </h4>
@@ -46,7 +46,7 @@
                 </div>
               </div>
               <div class="row">
-                <button class="btn btn-hijau btn-md btn-block" id="btn-log-in" onclick="login()"><i
+                <button type="button" class="btn btn-hijau btn-md btn-block" id="btn-log-in" onclick="login()"><i
                     class="fa fa-sign-in"></i> Login</button>
                 </div>
               </div>

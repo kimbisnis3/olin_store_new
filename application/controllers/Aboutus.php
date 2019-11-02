@@ -21,6 +21,8 @@ class Aboutus extends CI_Controller
         $data['tx_about_body']  = $this->db->get_where('tconfigtext', array('kode' => 'tx_about_body'))->row();
         $data['tx_link_alamat'] = $this->db->get_where('tconfigtext', array('kode' => 'tx_link_alamat'))->row();
         $data['tx_link_wa']     = $this->db->get_where('tconfigtext', array('kode' => 'tx_link_wa'))->row();
+        $data['tx_link_wa']     = $this->db->get_where('tconfigtext', array('kode' => 'tx_link_wa'))->row();
+        $data['tx_link_map']    = $this->db->get_where('tconfigtext', array('kode' => 'tx_link_map'))->row();
 
         $data['menuaktif'] = $this->menuaktif;
         $this->load->view($this->indexpage,$data);

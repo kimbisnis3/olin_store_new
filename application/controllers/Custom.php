@@ -46,7 +46,8 @@ class Custom extends CI_Controller
           LEFT JOIN mgudang ON mgudang.kode = msatbrg.ref_gud
           WHERE
               msatbrg.def = 't'
-          AND mbarang.ref_ktg = 'GX0003'";
+          AND mbarang.is_design = 't'
+          ORDER BY mmodesign.datei ASC";
         $data['pr']  = $this->db->query($q)->result_array();
         $this->load->view($this->indexpage,$data);
     }

@@ -5,6 +5,37 @@
   //image
   $logofooter = $this->db->get_where('tconfigimage', array('kode' => 'logofooter'))->row();
   $ktg = $this->db->get('mkategori')->result();
+  $q = "SELECT
+        msatbrg. ID,
+        msatbrg.konv,
+        msatbrg.ket,
+        msatbrg.harga,
+        msatbrg.def,
+        mbarang. ID idbarang,
+        mbarang.kode kodebarang,
+        mbarang.ket ketbarang,
+        mbarang.nama namabarang,
+        mbarang.id_prod_lumise,
+        msatuan.nama namasatuan,
+        mgudang.nama namagudang,
+        mmodesign.gambar gambardesign,
+        mmodesign.nama namadesign,
+        mwarna.colorc kodewarna,
+        mkategori.nama kategori_nama
+    FROM
+        msatbrg
+    LEFT JOIN mbarang ON mbarang.kode = msatbrg.ref_brg
+    LEFT JOIN mkategori ON mkategori.kode = mbarang.ref_ktg
+    LEFT JOIN mbarangs ON mbarang.kode = mbarangs.ref_brg
+    LEFT JOIN mmodesign ON mmodesign.kode = mbarangs.model
+    LEFT JOIN mwarna ON mwarna.kode = mbarangs.warna
+    LEFT JOIN msatuan ON msatuan.kode = msatbrg.ref_sat
+    LEFT JOIN mgudang ON mgudang.kode = msatbrg.ref_gud
+    WHERE
+        msatbrg.def = 't'
+    AND mbarang.is_design = 't'
+    ORDER BY mmodesign.datei ASC";
+    $pr  = $this->db->query($q)->result_array();
  ?>
  <div class="footer-top py-lg-5 py-4">
 		 <div class="container-fluid">
@@ -28,8 +59,9 @@
 						 <div class="col-md-3">
 								 <h5 class="footer-top-title">Design Sendiri</h5>
 								 <ul class="post-links">
-										 <li>Tas Anak Tanpa Kantong</li>
-										 <li>Tas Anak Dengan Kantong</li>
+                   <?php foreach ($pr as $i => $v): ?>
+                     <li><?php echo $v['namabarang'] ?></li>
+                   <?php endforeach; ?>
 								 </ul>
 						 </div>
 						 <div class="col-md-3">

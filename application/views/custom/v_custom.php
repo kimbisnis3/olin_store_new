@@ -2,11 +2,23 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <?php $this->load->view('_partials/head') ?>
+<style media="screen">
+.img-slide-pr {
+  width : 100% !important;
+  height : 400px !important
+}
+@media only screen and (max-width: 600px) {
+  .img-slide-pr {
+    width : 100% !important;
+    height : 200px !important
+  }
+}
+</style>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <?php $this->load->view('_partials/topbar') ?>
       <section style="padding : 10px !important">
         <div class="container-fluid">
-          <img src="<?php echo prep_url(api_url()).$banner->image ?>" data-magnify-src="<?php echo prep_url(api_url()).$banner->image ?>" class="img-slide-produk">
+          <img src="<?php echo prep_url(api_url()).$banner->image ?>" data-magnify-src="<?php echo prep_url(api_url()).$banner->image ?>" class="img-slide-pr">
         </div>
       </section>
       <section class="offer-wthree py-lg-5 py-3" id="offer">
@@ -35,7 +47,10 @@
 </body>
 <script>
 $(document).ready(function() {
-  $('.img-slide-produk').magnify();
+  $('.img-slide-produk').magnify({
+  	magnifiedWidth : 1700,
+  	magnifiedHeight : 900
+  });
 });
     // $(function(){
 		// 	var f=$('#iframe')

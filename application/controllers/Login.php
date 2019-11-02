@@ -28,7 +28,7 @@ class Login extends CI_Controller{
             $cek = $this->db->get_where("mcustomer",$where)->num_rows();
             if($cek > 0){
                 $this->db->trans_start();
-                $q = "SELECT 
+                $q = "SELECT
                         mcustomer.id,
                         mcustomer.kode,
                         mcustomer.nama,
@@ -40,8 +40,8 @@ class Login extends CI_Controller{
                         mcustomer.user,
                         mcustomer.pass,
                         mjencust.nama mjencust_nama
-                    FROM 
-                        mcustomer 
+                    FROM
+                        mcustomer
                     LEFT JOIN mjencust ON mjencust.kode = mcustomer.ref_jenc
                     WHERE mcustomer.user = '$username'";
                 $result = $this->db->query($q)->row();
@@ -70,7 +70,7 @@ class Login extends CI_Controller{
                 echo json_encode($r);
             }
     }
-    
+
     function logout(){
         $this->session->sess_destroy();
         redirect(base_url());
@@ -78,7 +78,7 @@ class Login extends CI_Controller{
 
     function sessdata() {
         $kode = $this->session->userdata('kodecust');
-        $q = "SELECT 
+        $q = "SELECT
             mcustomer.id,
             mcustomer.kode,
             mcustomer.nama,
@@ -107,7 +107,7 @@ class Login extends CI_Controller{
     }
 
     function login_try(){
-        // print_r(json_encode($this->session->all_userdata())); 
+        // print_r(json_encode($this->session->all_userdata()));
         // echo sess_data('status');
         // $d = array(
         //     prefix_sess().'status'    => "online",

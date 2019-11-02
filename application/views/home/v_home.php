@@ -3,8 +3,12 @@
 <?php $this->load->view('_partials/head') ?>
 <style media="screen">
   .img-icon-mini {
-    width: 100% !important;
-    height: 100% !important;
+    width: 72px !important;
+    height: 70px !important;
+  }
+  .img-dfr {
+    height: 450px !important;
+   	width: 100%!important;
   }
 </style>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -15,8 +19,8 @@
               <div class="col-md-4" style="border : 1px solid #d4cfcf">
                 <div class="large-2 columns">
                   <div class="twentytwenty-container">
-                    <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_before->image ?>" class="img-diff"/>
-                    <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_after->image ?>" class="img-diff"/>
+                    <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_before->image ?>" class="img-dfr"/>
+                    <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_after->image ?>" class="img-dfr"/>
                   </div>
                 </div>
               </div>
@@ -126,7 +130,7 @@
 		        dots: false,
 		        infinite: true,
 		        slidesToShow: 1,
-		        slidesToScroll: 3
+		        slidesToScroll: 1
 		      });
 
 
