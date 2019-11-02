@@ -3,7 +3,7 @@
 <?php $this->load->view('_partials/head') ?>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <?php $this->load->view('_partials/topbar') ?>
-      <section class="section-x mt-3">
+      <!-- <section class="section-x mt-3">
         <div class="container-fluid">
           <section class="regular slider row">
             <?php foreach ($ktg as $i => $v): ?>
@@ -12,6 +12,13 @@
               </div>
             <?php endforeach; ?>
           </section>
+        </div>
+      </section> -->
+      <section style="padding : 10px !important">
+        <div class="container-fluid">
+          <div class="row py-0">
+            <img src="<?php echo prep_url(api_url()).$banner->image ?>" class="img-slide-produk">
+          </div>
         </div>
       </section>
       <section class="section-list-produk">

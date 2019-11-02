@@ -47,6 +47,7 @@ class Product extends CI_Controller
         $q_kategori = "SELECT * FROM mkategori WHERE kode != 'GX0003'";
         $data['product']  = $this->db->query($q)->result();
         $data['ktg']      = $this->db->query($q_kategori)->result();
+        $data['banner']   = $this->db->get_where('tconfigimage',array('kode' => 'banner_produk'))->row(); 
         $data['menuaktif']= $this->menuaktif;
         $this->load->view($this->indexpage,$data);
     }
