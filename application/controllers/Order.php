@@ -58,10 +58,10 @@ class Order extends CI_Controller
         }
         // if ($filterawal || $filterakhir) {
         //     $q .= " AND
-        //         xorder.tgl 
+        //         xorder.tgl
         //     BETWEEN '$filterawal' AND '$filterakhir'";
         // }
-        
+
         $q .=" ORDER BY xorder.id DESC" ;
         $result     = $this->db->query($q)->result();
         $list       = [];
@@ -86,7 +86,7 @@ class Order extends CI_Controller
             $row['orderdone']   = $r->orderdone;
             $row['statusorder'] = ($r->orderdone == $r->jmlorder) ? '<span class="label label-success">Selesai Semua</span>' : '<span class="label label-warning">Belum Selesai</span>' ;
             $list[] = $row;
-        }   
+        }
         echo json_encode(array('data' => $list));
     }
 
@@ -168,8 +168,8 @@ class Order extends CI_Controller
                             <td>'.$r->ket.'</td>
                         </tr>
                         </tbody>';
-        }       
-        $tabs .= '</table>';       
+        }
+        $tabs .= '</table>';
         $tabs .=    '</div>
                     <div class="tab-pane" id="tab_2">';
 
@@ -196,7 +196,7 @@ class Order extends CI_Controller
                         </tr>
                         </tbody>';
         }
-        $tabs .= '</table>';              
+        $tabs .= '</table>';
         $tabs .='   </div>
                   </div>
                 </div>';
@@ -204,7 +204,7 @@ class Order extends CI_Controller
     }
 
     public function savedata()
-    {   
+    {
         $this->db->trans_begin();
         $provfrom = '10';
         $cityfrom = '445';
@@ -218,7 +218,7 @@ class Order extends CI_Controller
         $a['ref_layanan'] = $this->input->post('ref_layanan');
         $a['kirimke']   = $this->input->post('nama_penerima');
         $a['alamat']    = $this->input->post('alamat_penerima');
-        if ($this->input->post('ref_kirim') == 'GX0002') {    
+        if ($this->input->post('ref_kirim') == 'GX0002') {
             $a['kodeprovfrom']  = $provfrom ;
             $a['kodecityfrom']  = $cityfrom;
             $a['kodeprovto']    = $this->input->post('provinsito');
@@ -237,26 +237,29 @@ class Order extends CI_Controller
         foreach ($this->cart->contents() as $r) {
             $kodebrg = $r['id'];
             $Brg = $this->db->query("
-            SELECT 
+            SELECT
                 msatbrg.kode msatbrg_kode,
                 msatbrg.ref_brg msatbrg_ref_brg,
                 msatbrg.harga msatbrg_harga,
                 msatbrg.ref_gud msatbrg_ref_gud,
                 msatbrg.ket msatbrg_ket
-            FROM 
-                mbarang 
-            LEFT JOIN msatbrg ON msatbrg.ref_brg = mbarang.kode 
-            WHERE 
-                msatbrg.def = 't' 
+            FROM
+                mbarang
+            LEFT JOIN msatbrg ON msatbrg.ref_brg = mbarang.kode
+            WHERE
+                msatbrg.def = 't'
             AND mbarang.kode = '".$kodebrg."'")->row();
             $rowb['useri']     = $this->session->userdata('user');
             $rowb['ref_order'] = $kodeOrder;
             $rowb['ref_brg']   = $Brg->msatbrg_ref_brg;
-            $rowb['jumlah']    = $r['qty'];
             $rowb['harga']     = $Brg->msatbrg_harga;
             $rowb['ref_satbrg']= $Brg->msatbrg_kode;
             $rowb['ref_gud']   = $Brg->msatbrg_ref_gud;
             $rowb['ket']       = $Brg->msatbrg_ket;
+            $rowb['jumlah']    = $r['qty'];
+            $rowb['_product_id']  = $r['_product_id'];
+            $rowb['_design_id']   = $r['_design_id'];
+            $rowb['_order_id']    = $r['_order_id'];
             $b[] = $rowb;
         }
         $this->db->delete('xorderd',array('ref_order' => $kodeOrder));
@@ -286,7 +289,7 @@ class Order extends CI_Controller
         {
             $this->db->trans_rollback();
             $r = array(
-                'sukses' => 'fail', 
+                'sukses' => 'fail',
             );
         }
         else

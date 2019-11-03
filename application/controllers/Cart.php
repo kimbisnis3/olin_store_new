@@ -74,7 +74,7 @@ class Cart extends CI_Controller
     {
         $berat = 0;
         foreach($this->cart->contents() as $i => $v) {
-            $berat += $v['berat'] * $v['qty'];
+            $berat += ceil($v['berat']) * $v['qty'];
         }
         $result = $this->cart->contents();
         $list       = [];

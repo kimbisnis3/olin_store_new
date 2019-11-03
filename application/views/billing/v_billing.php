@@ -220,7 +220,7 @@
         getbank()
         getlayanan()
         getkirim()
-        // load_cart()
+        load_cart()
         // getdata()
     })
 
@@ -636,8 +636,8 @@
     }
 
     function getselect(prop, classoption, val, caption, arr) {
-	    $(`${prop}`).after(function() { $(`.${classoption}`).remove() });
-		$(`${prop}`).val('');
+	      $(`${prop}`).after(function() { $(`.${classoption}`).remove() });
+		    $(`${prop}`).val('');
         $(`${prop}`).trigger('change');
 
         // $(`${prop}`).append(`<option class="${classoption}" value="">-</option>`);

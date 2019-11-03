@@ -7,6 +7,15 @@
   width : 100% !important;
   height : 400px !important
 }
+.link-href {
+    color: black !important;
+    text-decoration: none !important;
+}
+.link-href:hover {
+     color: black !important;
+     text-decoration:none !important;
+     cursor:pointer !important;
+}
 @media only screen and (max-width: 600px) {
   .img-slide-pr {
     width : 100% !important;
@@ -33,7 +42,9 @@
                             <img src="<?php echo prep_url(api_url()).$v['gambardesign'] ?>" alt="" class="img-fluid img-produk">
                         </div>
                         <div class="card-footer text-center p-2 border-0 bg-white">
+                          <a href="<?php echo base_url(); ?>product/detail?q=<?php echo $v['kodebarang'] ?>" class="link-href">
                             <h5><?php echo $v['namabarang'] ?></h5>
+                          </a>
                         </div>
                     </div>
                   </div>

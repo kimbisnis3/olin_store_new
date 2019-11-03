@@ -50,18 +50,11 @@ class Design extends CI_Controller {
 
     function start()
     {
-        $sess_kode  = $this->session->userdata('kode_ref_design');
         $product_id = $this->input->get('product_id');
         $arr = array('kode_ref_design' => md5(time()));
-        if ($sess_kode) {
-          redirect(lumise_url().'index.php?product='.$product_id.'&ref='.$sess_kode, 'refresh');
-        } else {
-          $this->session->set_userdata($arr);
-          $sess_kode = $this->session->userdata('kode_ref_design');
-          if ($sess_kode) {
-              redirect(lumise_url().'index.php?product='.$product_id.'&ref='.$sess_kode, 'refresh');
-          }
-        }
+        $this->session->set_userdata($arr);
+        $sess_kode = $this->session->userdata('kode_ref_design');
+        redirect(lumise_url().'index.php?product='.$product_id.'&ref='.$sess_kode, 'refresh');
     }
 
     function finish()
@@ -69,6 +62,7 @@ class Design extends CI_Controller {
         $sess_kode  = $this->session->userdata('kode_ref_design');
         $q = "SELECT lumise_order_products.* FROM lumise_order_products LEFT JOIN lumise_orders ON lumise_orders.id = lumise_order_products.order_id  WHERE kode_ref = '$sess_kode' ";
         $result = $this->dblumise->query($q)->result();
+        $cart_contents = [];
         foreach ($result as $i => $v) {
           $product_id = $v->product_id;
           $q        = "SELECT mbarang. ID idbarang, mbarang.kode kodebarang FROM mbarang WHERE id_prod_lumise = '$product_id'";
@@ -94,18 +88,19 @@ class Design extends CI_Controller {
                           mbarang.kode ='$kodebrg'";
           $res_cart = $this->db->query($q_cart)->row();
           $data_cart = array(
-              'id'      => $res_cart->kodebarang,
-              'qty'     => 1,
-              'price'   => $res_cart->harga,
-              'name'    => $res_cart->namabarang,
-              'image'   => $res_cart->gambardesign,
-              'berat'   => $res_cart->beratkg,
+              'id'          => $res_cart->kodebarang,
+              'qty'         => 1,
+              'price'       => $res_cart->harga,
+              'name'        => $res_cart->namabarang,
+              'image'       => $res_cart->gambardesign,
+              'berat'       => $res_cart->beratkg,
+              '_product_id' => $v->product_id,
+              '_design_id'  => $v->design,
+              '_order_id'   => $v->order_id,
             );
+          $cart_contents = $data_cart;
         }
-        $add_cart = $this->cart->insert($data_cart);
-        // $r['sukses']      = $add_cart ? 'success' : 'fail' ;
-        // $r['total_items'] = $this->cart->total_items() ;
-        // echo json_encode($this->cart->contents());
+        $add_cart = $this->cart->insert($cart_contents);
         if ($add_cart) {
           redirect(base_url('cart'));
         }
@@ -155,7 +150,16 @@ class Design extends CI_Controller {
 
     function ceksess()
     {
-        print_r($this->session->userdata());
+        // print_r($this->session->userdata());
+        print_r($this->cart->contents());
+    }
+
+    function setsession()
+    {
+      $arr = array('kode_ref_design' => md5(time()));
+      $this->session->set_userdata($arr);
+      $sess_kode = $this->session->userdata('kode_ref_design');
+      print_r($sess_kode);
     }
 
     function delsess()

@@ -110,8 +110,8 @@
     });
 
     function design(id) {
-      // location.href = `<?php echo base_url(); ?>design/start?product_id=${id}`
-      console.log(id)
+      location.href = `<?php echo base_url(); ?>design/start?product_id=${id}`
+      // console.log(id)
     }
 
     function add_cart(kode) {
