@@ -98,12 +98,13 @@ class Design extends CI_Controller {
               '_design_id'  => $v->design,
               '_order_id'   => $v->order_id,
             );
-          $cart_contents = $data_cart;
+          // $cart_contents = $data_cart;
+          $add_cart = $this->cart->insert($data_cart);
         }
-        $add_cart = $this->cart->insert($cart_contents);
-        if ($add_cart) {
-          redirect(base_url('cart'));
-        }
+        // $add_cart = $this->cart->insert($cart_contents);
+        // if ($add_cart) {
+        // }
+        redirect(base_url('cart'));
     }
 
     function detail()
