@@ -50,10 +50,10 @@ $db['two'] = array(
 
 $db['lumise'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => 'cloud.gongsoft.com',
 	'username' => 'root',
-	'password' => '',
-	'database' => 'lumise',
+	'password' => 'gongsoft2016go',
+	'database' => 'pabriktascustomx',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
