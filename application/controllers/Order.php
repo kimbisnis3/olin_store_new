@@ -235,7 +235,7 @@ class Order extends CI_Controller
         $kodeOrder  = $this->db->get_where('xorder',array('id' => $idOrder))->row()->kode;
         $arr_produk = $this->cart->contents();
         foreach ($this->cart->contents() as $r) {
-            $kodebrg = $r['id'];
+            $kodebrg = $r['kode'];
             $Brg = $this->db->query("
             SELECT
                 msatbrg.kode msatbrg_kode,
