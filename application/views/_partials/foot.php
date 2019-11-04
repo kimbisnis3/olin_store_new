@@ -127,7 +127,7 @@
 
  <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
  <script src="<?php echo base_url()?>assets/select2/dist/js/select2.full.min.js"></script>
- <script src="<?php echo base_url()?>assets/js/imagezoom.js"></script>
+ <!-- <script src="<?php echo base_url()?>assets/js/imagezoom.js"></script> -->
  <!-- <script defer src="<?php echo base_url()?>assets/js/jquery.flexslider.js"></script> -->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js" integrity="sha256-VeNaFBVDhoX3H+gJ37DpT/nTuZTdjYro9yBruHjVmoQ=" crossorigin="anonymous"></script>
  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>

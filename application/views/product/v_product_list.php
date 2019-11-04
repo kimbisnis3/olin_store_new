@@ -61,6 +61,7 @@
     </div>
   </section>
 <?php $this->load->view('_partials/foot') ?>
+<script src="<?php echo base_url()?>assets/js/imagezoom_bottom.js"></script>
 </body>
 <div class="modal fade" id="modal-image" role="dialog" data-backdrop="static">
   <div class="modal-dialog modal-lg">

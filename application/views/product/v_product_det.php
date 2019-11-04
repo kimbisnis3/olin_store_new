@@ -91,6 +91,7 @@
       </div>
     </section>
     <?php $this->load->view('_partials/foot.php'); ?>
+    <script src="<?php echo base_url()?>assets/js/imagezoom.js"></script>
     <script src="<?php echo base_url()?>assets/flexslider/jquery.flexslider.js"></script>
 </body>
 <script>
