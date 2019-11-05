@@ -10,6 +10,20 @@
     height: 450px !important;
    	width: 100%!important;
   }
+  .img-big-home {
+  	height: 500px !important;
+  	width: 100% !important;
+  }
+  @media only screen and (max-width: 600px) {
+    .img-dfr {
+      height: 180px !important;
+     	width: 100%!important;
+    }
+    .img-big-home {
+      width : 100% !important;
+  	  height : 200px !important
+    }
+  }
 </style>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <?php $this->load->view('_partials/topbar') ?>
@@ -25,7 +39,7 @@
                 </div>
               </div>
               <div class="col-md-8" style="border : 1px solid #d4cfcf">
-                <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_big->image ?>" class="img-big"/>
+                <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_big->image ?>" class="img-big-home"/>
               </div>
             </div>
           </div>
