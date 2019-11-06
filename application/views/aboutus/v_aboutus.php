@@ -8,6 +8,11 @@
   .tx-black > a {
     color: black !important;
   }
+  .img-slide {
+  	/* 1400x400 */
+  	width : 100% !important;
+  	height: 100% !important;
+  }
 </style>
 <body>
 <?php $this->load->view('_partials/topbar') ?>
@@ -16,7 +21,8 @@
       <section class="regular slider row">
         <?php foreach ($ss_about as $i => $v): ?>
           <div>
-            <img src="<?php echo prep_url(api_url()).$v->image ?>" class="img-slide-large">
+            <img src="<?php echo prep_url(api_url()).$v->image ?>" class="img-slide">
+            <!-- <img src="https://mkj.olinbags.com/agen//uploads/slideabout/img-1573017098.png" class="img-slide"> -->
           </div>
         <?php endforeach; ?>
       </section>

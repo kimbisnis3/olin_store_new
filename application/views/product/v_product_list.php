@@ -3,9 +3,19 @@
 <?php $this->load->view('_partials/head') ?>
 <style media="screen">
   .img-produk {
-    height: 200px;
+    height: 100%;
     width: 100%;
   }
+  /* .square {
+    float:left;
+    position: relative;
+    width: 100%;
+    padding-bottom : 100%;
+    margin:1.66%;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:cover;
+  } */
   .link-href {
     color: black !important;
     text-decoration: none !important;
@@ -25,7 +35,7 @@
       <div class="row list-produk">
         <?php foreach ($product as $i => $v) { ?>
         <div class="col-md-3 p-3">
-          <div class="card item-flat border-0">
+          <div class="card item-flat border-0 my-2">
             <div class="card-header text-center border-0">
               <?php if ($v['is_design'] == true): ?>
               <a href="<?php echo base_url(); ?>product/detail?q=<?php echo $v['kodebarang'] ?>" class="link-href">
@@ -37,14 +47,14 @@
               </div>
               <?php endif; ?>
             </div>
-            <div class="card-body text-center p-1">
+            <div class="card-body text-center p-0">
               <?php if ($v['is_design'] == true): ?>
               <a href="<?php echo base_url(); ?>product/detail?q=<?php echo $v['kodebarang'] ?>" class="link-href">
-                <img src="<?php echo prep_url(api_url()).$v['gambardesign'] ?>" alt="" class="img-fluid img-produk">
+                <img src="<?php echo prep_url(api_url()).$v['gambardesign'] ?>" alt="" class="img-produk">
               </a>
               <?php else: ?>
               <div onclick="open_detail('<?php echo $v['kodebarang'] ?>')" class="pointer">
-                <img src="<?php echo prep_url(api_url()).$v['gambardesign'] ?>" alt="" class="img-fluid img-produk">
+                <img src="<?php echo prep_url(api_url()).$v['gambardesign'] ?>" alt="" class="img-produk">
               </div>
               <?php endif; ?>
             </div>

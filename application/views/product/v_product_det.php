@@ -81,9 +81,11 @@
               </div>
 
               <div class="mt-4">
-                <button type="button" class="btn btn-warning btn-lg btn-flat" onclick="design('<?php echo $pr->id_prod_lumise ?>')">
-                  <strong>Design Sendiri</strong>
-                </button>
+                <?php if ($pr->kodebarang != 'GX0010'): ?>
+                  <button type="button" class="btn btn-warning btn-lg btn-flat" onclick="design('<?php echo $pr->id_prod_lumise ?>')">
+                    <strong>Design Sendiri</strong>
+                  </button>
+                <?php endif; ?>
               </div>
             </div>
           </div>

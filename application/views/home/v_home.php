@@ -30,7 +30,7 @@
       <section class="img-diff-section">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-md-4" style="border : 1px solid #d4cfcf">
+              <div class="col-md-4">
                 <div class="large-2 columns">
                   <div class="twentytwenty-container">
                     <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_before->image ?>" class="img-dfr"/>
@@ -38,7 +38,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-8" style="border : 1px solid #d4cfcf">
+              <div class="col-md-8">
                 <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_big->image ?>" class="img-big-home"/>
               </div>
             </div>

@@ -47,46 +47,18 @@
               </div>
               <div class="row">
                 <button type="button" class="btn btn-hijau btn-md btn-block" id="btn-log-in" onclick="login()"><i
-                    class="fa fa-sign-in"></i> Login</button>
+                    class="fa fa-sign-in"></i> Login
+                  </button>
+              </div>
+              <div class="pt-2">
+                <div class="d-flex justify-content-center">
+                  <p>Atau register <a href="<?php base_url() ?>register">Disini</a></p>
                 </div>
               </div>
             </form>
           </div>
         </div>
       </div>
-      <!-- <div class="box-input container neon box-user">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="pull-right">
-            <h4 class="text-hijau text-user"> </h4>
-          </div>
-        </div>
-      </div>
-        <form id="form-login">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Username</label>
-                <input type="text" class="form-control" name="user">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" name="pass">
-              </div>
-            </div>
-          </div>
-        </form>
-        <div class="row">
-          <div class="col-md-12">
-            <button class="btn btn-hijau btn-md btn-block" id="btn-log-in" onclick="login()"><i
-                class="fa fa-sign-in"></i> Login</button>
-          </div>
-        </div>
-      </div> -->
     </section>
     <?php $this->load->view('_partials/foot.php'); ?>
   </body>
