@@ -87,7 +87,7 @@ class Product extends CI_Controller
         $q .= " ORDER BY mbarang.is_design ASC , mbarang.datei desc";
         $data['product'] = $this->db->query($q)->result_array();
         $data['menuaktif'] = $this->menuaktif;
-        $data['banner'] = $this->db->get_where('tconfigimage',array('kode' => 'banner_custom' ))->row();
+        $data['banner'] = $this->db->get_where('tconfigimage',array('kode' => 'banner_caraorder' ))->row();
         $this->load->view('product/v_product_list',$data);
     }
 
