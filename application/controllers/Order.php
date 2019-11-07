@@ -249,14 +249,15 @@ class Order extends CI_Controller
             WHERE
                 msatbrg.def = 't'
             AND mbarang.kode = '".$kodebrg."'")->row();
-            $rowb['useri']     = $this->session->userdata('user');
-            $rowb['ref_order'] = $kodeOrder;
-            $rowb['ref_brg']   = $Brg->msatbrg_ref_brg;
-            $rowb['harga']     = $Brg->msatbrg_harga;
-            $rowb['ref_satbrg']= $Brg->msatbrg_kode;
-            $rowb['ref_gud']   = $Brg->msatbrg_ref_gud;
-            $rowb['ket']       = $Brg->msatbrg_ket;
-            $rowb['jumlah']    = $r['qty'];
+            $rowb['useri']        = $this->session->userdata('user');
+            $rowb['ref_order']    = $kodeOrder;
+            $rowb['ref_brg']      = $Brg->msatbrg_ref_brg;
+            $rowb['harga']        = $Brg->msatbrg_harga;
+            $rowb['ref_satbrg']   = $Brg->msatbrg_kode;
+            $rowb['ref_gud']      = $Brg->msatbrg_ref_gud;
+            $rowb['ket']          = $Brg->msatbrg_ket;
+            $rowb['jumlah']       = $r['qty'];
+            $rowb['diskon']       = $r['diskon'];
             $rowb['_product_id']  = $r['_product_id'];
             $rowb['_design_id']   = $r['_design_id'];
             $rowb['_order_id']    = $r['_order_id'];
@@ -282,7 +283,11 @@ class Order extends CI_Controller
         if (count($design) > 0) {
             $this->db->insert_batch('xorderds',$c);
         }
-        $d['total'] = $this->cart->total() + $this->input->post('bykirim');
+        $sum_diskon = 0;
+        foreach($this->cart->contents() as $i => $v) {
+            $sum_diskon += ($v['diskon'] * $v['qty']);
+        }
+        $d['total'] = ($this->cart->total() - $sum_diskon) + $this->input->post('bykirim');
         $this->db->update('xorder',$d,array('kode' => $kodeOrder));
 
         if ($this->db->trans_status() === FALSE)

@@ -57,6 +57,8 @@ class Design extends CI_Controller {
               'kode'        => $res_cart->kodebarang,
               'qty'         => 1,
               'price'       => $res_cart->harga,
+              'diskon'      => 0,
+              'kodepromo'   => '',
               'name'        => $res_cart->namabarang,
               'image'       => $res_cart->gambardesign,
               'berat'       => $res_cart->beratkg,
@@ -64,19 +66,20 @@ class Design extends CI_Controller {
               '_design_id'  => $v->design,
               '_order_id'   => $v->order_id,
             );
-          // $cart_contents = $data_cart;
           $add_cart = $this->cart->insert($data_cart);
         }
-        // $add_cart = $this->cart->insert($cart_contents);
-        // if ($add_cart) {
-        // }
         redirect(base_url('cart'));
     }
 
     function ceksess()
     {
         // print_r($this->session->userdata());
-        print_r(count($this->cart->contents()) + 1);
+        // print_r($this->cart->contents());
+        $sum_diskon = 0;
+        foreach($this->cart->contents() as $i => $v) {
+            $sum_diskon += ($v['diskon'] * $v['qty']);
+        }
+        print_r($sum_diskon);
     }
 
     function setsession()
