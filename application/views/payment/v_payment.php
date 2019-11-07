@@ -114,6 +114,7 @@
       </section>
       <section class="p-3 mb-5">
         <div class="container">
+          <div class="table-responsive">
             <table id="table" class="table-custom" cellspacing="0" width="100%">
               <thead>
                 <tr>
@@ -135,6 +136,7 @@
               </tbody>
             </table>
         </div>
+      </div>
       </section>
       <?php $this->load->view('_partials/foot.php'); ?>
     </body>

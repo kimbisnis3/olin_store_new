@@ -3,21 +3,10 @@
 <?php $this->load->view('_partials/head') ?>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <?php $this->load->view('_partials/topbar') ?>
-    <section style="min-height : 50vh !important">
-    <div class="container" style="margin-top: 25px !important">
-      <div class="ckeck-top heading">
-        <h2 class="judul-page">Data Pesanan</h2>
-      </div>
-    </div>
-    <div class="konten" >
-      <!-- <div class="container" style="margin-bottom: 20px !important;">
-        <div class="row">
-          <button class="btn btn-teal btn-flat" onclick="add_data()"><i class="fa fa-plus"></i> Tambah</button>
-        </div>
-      </div> -->
+    <section class="py-1 my-4">
       <div class="container">
-        <div class="row">
-          <table id="table" class="table-custom" cellspacing="0" width="100%">
+        <div class="table-responsive">
+          <table id="table" class="table-custom" cellspacing="0" style="width : 100% !important">
             <thead>
               <tr>
                 <th width="5%"></th>
@@ -37,10 +26,8 @@
           </table>
         </div>
       </div>
-    </div>
     </section>
     <?php $this->load->view('_partials/foot') ?>
-
 </body>
 <script>
     var path = 'order';

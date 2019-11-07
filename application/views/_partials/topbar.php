@@ -75,6 +75,17 @@
  															<li class="nav-item menu-aboutus">
  																	<a class="nav-link" href="<?php echo base_url() ?>aboutus">Tentang Kami</a>
  															</li>
+                              <?php if ($this->session->userdata('in') == 1): ?>
+                                <li class="nav-item dropdown">
+                                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Shop
+                                  </a>
+                                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="<?php echo base_url() ?>order">Order</a>
+                                    <a class="dropdown-item" href="<?php echo base_url() ?>payment">Pembayaran</a>
+                                  </div>
+                                </li>
+                              <?php endif; ?>
                               <li class="nav-item menu-cart">
  																	<a class="nav-link text-primary" href="<?php echo base_url() ?>cart"><i class="fa fa-shopping-cart"></i> (<span class="total_items"></span>) </a>
  															</li>
