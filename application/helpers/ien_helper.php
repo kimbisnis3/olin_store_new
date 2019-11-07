@@ -19,7 +19,7 @@ if (!function_exists('status')) {
 
     function lumise_url() {
         // return 'https://https://pabriktascustom.com/design/';
-        return 'http://localhost/lumise_new_2/';
+        return 'http://localhost/lumise_new/';
     }
 
     function ien($text)
