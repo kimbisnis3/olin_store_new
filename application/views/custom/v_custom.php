@@ -38,9 +38,11 @@
                 <?php foreach ($pr as $i => $v): ?>
                   <div class="col-md-4">
                     <div class="card item-flat border-0">
-                        <div class="card-body text-center p-1">
-                            <img src="<?php echo prep_url(api_url()).$v['gambardesign'] ?>" alt="" class="img-fluid img-produk">
-                        </div>
+                        <a href="<?php echo base_url(); ?>product/detail?q=<?php echo $v['kodebarang'] ?>" class="link-href">
+                          <div class="card-body text-center p-1">
+                              <img src="<?php echo prep_url(api_url()).$v['gambardesign'] ?>" alt="" class="img-fluid img-produk">
+                          </div>
+                        </a>
                         <div class="card-footer text-center p-2 border-0 bg-white">
                           <a href="<?php echo base_url(); ?>product/detail?q=<?php echo $v['kodebarang'] ?>" class="link-href">
                             <h5><?php echo $v['namabarang'] ?></h5>
@@ -58,7 +60,7 @@
 </body>
 <script>
 $(document).ready(function() {
-  $('.img-slide-produk').magnify({
+  $('.img-slide-pr').magnify({
   	magnifiedWidth : 1700,
   	magnifiedHeight : 900
   });

@@ -6,16 +6,10 @@
     height: 100%;
     width: 100%;
   }
-  /* .square {
-    float:left;
-    position: relative;
-    width: 100%;
-    padding-bottom : 100%;
-    margin:1.66%;
-    background-position:center center;
-    background-repeat:no-repeat;
-    background-size:cover;
-  } */
+  .img-slide-pr {
+    width : 100% !important;
+    height : 400px !important
+  }
   .link-href {
     color: black !important;
     text-decoration: none !important;
@@ -26,6 +20,12 @@
        color: black !important;
        text-decoration:none !important;
        cursor:pointer !important;
+  }
+  @media only screen and (max-width: 600px) {
+    .img-slide-pr {
+      width : 100% !important;
+      height : 200px !important
+    }
   }
 </style>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -70,6 +70,14 @@
       </div>
     </div>
   </section>
+  <section class="pl-4 mb-0">
+    <h4>CARA ORDER</h4>
+  </section>
+  <section class="py-3">
+    <div class="container-fluid">
+      <img src="<?php echo prep_url(api_url()).$banner->image ?>" data-magnify-src="<?php echo prep_url(api_url()).$banner->image ?>" class="img-slide-pr">
+    </div>
+  </section>
 <?php $this->load->view('_partials/foot') ?>
 <script src="<?php echo base_url()?>assets/js/imagezoom_bottom.js"></script>
 </body>
@@ -91,6 +99,13 @@
   </div>
 </div>
   <script>
+
+  $(document).ready(function() {
+    $('.img-slide-pr').magnify({
+    	magnifiedWidth : 1700,
+    	magnifiedHeight : 900
+    });
+  });
 
   function open_detail(kode) {
     $.ajax({
