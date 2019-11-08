@@ -70,14 +70,17 @@
       </div>
     </div>
   </section>
-  <section class="pl-4 mb-0">
-    <h4>CARA ORDER</h4>
-  </section>
-  <section class="py-3">
-    <div class="container-fluid">
-      <img src="<?php echo prep_url(api_url()).$banner->image ?>" data-magnify-src="<?php echo prep_url(api_url()).$banner->image ?>" class="img-slide-pr">
-    </div>
-  </section>
+  <?php if ($this->input->get('q') != 'GX0001'): ?>
+    <section class="pl-4 mb-0">
+      <h4>CARA ORDER</h4>
+    </section>
+    <section class="py-3">
+      <div class="container-fluid">
+        <img src="<?php echo prep_url(api_url()).$banner->image ?>" data-magnify-src="<?php echo prep_url(api_url()).$banner->image ?>" class="img-slide-pr">
+      </div>
+    </section>
+  <?php endif; ?>
+
 <?php $this->load->view('_partials/foot') ?>
 <script src="<?php echo base_url()?>assets/js/imagezoom_bottom.js"></script>
 </body>

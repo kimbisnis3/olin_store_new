@@ -7,11 +7,11 @@
     height: 70px !important;
   }
   .img-dfr {
-    height: 450px !important;
-   	width: 100%!important;
+    /* height: 100% !important;
+   	width: 100%!important; */
   }
   .img-big-home {
-  	height: 500px !important;
+  	height: 100% !important;
   	width: 100% !important;
   }
   @media only screen and (max-width: 600px) {
