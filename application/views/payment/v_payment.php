@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <?php $this->load->view('_partials/head.php'); ?>
+<style media="screen">
+.table-custom td,
+.table-custom th {
+        padding: .4rem !important;
+        font-size: 1rem !important;
+}
+</style>
 <body class="fadeIn animated">
   <?php $this->load->view('_partials/topbar.php'); ?>
   <div class="modal fade" id="modal-data" role="dialog" data-backdrop="static">
@@ -129,6 +136,8 @@
                   <th>Jenis Bayar</th>
                   <th>Bayar</th>
                   <th>Keterangan</th>
+                  <th>Bank</th>
+                  <th>No. Rekening</th>
                   <th>Kode Unik</th>
                 </tr>
               </thead>
@@ -185,6 +194,8 @@
                 { "data": "mjenbayar_nama" },
                 { "data": "bayar" },
                 { "data": "ket" },
+                { "data": "bank_nama" },
+                { "data": "norek" },
                 { "data": "kodeunik" },
             ]
         });

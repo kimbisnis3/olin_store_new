@@ -263,6 +263,7 @@
                 ref_kirim       : $('[name="kirim"]').val(),
                 ref_layanan     : $('[name="layanan"]').val(),
                 ket             : $('[name="ket"]').val(),
+                bank            : $('[name="bank"]').val(),
                 // arr_produk      : arr_barang.content
             },
 	        success: function(data) {

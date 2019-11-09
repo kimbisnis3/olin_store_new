@@ -218,6 +218,7 @@ class Order extends CI_Controller
         $a['ref_layanan'] = $this->input->post('ref_layanan');
         $a['kirimke']   = $this->input->post('nama_penerima');
         $a['alamat']    = $this->input->post('alamat_penerima');
+        $a['ref_bank']  = $this->input->post('bank');
         if ($this->input->post('ref_kirim') == 'GX0002') {
             $a['kodeprovfrom']  = $provfrom ;
             $a['kodecityfrom']  = $cityfrom;
@@ -283,6 +284,7 @@ class Order extends CI_Controller
         if (count($design) > 0) {
             $this->db->insert_batch('xorderds',$c);
         }
+        //Total Diskon
         $sum_diskon = 0;
         foreach($this->cart->contents() as $i => $v) {
             $sum_diskon += ($v['diskon'] * $v['qty']);

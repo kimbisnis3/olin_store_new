@@ -19,12 +19,12 @@ class Payment extends CI_Controller
     {
         $data['menuaktif'] = $this->menuaktif;
         $data['jenisbayar'] = $this->db->get('mjenbayar')->result();
-        $this->load->view($this->indexpage,$data);  
+        $this->load->view($this->indexpage,$data);
     }
 
     public function getall(){
         $filteragen = $this->session->userdata('kodecust');
-        $q = "SELECT 
+        $q = "SELECT
                 xpelunasan.id,
                 xpelunasan.kode,
                 xpelunasan.tgl tgl_real,
@@ -38,15 +38,19 @@ class Payment extends CI_Controller
                 xpelunasan.kodeunik,
                 mcustomer.nama mcustomer_nama,
                 mgudang.nama mgudang_nama,
-                mjenbayar.nama mjenbayar_nama
-            FROM 
+                mjenbayar.nama mjenbayar_nama,
+                mbank.nama bank_nama,
+              	mbank.norek
+            FROM
                 xpelunasan
             LEFT JOIN mcustomer ON mcustomer.kode = xpelunasan.ref_cust
             LEFT JOIN mgudang ON mgudang.kode = xpelunasan.ref_gud
             LEFT JOIN mjenbayar ON mjenbayar.kode = xpelunasan.ref_jenbayar
+            LEFT JOIN xorder ON xorder.kode = xpelunasan.ref_jual
+            LEFT JOIN mbank ON mbank.kode = xorder.ref_bank
             WHERE xpelunasan.void IS NOT TRUE";
         if ($filteragen) {
-            $q .= " AND ref_cust = '$filteragen'";
+            $q .= " AND xpelunasan.ref_cust = '$filteragen'";
         }
         $result     = $this->db->query($q)->result();
         $list       = [];
@@ -65,6 +69,8 @@ class Payment extends CI_Controller
             $row['posted']          = $r->posted;
             $row['ref_jual']        = $r->ref_jual;
             $row['kodeunik']        = $r->kodeunik;
+            $row['norek']           = $r->norek;
+            $row['bank_nama']       = $r->bank_nama;
 
             $list[] = $row;
         }
@@ -72,7 +78,7 @@ class Payment extends CI_Controller
     }
 
     public function savedata()
-    {   
+    {
         $this->db->trans_begin();
         $a['useri']     = $this->session->userdata('username');
         $a['ref_cust']  = $this->session->userdata('kodecust');
@@ -169,7 +175,7 @@ class Payment extends CI_Controller
         $kodecust = $this->session->userdata('kodecust');
         $q = "select qr.*, (COALESCE(qr.total,0))- (COALESCE(qr.dibayar,0)) kurang
             from (
-            select 
+            select
             xorder.id,
             xorder.kode,
             xorder.tgl,
@@ -180,19 +186,19 @@ class Payment extends CI_Controller
             xorder.ref_cust,
             xorder.ref_kirim,
             mcustomer.nama mcustomer_nama,
-            case xorder.ref_kirim 
+            case xorder.ref_kirim
             when 'GX0002' then xorder.total
             when 'GX0001' then xorder.total - xorder.bykirim
             end as total,
             (select sum(xpelunasan.bayar) from xpelunasan
-            where xpelunasan.void is not true 
+            where xpelunasan.void is not true
             and xpelunasan.ref_jual = xorder.kode) dibayar
             from xorder
             join mcustomer on mcustomer.kode = xorder.ref_cust
             ) qr
             where (qr.total - (COALESCE(qr.dibayar,0))) > 0
             AND qr.ref_cust ='$kodecust'";
-            
+
         $result     = $this->db->query($q)->result();
         $list       = [];
         foreach ($result as $i => $r) {
@@ -208,7 +214,7 @@ class Payment extends CI_Controller
             $row['ket']             = $r->ket;
 
             $list[] = $row;
-        }   
+        }
         echo json_encode(array('data' => $list));
     }
 }

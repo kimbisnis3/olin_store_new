@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <?php $this->load->view('_partials/head') ?>
+<style media="screen">
+.table-custom td,
+.table-custom th {
+        padding: .4rem !important;
+        font-size: 1rem !important;
+}
+</style>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <?php $this->load->view('_partials/topbar') ?>
     <section class="py-1 my-4">
