@@ -34,10 +34,10 @@
  									</li>
  							</ul>
  							<ul class="social-icons">
- 									<li>
+ 									<li style="display : none">
  											<strong><img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_header_2->image ?>" class="img-header"> <?php echo $tx_header_top_3->teks; ?></strong>
  									</li>
- 									<li>
+ 									<li  style="display : none">
  											<strong><img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_header_3->image ?>" class="img-header"> <?php echo $tx_header_top_4->teks; ?></strong>
  									</li>
  								</ul>

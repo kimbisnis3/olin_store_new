@@ -43,12 +43,12 @@
 
         .img-slide-small {
         	width : 100% !important;
-        	height: 100px !important;
+        	height: 100% !important;
         }
 
         .img-slide-small-mobile {
         	width : 100% !important;
-        	height: 100px !important;
+        	height: 100% !important;
         }
 
         @media screen and (max-width: 600px) {

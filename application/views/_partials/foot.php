@@ -4,7 +4,7 @@
 
   //image
   $logofooter = $this->db->get_where('tconfigimage', array('kode' => 'logofooter'))->row();
-  $ktg = $this->db->get('mkategori')->result();
+  $ktg = $this->db->query('SELECT * FROM mkategori ORDER BY datei')->result();
   $q = "SELECT
         msatbrg. ID,
         msatbrg.konv,
@@ -60,12 +60,16 @@
 								 <h5 class="footer-top-title">Design Sendiri</h5>
 								 <ul class="post-links">
                    <?php foreach ($pr as $i => $v): ?>
-                     <li><?php echo $v['namabarang'] ?></li>
+                     <li>
+                        <a href="<?php echo base_url(); ?>product/detail?q=<?php echo $v['kodebarang'] ?>">
+                          <?php echo $v['namabarang'] ?>
+                        </a>
+                     </li>
                    <?php endforeach; ?>
 								 </ul>
 						 </div>
 						 <div class="col-md-3">
-								 <h5 class="footer-top-title">Login</h5>
+								 <h5 class="footer-top-title"><a href="<?php echo base_url(); ?>login" style="color : #fff;">Login</a></h5>
 								 <ul class="post-links">
 										 <li><strong><a href="<?php echo base_url() ?>karir">Karir</a></strong></li>
 										 <li><strong><a href="<?php echo base_url() ?>aboutus">Tentang Kami</a></strong></li>

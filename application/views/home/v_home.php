@@ -39,7 +39,9 @@
                 </div>
               </div>
               <div class="col-md-8">
-                <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_big->image ?>" class="img-big-home"/>
+                <a href="<?php echo base_url(); ?>custom">
+                  <img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_big->image ?>" class="img-big-home"/>
+                </a>
               </div>
             </div>
           </div>

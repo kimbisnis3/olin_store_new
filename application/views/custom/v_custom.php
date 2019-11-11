@@ -25,6 +25,9 @@
 </style>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     <?php $this->load->view('_partials/topbar') ?>
+      <section class="pl-4 pt-4 mb-0">
+        <h4>CARA ORDER</h4>
+      </section>
       <section style="padding : 10px !important">
         <div class="container-fluid">
           <img src="<?php echo prep_url(api_url()).$banner->image ?>" data-magnify-src="<?php echo prep_url(api_url()).$banner->image ?>" class="img-slide-pr">
@@ -60,10 +63,10 @@
 </body>
 <script>
 $(document).ready(function() {
-  $('.img-slide-pr').magnify({
-  	magnifiedWidth : 1700,
-  	magnifiedHeight : 900
-  });
+  // $('.img-slide-pr').magnify({
+  // 	magnifiedWidth : 1700,
+  // 	magnifiedHeight : 900
+  // });
 });
     // $(function(){
 		// 	var f=$('#iframe')

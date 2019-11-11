@@ -24,7 +24,7 @@
   @media only screen and (max-width: 600px) {
     .img-slide-pr {
       width : 100% !important;
-      height : 200px !important
+      height : 100% !important
     }
   }
 </style>
@@ -32,12 +32,18 @@
 <?php $this->load->view('_partials/topbar') ?>
   <section>
     <div class="container">
+      <div class="row pt-4 pb-2">
+        <h3><?php echo $ktg->nama; ?></h3>
+      </div>
+      <div class="row pb-2">
+        <p><?php echo $ktg->ket; ?></p>
+      </div>
       <div class="row list-produk">
         <?php foreach ($product as $i => $v) { ?>
         <div class="col-md-3 p-3">
           <div class="card item-flat border-0 my-2">
             <div class="card-header text-center border-0">
-              <?php if ($v['is_design'] == true): ?>
+              <?php if ($v['is_design'] == 't'): ?>
               <a href="<?php echo base_url(); ?>product/detail?q=<?php echo $v['kodebarang'] ?>" class="link-href">
                 <strong><?php echo $v['namabarang'] ?></strong>
               </a>
@@ -48,7 +54,7 @@
               <?php endif; ?>
             </div>
             <div class="card-body text-center p-0">
-              <?php if ($v['is_design'] == true): ?>
+              <?php if ($v['is_design'] == 't'): ?>
               <a href="<?php echo base_url(); ?>product/detail?q=<?php echo $v['kodebarang'] ?>" class="link-href">
                 <img src="<?php echo prep_url(api_url()).$v['gambardesign'] ?>" alt="" class="img-produk">
               </a>
@@ -70,7 +76,7 @@
       </div>
     </div>
   </section>
-  <?php if ($this->input->get('q') != 'GX0001'): ?>
+  <?php //if ($this->input->get('q') != 'GX0001'): ?>
     <section class="pl-4 mb-0">
       <h4>CARA ORDER</h4>
     </section>
@@ -79,7 +85,7 @@
         <img src="<?php echo prep_url(api_url()).$banner->image ?>" data-magnify-src="<?php echo prep_url(api_url()).$banner->image ?>" class="img-slide-pr">
       </div>
     </section>
-  <?php endif; ?>
+  <?php // endif; ?>
 
 <?php $this->load->view('_partials/foot') ?>
 <script src="<?php echo base_url()?>assets/js/imagezoom_bottom.js"></script>
@@ -104,10 +110,10 @@
   <script>
 
   $(document).ready(function() {
-    $('.img-slide-pr').magnify({
-    	magnifiedWidth : 1700,
-    	magnifiedHeight : 900
-    });
+    // $('.img-slide-pr').magnify({
+    // 	magnifiedWidth : 1700,
+    // 	magnifiedHeight : 900
+    // });
   });
 
   function open_detail(kode) {

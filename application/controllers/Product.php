@@ -85,9 +85,10 @@ class Product extends CI_Controller
                 msatbrg.def = 't'
             AND mbarang.ref_ktg = '$ref_ktg'";
         $q .= " ORDER BY mbarang.is_design ASC , mbarang.datei desc";
-        $data['product'] = $this->db->query($q)->result_array();
-        $data['menuaktif'] = $this->menuaktif;
-        $data['banner'] = $this->db->get_where('tconfigimage',array('kode' => 'banner_caraorder' ))->row();
+        $data['ktg']      = $this->db->get_where('mkategori',array('kode' => $ref_ktg))->row();
+        $data['product']  = $this->db->query($q)->result_array();
+        $data['menuaktif']= $this->menuaktif;
+        $data['banner']   = $this->db->get_where('tconfigimage',array('kode' => 'banner_caraorder' ))->row();
         $this->load->view('product/v_product_list',$data);
     }
 
