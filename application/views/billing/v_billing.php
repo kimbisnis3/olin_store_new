@@ -136,7 +136,8 @@
                     </div>
                     <div class="row" style="margin-bottom: 10px !important;">
                         <div class="col-md-12">
-                            <label>No Rekening : <strong><span id="norek"></span></strong></label>
+                            <label>No Rekening : <strong><span id="norek"></span></strong></label><br>
+                            <label>Atas Nama : <strong><span id="atasnama"></span></strong></label>
                         </div>
                     </div>
                     <div class="row" style="margin-bottom: 20px !important;">
@@ -681,6 +682,7 @@
               },
               success: function(data) {
                   $('#norek').html(data.norek)
+                  $('#atasnama').html(data.ket)
               }
           });
         })
