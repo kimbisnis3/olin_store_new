@@ -38,6 +38,7 @@
                             <select class="form-control" name="layanan" id="layanan">
                                 <option value="">-</option>
                             </select>
+                            <input type="hidden" class="form-control" name="hargalayanan" id="hargalayanan">
                         </div>
                         <div class="col-md-6">
                             <label for="">Pengiriman</label>
@@ -128,9 +129,14 @@
                     <div class="row" style="margin-bottom: 20px !important;">
                         <div class="col-md-12">
                             <label for="">Pilihan Bank</label>
-                            <select class="form-control" name="bank" id="bank">
+                            <select class="form-control" name="bank" id="bank" onchange="getnorek()">
                                 <option value="">-</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 10px !important;">
+                        <div class="col-md-12">
+                            <label>No Rekening : <strong><span id="norek"></span></strong></label>
                         </div>
                     </div>
                     <div class="row" style="margin-bottom: 20px !important;">
@@ -183,7 +189,79 @@
           </table>
         </div> -->
         <div class="container step step-4">
-            <!-- page konfimasi, kode unik  -->
+            <div class="d-flex justify-content-center py-1">
+              <h4>Ringkasan Pembelian</h4>
+            </div>
+            <div class="d-flex justify-content-center p-3">
+              <div class="col-md-12">
+                <table class="table">
+                  <tr>
+                    <td>Nama Penerima</th>
+                    <td>:</th>
+                    <td><span id="k_nama_penerima"></span></td>
+                    <td>Telp Penerima</th>
+                    <td>:</th>
+                    <td><span id="k_telp_penerima"></span></td>
+                  </tr>
+                  <tr>
+                    <td>Email Penerima</th>
+                    <td>:</th>
+                    <td><span id="k_email_penerima"></span></td>
+                    <td>Alamat Penerima</th>
+                    <td>:</th>
+                    <td><span id="k_alamat_penerima"></span></td>
+                  </tr>
+                  <tr>
+                    <td>Provinsi</th>
+                    <td>:</th>
+                    <td><span id="k_provinsi"></span></td>
+                    <td>Kota</th>
+                    <td>:</th>
+                    <td><span id="k_kota"></span></td>
+                  </tr>
+                  <tr>
+                    <td>Pengiriman</th>
+                    <td>:</th>
+                    <td><span id="k_kirim"></span></td>
+                    <td>Kurir</th>
+                    <td>:</th>
+                    <td><span id="k_kurir"></span></td>
+                  </tr>
+                  <tr>
+                    <td>Layanan</th>
+                    <td>:</th>
+                    <td><span id="k_layanan"></span></td>
+                    <td>Biaya Layanan</th>
+                    <td>:</th>
+                    <td><span id="k_hargalayanan"></span></td>
+                  </tr>
+                  <tr>
+                    <td>Bank</th>
+                    <td>:</th>
+                    <td><span id="k_bank"></span></td>
+                    <td>No Rekening</th>
+                    <td>:</th>
+                    <td><span id="k_norek"></span></td>
+                  </tr>
+                  <tr>
+                    <td>Total Berat</th>
+                    <td>:</th>
+                    <td><span id="k_berattotal"></span></td>
+                    <td>Biaya Kirim</th>
+                    <td>:</th>
+                    <td><span id="k_biaya"></span></td>
+                  </tr>
+                  <tr>
+                    <td>Total Pembelian</th>
+                    <td>:</th>
+                    <td><span id="k_total"></span></td>
+                    <td>Total Bayar</th>
+                    <td>:</th>
+                    <td><span id="k_totalbayar"></span></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
@@ -192,7 +270,7 @@
                 <div class="col-md-4"></div>
             </div>
         </div>
-        <div class="containter btn-step" style="margin-top: 25px !important;">
+        <div class="containter btn-step mt-3">
             <div class="ckeck-top heading">
                 <div class="row">
                     <div class="col-md-12 text-center">
@@ -350,6 +428,9 @@
             toastr.warning("Lengkapi Data")
             return false
         }
+        if (page == page_ongkir) {
+          gethargalayanan()
+        }
 
         let page_bank = 3;
         if(page == page_bank && $('[name="bank"]').val() == '') {
@@ -365,6 +446,7 @@
 
         if(page == maxpage) {
             $('.btn-next').addClass('invisible')
+            load_konfirmasi()
         } else {
             $('.btn-next').removeClass('invisible')
         }
@@ -398,6 +480,31 @@
         $(`.step-3`).hide()
         $(`.step-4`).hide()
         $(`.step-5`).hide()
+    }
+
+    function load_konfirmasi()
+    {
+      $('#k_nama_penerima').html($('[name="nama_penerima"]').val())
+      $('#k_telp_penerima').html($('[name="telp_penerima"]').val())
+      $('#k_email_penerima').html($('[name="email_penerima"]').val())
+      $('#k_alamat_penerima').html($('[name="alamat_penerima"]').val())
+      $('#k_provinsi').html($('[name="provinsi"] option:selected').html())
+      $('#k_kota').html($('[name="kota"] option:selected').html())
+      $('#k_berattotal').html($('[name="berattotal"]').val() + ' kg')
+      $('#k_biaya').html('Rp ' + numeral($('[name="biaya"]').val()).format('0,0'))
+      $('#k_kodekurir').html($('[name="kodekurir"]').val())
+      $('#k_kurir').html($('[name="kurir"]').val())
+      $('#k_kirim').html($('[name="kirim"] option:selected').html())
+      $('#k_layanan').html($('[name="layanan"] option:selected').html())
+      $('#k_hargalayanan').html('Rp '+ numeral($('#hargalayanan').val()).format('0,0'))
+      $('#k_ket').html($('[name="ket"]').val())
+      $('#k_bank').html($('[name="bank"] option:selected').html())
+      $('#k_norek').html($('#norek').html())
+      $('#k_total').html('Rp '+ numeral($('#carttotal').val()).format('0,0'))
+      let biayakirim      = ($('[name="biaya"]').val() == '' | $('[name="biaya"]').val() == null) ? 0 : $('[name="biaya"]').val()
+      let totalcart       = $('#carttotal').val()
+      let hargalayanan    = $('#hargalayanan').val()
+      $('#k_totalbayar').html('Rp '+ numeral(parseInt(totalcart) + parseInt(biayakirim) + parseInt(hargalayanan)).format('0,0'))
     }
 
     function load_cart() {
@@ -560,6 +667,38 @@
                 $(`#provinsi`).attr('readonly', false);
 	        }
 	    });
+    }
+
+    function getnorek() {
+      if ($('#bank').val() != '' | $('#bank').val() != null) {
+        setTimeout(function(){
+          $.ajax({
+              url: `<?php echo base_url() ?>billing/getnorek`,
+              type: "GET",
+              dataType: "JSON",
+              data : {
+                kode : $('#bank').val()
+              },
+              success: function(data) {
+                  $('#norek').html(data.norek)
+              }
+          });
+        })
+      }
+    }
+
+    function gethargalayanan(){
+        $.ajax({
+            url: `<?php echo base_url() ?>billing/gethargalayanan`,
+            type: "GET",
+            dataType: "JSON",
+            data : {
+              kode : $('#layanan').val()
+            },
+            success: function(data) {
+              $('#hargalayanan').val(data.harga)
+            }
+        });
     }
 
     function changecity(){

@@ -7,6 +7,7 @@ class Register extends CI_Controller
     public $foldername  = '';
     public $menuaktif   = 'register';
     public $indexpage   = 'register/v_register';
+    public $indexpage2  = 'register/v_register_reseller';
 
     function __construct()
     {
@@ -18,6 +19,12 @@ class Register extends CI_Controller
     {
         $data['menuaktif'] = $this->menuaktif;
         $this->load->view($this->indexpage,$data);
+    }
+
+    function reseller()
+    {
+        $data['menuaktif'] = $this->menuaktif;
+        $this->load->view($this->indexpage2,$data);
     }
 
     function savedata()
@@ -36,8 +43,8 @@ class Register extends CI_Controller
 
         $user = $this->db->get_where($this->table,
             array(
-                'user' => $d['user'], 
-                'pass' => $d['pass'], 
+                'user' => $d['user'],
+                'pass' => $d['pass'],
             ))->num_rows();
         if ($user > 0) {
             $r['header']    = 'Gagal' ;

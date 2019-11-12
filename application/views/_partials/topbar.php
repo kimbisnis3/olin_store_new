@@ -40,6 +40,9 @@
  									<li  style="display : none">
  											<strong><img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$gb_header_3->image ?>" class="img-header"> <?php echo $tx_header_top_4->teks; ?></strong>
  									</li>
+                  <li>
+ 											<strong><a href="<?php echo base_url() ?>user"><?php echo $this->session->userdata('nama'); ?></a> <i class="fa fa-user pl-1"></i></strong>
+ 									</li>
  								</ul>
  						</div>
  				</div>

@@ -22,7 +22,7 @@
         <h2><strong><?php echo $tx_karir->teks ?></strong></h2>
       </div>
       <div class="row justify-content-center" style="padding : 20px">
-        <a href="<?php echo base_url(); ?>register" type="button" class="btn btn-lg btn-biru">Register Reseller</a>
+        <a href="<?php echo base_url(); ?>register/reseller" type="button" class="btn btn-lg btn-biru">Register Reseller</a>
       </div>
     </div>
   </section>

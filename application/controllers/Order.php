@@ -290,7 +290,8 @@ class Order extends CI_Controller
         //     $sum_diskon += ($v['diskon'] * $v['qty']);
         // }
         // $d['total'] = ($this->cart->total() - $sum_diskon) + $this->input->post('bykirim');
-        $d['total'] = ($this->cart->total()) + $this->input->post('bykirim');
+        $hargalayanan = $this->gethargalayanan($this->input->post('ref_layanan'));
+        $d['total'] = ($this->cart->total()) + $this->input->post('bykirim')  + $hargalayanan;
         $this->db->update('xorder',$d,array('kode' => $kodeOrder));
 
         if ($this->db->trans_status() === FALSE)
@@ -309,5 +310,11 @@ class Order extends CI_Controller
                 );
         }
         echo json_encode($r);
+    }
+
+    function gethargalayanan($ref_layanan)
+    {
+        $harga = $this->db->get_where('mlayanan',array('kode' => $ref_layanan))->row();
+        return $harga->harga;
     }
 }

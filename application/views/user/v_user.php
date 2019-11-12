@@ -19,19 +19,12 @@
   </style>
   <body class="fadeIn animated">
     <?php $this->load->view('_partials/topbar.php'); ?>
-  <section class="section-x mb-5">
-    <div class="container p-3">
-      <div class="box-button p-3 col-md-6 mx-auto">
+  <section class="section-x my-4">
+    <div class="container pb-3">
+      <div class="box-button">
         <div class="row">
-          <div class="col-md-12">
-            <!-- <div class="row">
-              <div class="col-md-6 pb-3">
-                <button class="btn btn-biru btn-block" onclick="open_cust()"><i class="fa fa-user"></i> Daftar Sebagai Customer</button>
-              </div>
-              <div class="col-md-6 pb-3">
-                <button class="btn btn-teal btn-block" onclick="open_reseller()"><i class="fa fa-users"></i> Daftar Sebagai Reseller</button>
-              </div>
-            </div> -->
+          <div class="col-md-12 text-center">
+            <h3>User Profile</h3>
           </div>
         </div>
       </div>
@@ -49,8 +42,8 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Nama</label>
+                  <input type="hidden" class="form-control" name="kode">
                   <input type="text" class="form-control" name="nama">
-                  <input type="hidden" class="form-control" name="jencust">
                 </div>
               </div>
             </div>
@@ -79,14 +72,6 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label>Username</label>
-                  <input type="text" class="form-control" name="user">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
                   <label>Password</label>
                   <input type="password" class="form-control" name="pass">
                 </div>
@@ -102,8 +87,8 @@
             </div>
             <div class="row">
               <div class="col-md-12">
-                <button class="btn btn-hijau btn-md btn-block" id="btn-sign-up" onclick="register()"><i
-                class="fa fa-sign-in"></i> Register</button>
+                <button type="button" class="btn btn-hijau btn-md btn-block" id="btn-sign-up" onclick="savedata()"><i
+                class="fa fa-sign-in"></i> Simpan</button>
               </div>
             </div>
           </form>
@@ -117,27 +102,28 @@
   <script>
 
     $(document).ready(function(){
-      // $('.box-user').hide()
-      open_cust()
+      getdata()
     })
 
-    function open_reseller() {
-      $('.box-user').hide()
-      $('.box-user').show()
-      $('[name="jencust"]').val('res')
-      $('.text-user').html('<i class="fa fa-users"></i> Reseller')
-      $('#form-register')[0].reset();
+    function getdata() {
+      $.ajax({
+        url: `<?php echo base_url() ?>user/edit`,
+        type: "POST",
+        dataType: "JSON",
+        success: function (data) {
+          $('[name="kode"]').val(data.kode)
+          $('[name="nama"]').val(data.nama)
+          $('[name="telp"]').val(data.telp)
+          $('[name="email"]').val(data.email)
+          $('[name="alamat"]').val(data.alamat)
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          // toastr.danger('Internal Error')
+        }
+      });
     }
 
-    function open_cust() {
-      $('.box-user').hide()
-      $('.box-user').show()
-      $('[name="jencust"]').val('cust')
-      $('.text-user').html('<i class="fa fa-user"></i> Customer')
-      $('#form-register')[0].reset();
-    }
-
-    function register() {
+    function savedata() {
       if ($('[name="nama"]').val() == '' || $('[name="nama"]').val() == null) {
         $('[name="nama"]').focus()
         showNotif('Perhatian', 'Lengkapi Data', 'warning')
@@ -158,48 +144,35 @@
         showNotif('Perhatian', 'Lengkapi Data', 'warning')
         return false
       }
-      if ($('[name="user"]').val() == '' || $('[name="user"]').val() == null) {
-        $('[name="user"]').focus()
-        showNotif('Perhatian', 'Lengkapi Data', 'warning')
-        return false
-      }
-      if ($('[name="pass"]').val() == '' || $('[name="pass"]').val() == null) {
-        $('[name="pass"]').focus()
-        showNotif('Perhatian', 'Lengkapi Data', 'warning')
-        return false
-      }
+      // if ($('[name="pass"]').val() == '' || $('[name="pass"]').val() == null) {
+      //   $('[name="pass"]').focus()
+      //   showNotif('Perhatian', 'Lengkapi Data', 'warning')
+      //   return false
+      // }
       if ($('[name="typepass"]').val() != $('[name="pass"]').val()) {
         $('[name="typepass"]').focus()
         showNotif('Perhatian', 'Ketik Ulang Password Harus Sesuai Dengan Password', 'warning')
         return false
       }
       $('.form-control').prop('readonly', true)
-      btnproc('#btn-sign-up', 1)
       $.ajax({
-        url: `<?php echo base_url() ?>register/savedata`,
+        url: `<?php echo base_url() ?>user/updatedata`,
         type: "POST",
         dataType: "JSON",
         data: $('#form-register').serializeArray(),
         success: function (data) {
           if (data.status == 'success') {
-            // showNotif(data.header, data.msg, data.class)
-            toastr.success(data.msg)
+            toastr.success('Sukses')
             $('.form-control').prop('readonly', false)
-            btnproc('#btn-sign-up', 0)
-            // location.href = "<?php echo base_url() ?>";
-            $('#form-register')[0].reset();
-            setTimeout(function(){ login_modal() }, 1500);
+            location.href = "<?php echo base_url() ?>user";
           } else {
-            // showNotif(data.header, data.msg, data.class)
-            toastr.danger(data.msg)
+            toastr.error('Gagal')
             $('.form-control').prop('readonly', false)
-            btnproc('#btn-sign-up', 0)
           }
         },
         error: function (jqXHR, textStatus, errorThrown) {
           $('.form-control').prop('readonly', false)
-          toastr.danger(data.msg)
-          btnproc('#btn-sign-up', 0)
+          toastr.error('Internal Error')
         }
       });
     }

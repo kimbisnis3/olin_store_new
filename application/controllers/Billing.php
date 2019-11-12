@@ -19,39 +19,50 @@ class Billing extends CI_Controller {
     }
 
     function getlayanan() {
-        echo json_encode($this->db->get('mlayanan')->result()); 
+        echo json_encode($this->db->get('mlayanan')->result());
     }
 
     function getkirim() {
-        echo json_encode($this->db->get('mkirim')->result()); 
+        echo json_encode($this->db->get('mkirim')->result());
     }
 
     function getbank() {
         $result = $this->db->get('mbank')->result();
-        echo json_encode($result); 
+        echo json_encode($result);
     }
-    
+
     function getprov() {
         $response = $this->libre->get_province_ro();
-        echo $response; 
+        echo $response;
     }
 
     function getcity() {
         $provincecode = $this->input->get('provincecode');
         $response = $this->libre->get_city_ro($provincecode);
-        echo $response; 
+        echo $response;
     }
 
     function getongkir() {
-        $origin         = '445'; //Solo / Surakarta  
-        $destination    = $this->input->get('destination'); 
+        $origin         = '445'; //Solo / Surakarta
+        $destination    = $this->input->get('destination');
         // $weight         = $this->input->get('weight') * 1000;
         $weight         = 1 * 1000;
         $courier        = $this->input->get('kurir');
         $response = $this->libre->get_ongkir_ro($origin,$destination,$weight,$courier);
-        echo $response; 
-        
+        echo $response;
     }
-    
+
+    function getnorek() {
+        $kode   = $this->input->get('kode');
+        $result = $this->db->get_where('mbank',array('kode' => $kode ))->row();
+        echo json_encode($result);
+    }
+
+    function gethargalayanan() {
+        $kode   = $this->input->get('kode');
+        $result = $this->db->get_where('mlayanan',array('kode' => $kode ))->row();
+        echo json_encode($result);
+    }
+
 
 }

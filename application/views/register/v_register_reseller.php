@@ -118,7 +118,7 @@
 
     $(document).ready(function(){
       // $('.box-user').hide()
-      open_cust()
+      open_reseller()
     })
 
     function open_reseller() {
