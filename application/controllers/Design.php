@@ -52,11 +52,13 @@ class Design extends CI_Controller {
                       WHERE
                           mbarang.kode ='$kodebrg'";
           $res_cart = $this->db->query($q_cart)->row();
+          $harga = $res_cart->harga;
           $data_cart = array(
               'id'          => md5(time().$i),//kode unique
               'kode'        => $res_cart->kodebarang,
               'qty'         => 1,
               'price'       => $res_cart->harga,
+              'harga'       => $harga,
               'diskon'      => 0,
               'kodepromo'   => '',
               'name'        => $res_cart->namabarang,

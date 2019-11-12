@@ -285,11 +285,12 @@ class Order extends CI_Controller
             $this->db->insert_batch('xorderds',$c);
         }
         //Total Diskon
-        $sum_diskon = 0;
-        foreach($this->cart->contents() as $i => $v) {
-            $sum_diskon += ($v['diskon'] * $v['qty']);
-        }
-        $d['total'] = ($this->cart->total() - $sum_diskon) + $this->input->post('bykirim');
+        // $sum_diskon = 0;
+        // foreach($this->cart->contents() as $i => $v) {
+        //     $sum_diskon += ($v['diskon'] * $v['qty']);
+        // }
+        // $d['total'] = ($this->cart->total() - $sum_diskon) + $this->input->post('bykirim');
+        $d['total'] = ($this->cart->total()) + $this->input->post('bykirim');
         $this->db->update('xorder',$d,array('kode' => $kodeOrder));
 
         if ($this->db->trans_status() === FALSE)

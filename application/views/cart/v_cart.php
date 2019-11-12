@@ -125,13 +125,13 @@
               { "render" : (data,type,row,meta) => { return `${showimage(row.image)}` }},
               { "data": "name" },
               { "render" : (data,type,row,meta) => { return `${numeral(row.price).format('0,0')}` }},
-              { "render" : (data,type,row,meta) => { return `${numeral(row.diskon).format('0,0')} <i class="fa fa-times pointer text-danger" onclick=do_delete_promo('${row.rowid}')></i>` }},
+              { "render" : (data,type,row,meta) => { return `${numeral(row.diskon).format('0,0')} <i class="fa fa-times pointer text-danger invisible" onclick=do_delete_promo('${row.rowid}')></i>` }},
               { "render" : (data,type,row,meta) => { return `<input style="height : 30px !important; width : 30px !important;" id="qty-${row.rowid}" type="text" value="${row.qty}">` }},
-              { "render" : (data,type,row,meta) => { return `${numeral(row.sub_total_after).format('0,0')}` }},
+              { "render" : (data,type,row,meta) => { return `${numeral(row.subtotal).format('0,0')}` }},
               { "render" : (data,type,row,meta) => {return `
                 <button style="border-radius : 0 !important" class="btn btn-md btn-edit-cart"  onclick="update_cart('${row.rowid}')"><i class="fa fa-save"></i></button>
                 <button style="border-radius : 0 !important" class="btn btn-md btn-delete-cart"  onclick="remove_cart('${row.rowid}')"><i class="fa fa-times"></i></button>
-                <button style="border-radius : 0 !important" class="btn btn-md btn-edit-promo"  onclick="update_promo('${row.rowid}','${row.kode}','${row.qty}')"><i class="fa fa-tag"></i></button>
+                <button style="border-radius : 0 !important" class="btn btn-md btn-edit-promo invisible"  onclick="update_promo('${row.rowid}','${row.kode}','${row.qty}')"><i class="fa fa-tag"></i></button>
               `} },
           ]
       });

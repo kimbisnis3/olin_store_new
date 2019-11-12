@@ -81,6 +81,7 @@ class Cart extends CI_Controller
         foreach ($result as $i => $r) {
             $row['name']    = $r['name'];
             $row['price']   = $r['price'];
+            $row['harga']   = $r['harga'];
             $row['diskon']  = $r['diskon'] * $r['qty'];
             $row['kodepromo']= $r['kodepromo'];
             $row['image']   = $r['image'];
@@ -93,15 +94,23 @@ class Cart extends CI_Controller
             $row['rowid']   = $r['rowid'];
             $list[] = $row;
         }
+        //total diskon cart
         $sum_diskon = 0;
         foreach($this->cart->contents() as $i => $v) {
             $sum_diskon += ($v['diskon'] * $v['qty']);
         }
+        //total harga cart
+        // $sum_harga = 0;
+        // foreach($this->cart->contents() as $i => $v) {
+        //     $sum_harga += ($v['harga'] * $v['qty']);
+        // }
         echo json_encode(
             array(
                 'data'        => $list,
                 'total_items' => $this->cart->total_items(),
-                'total_price' => $this->cart->total() - $sum_diskon,
+                'total_price' => $this->cart->total(),
+                // 'total_price' => $this->cart->total() - $sum_diskon,
+                // 'total_harga' => $sum_harga - $sum_diskon,
                 'berattotal'  => $berat
         ));
     }
@@ -170,6 +179,7 @@ class Cart extends CI_Controller
     {
         $rowid  = $this->input->post('rowid');
         $jumlah = $this->input->post('jumlah');
+        //koding get new harga new harga every update
         if ($rowid === "all") {
             $this->cart->destroy();
         } else {
@@ -216,6 +226,7 @@ class Cart extends CI_Controller
             'kode'        => 'GH55667',
             'qty'         => 1,
             'price'       => 20000,
+            'harga'       => 20000,
             'diskon'      => 0,
             'kodepromo'   => '',
             'name'        => 'Tas A',
