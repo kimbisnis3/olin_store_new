@@ -254,29 +254,32 @@ class Order extends CI_Controller
             AND mbarang.kode = '".$kodebrg."'")->row();
             $rowb['useri']        = $this->session->userdata('user');
             $rowb['ref_order']    = $kodeOrder;
-            $rowb['ref_brg']      = $Brg->msatbrg_ref_brg;
-            $rowb['harga']        = $Brg->msatbrg_harga;
             $rowb['ref_satbrg']   = $Brg->msatbrg_kode;
             $rowb['ref_gud']      = $Brg->msatbrg_ref_gud;
             $rowb['ket']          = $Brg->msatbrg_ket;
+            // $rowb['ref_brg']      = $Brg->msatbrg_ref_brg;
+            // $rowb['harga']        = $Brg->msatbrg_harga;
+            $rowb['ref_brg']      = $r['kode'];
+            $rowb['harga']        = $r['harga'];
             $rowb['jumlah']       = $r['qty'];
             $rowb['diskon']       = $r['diskon'];
             $rowb['_product_id']  = $r['_product_id'];
             $rowb['_design_id']   = $r['_design_id'];
             $rowb['_order_id']    = $r['_order_id'];
             $b[] = $rowb;
-            // $jml_order = $this->db->get_where(
-            //   'thandlerorder',
-            //   array(
-            //     'ref_cust'  => $this->session->userdata('kodecust'),
-            //     'ref_brg'   => $kodebrg,
-            //   ))->row();
-            // $old_jml = $jml_order->order;
-            // $new_jml = $r['qty'];
-            // $w['ref_cust']    = $this->session->userdata('kodecust');
-            // $w['ref_brg']     = $kodebrg;
-            // $d['order']       = $old_jml + $new_jml;
-            // $this->db->update('thandlerorder',$d,$w);
+
+            $jml_order = $this->db->get_where(
+              'thandlerorder',
+              array(
+                'ref_cust'  => $this->session->userdata('kodecust'),
+                'ref_brg'   => $kodebrg,
+              ))->row();
+            $old_jml = $jml_order->order;
+            $new_jml = $r['qty'];
+            $_w['ref_cust']    = $this->session->userdata('kodecust');
+            $_w['ref_brg']     = $kodebrg;
+            $_d['order']       = $old_jml + $new_jml;
+            $this->db->update('thandlerorder',$_d,$_w);
         }
         $this->db->delete('xorderd',array('ref_order' => $kodeOrder));
         $this->db->insert_batch('xorderd',$b);
@@ -305,8 +308,8 @@ class Order extends CI_Controller
         // }
         // $d['total'] = ($this->cart->total() - $sum_diskon) + $this->input->post('bykirim');
         $hargalayanan = $this->gethargalayanan($this->input->post('ref_layanan'));
-        $d['total']   = ($this->cart->total()) + $this->input->post('bykirim')  + $hargalayanan;
-        // $d['total'] = $this->input->post('total_cart') + $this->input->post('bykirim')  + $hargalayanan;
+        // $d['total']   = ($this->cart->total()) + $this->input->post('bykirim')  + $hargalayanan;
+        $d['total'] = $this->input->post('total_cart') + $this->input->post('bykirim')  + $hargalayanan;
         $this->db->update('xorder',$d,array('kode' => $kodeOrder));
 
         if ($this->db->trans_status() === FALSE)
