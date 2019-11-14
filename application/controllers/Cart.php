@@ -22,89 +22,129 @@ class Cart extends CI_Controller
 
     function content_cart()
     {
-        $berat = 0;
-        foreach($this->cart->contents() as $i => $v) {
-            $berat += ceil($v['berat']) * $v['qty'];
-        }
         $result = $this->cart->contents();
         $list       = [];
         foreach ($result as $i => $r) {
-            $row['name']    = $r['name'];
-            $row['price']   = $r['price'];
-            $row['harga']   = $r['harga'];
-            $row['diskon']  = $r['diskon'] * $r['qty'];
-            $row['kodepromo']= $r['kodepromo'];
-            $row['image']   = $r['image'];
-            $row['qty']     = $r['qty'];
-            $row['berat']   = $r['berat'] * $r['qty'];
+            $row['name']      = $r['name'];
+            $row['price']     = $r['price'];
+            $row['harga']     = $r['harga'];
+            $row['diskon']    = $r['diskon'] * $r['qty'];
+            $row['kodepromo'] = $r['kodepromo'];
+            $row['image']     = $r['image'];
+            $row['qty']       = $r['qty'];
+            $row['berat']     = $r['berat'] * $r['qty'];
             $row['sub_total_after'] = $r['subtotal'] - ($r['diskon'] * $r['qty']);
-            $row['subtotal']= $r['subtotal'];
-            $row['id']      = $r['id'];
-            $row['kode']    = $r['kode'];
-            $row['rowid']   = $r['rowid'];
+            $row['subtotal']  = $r['subtotal'];
+            $row['subharga']  = $r['harga'] * $r['qty'];
+            $row['id']        = $r['id'];
+            $row['kode']      = $r['kode'];
+            $row['rowid']     = $r['rowid'];
             $list[] = $row;
         }
+        echo json_encode(
+            array(
+                'data'        => $list,
+        ));
+    }
+
+    function totalcart()
+    {
         //total diskon cart
         $sum_diskon = 0;
         foreach($this->cart->contents() as $i => $v) {
             $sum_diskon += ($v['diskon'] * $v['qty']);
         }
-        //total harga cart
-        // $sum_harga = 0;
-        // foreach($this->cart->contents() as $i => $v) {
-        //     $sum_harga += ($v['harga'] * $v['qty']);
-        // }
+        // total harga cart
+        $sum_harga = 0;
+        foreach($this->cart->contents() as $i => $v) {
+            $sum_harga += ($v['harga'] * $v['qty']);
+        }
+        // total berat cart
+        $berat = 0;
+        foreach($this->cart->contents() as $i => $v) {
+            $berat += ceil($v['berat']) * $v['qty'];
+        }
         echo json_encode(
             array(
-                'data'        => $list,
                 'total_items' => $this->cart->total_items(),
                 'total_price' => $this->cart->total(),
-                // 'total_price' => $this->cart->total() - $sum_diskon,
-                // 'total_harga' => $sum_harga - $sum_diskon,
+                'total_harga' => $sum_harga,
                 'berattotal'  => $berat
         ));
-    }
-
-    function update()
-    {
-        $rowid  = $this->input->post('rowid');
-        $jumlah = $this->input->post('jumlah');
-        //koding get new harga new harga every update
-        if ($rowid === "all") {
-            $this->cart->destroy();
-        } else {
-            $data = array(
-                'rowid'   => $rowid,
-                'qty'     => $jumlah
-            );
-            $result = $this->cart->update($data);
-            $r['sukses']= $result ? 'success' : 'fail' ;
-            $r['total_items']= $this->cart->total_items();
-            $r['total_price']= $this->cart->total();
-            echo json_encode($r);
-        }
     }
 
     function remove()
     {
         $rowid = $this->input->post('rowid');
-        if ($rowid === "all") {
-            $this->cart->destroy();
-            $r['sukses']=  'success' ;
-            $r['respon']=  'Keranjang Berhasil Dikosongkan' ;
-            echo json_encode($r);
-        } else {
-            $data = array(
-                'rowid'   => $rowid,
-                'qty'     => 0
-            );
-            $result = $this->cart->update($data);
-            $r['sukses']= $result ? 'success' : 'fail' ;
-            $r['respon']=  'Produk Berhasil Dihapus Dari Keranjang' ;
-            $r['total_items']= $this->cart->total_items();
-            $r['total_price']= $this->cart->total();
-            echo json_encode($r);
+        $data = array(
+            'rowid'   => $rowid,
+            'qty'     => 0
+        );
+        $result = $this->cart->update($data);
+        $r['sukses']= $result ? 'success' : 'fail' ;
+        $r['respon']=  'Produk Berhasil Dihapus Dari Keranjang' ;
+        echo json_encode($r);
+    }
+
+    function update()
+    {
+        $rowid    = $this->input->post('rowid');
+        $ref_brg  = $this->input->post('ref_brg');
+        $ref_cust = $this->session->userdata('kodecust');
+        $tgl      = date("d M Y");
+        $qty      = $this->input->post('jumlah');
+        // update qty
+        $data = array(
+            'rowid'   => $rowid,
+            'qty'     => $qty,
+        );
+        $result = $this->cart->update($data);
+        //update harga
+        $qty_cart = $this->h_sumcontent($this->cart->contents(), $ref_brg, 'qty');
+        $harga    = $this->h_proses($ref_cust, $ref_brg, $tgl, $qty_cart);
+        $arr = $this->h_get_content($ref_brg);
+        foreach ($arr as $i => $v) {
+          $d = array(
+              'rowid'   => $v['rowid'],
+              'harga'   => $harga
+          );
+          $res = $this->cart->update($d);
         }
+        $r['sukses']  = $result ? 'success' : 'fail';
+        $r['qty_cart']= $qty_cart;
+        echo json_encode($r);
+    }
+
+    function getsumc()
+    {
+        $qty_cart = $this->h_sumcontent($this->cart->contents(), 'GX0002', 'qty');
+        print_r($qty_cart);
+    }
+
+    function h_get_content($ref_brg)
+    {
+        $list = [];
+        foreach ($this->cart->contents() as $i => $r) {
+            if ($r['kode'] == $ref_brg) {
+              $row['kode']  = $r['kode'];
+              $row['rowid'] = $r['rowid'];
+              $list[] = $row;
+            }
+        }
+        return $list;
+    }
+
+    public function h_sumcontent($arr, $barang, $key)
+    {
+      $list = [];
+      foreach ($arr as $i => $r) {
+          if ($r['kode'] == $barang) {
+            $row[$key] = $r[$key];
+            $list[] = $row;
+          }
+      }
+      $sum_harga = array_column($list, $key);
+      return array_sum($sum_harga);
     }
 
     public function getharga()
@@ -128,22 +168,27 @@ class Cart extends CI_Controller
         $get_harga  = $barang->harga;
         $get_harga1 = $barang->harga1;
 
-        $cek = $this->h_cekorder($ref_cust, $ref_brg);
-        if ($cek <= 0) {
-          $this->h_entrybaru($ref_cust, $ref_brg);
-        }
+        $cekcust = $this->h_cekcust($ref_cust);
+        if ($cekcust > 0) {
+          $cek = $this->h_cekorder($ref_cust, $ref_brg);
+          if ($cek <= 0) {
+            $this->h_entrybaru($ref_cust, $ref_brg);
+          }
 
-        $jml = $this->h_hitung_order($ref_cust, $ref_brg, $tgl);
-        if ($jml <= 0) {
-          $this->h_resethandler($ref_cust, $ref_brg);
-        }
+          $jml = $this->h_hitung_order($ref_cust, $ref_brg, $tgl);
+          if ($jml <= 0) {
+            $this->h_resethandler($ref_cust, $ref_brg);
+          }
 
-        $current_qty = $this->h_curr_qty($ref_cust, $ref_brg);
-        $new_qty     = $qty;
-        if (($current_qty + $new_qty) >= $minorder) {
-          $harga = $get_harga1;
-        } elseif (($current_qty + $new_qty) < $minorder) {
-          $harga = $get_harga;
+          $current_qty = $this->h_curr_qty($ref_cust, $ref_brg);
+          $new_qty     = $qty;
+          if (($current_qty + $new_qty) >= $minorder) {
+            $harga = $get_harga1;
+          } elseif (($current_qty + $new_qty) < $minorder) {
+            $harga = $get_harga;
+          }
+        } else {
+          $harga = $barang->harga;
         }
         return $harga;
     }
@@ -153,6 +198,13 @@ class Cart extends CI_Controller
         $w['ref_cust']  = $ref_cust;
         $w['ref_brg']   = $ref_brg;
         $num_rows       = $this->db->get_where('thandlerorder',$w)->num_rows();
+        return $num_rows;
+    }
+
+    public function h_cekcust($ref_cust)
+    {
+        $w['kode']  = $ref_cust;
+        $num_rows   = $this->db->get_where('mcustomer',$w)->num_rows();
         return $num_rows;
     }
 

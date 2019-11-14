@@ -77,11 +77,21 @@ class Design extends CI_Controller {
     {
         // print_r($this->session->userdata());
         // print_r($this->cart->contents());
-        $sum_diskon = 0;
-        foreach($this->cart->contents() as $i => $v) {
-            $sum_diskon += ($v['diskon'] * $v['qty']);
-        }
-        print_r($sum_diskon);
+        $harga = $this->h_getsumharga($this->cart->contents(), 'GX0002', 'qty');
+        print_r($harga);
+    }
+
+    public function h_getsumharga($arr, $barang, $key)
+    {
+      $list = [];
+      foreach ($arr as $i => $r) {
+          if ($r['kode'] == $barang) {
+            $row[$key] = $r[$key];
+            $list[] = $row;
+          }
+      }
+      $sum_harga = array_column($list, $key);
+      return array_sum($sum_harga);
     }
 
     function setsession()

@@ -94,7 +94,7 @@
     var total_all_items = <?php echo $this->cart->total_items() ?>;
     $(document).ready(function() {
         getdata()
-        load_cart()
+        gettotal()
     })
 
     function checkout() {
@@ -124,16 +124,32 @@
               { "data": "id", "visible" : false },
               { "render" : (data,type,row,meta) => { return `${showimage(row.image)}` }},
               { "data": "name" },
-              { "render" : (data,type,row,meta) => { return `${numeral(row.price).format('0,0')}` }},
-              { "render" : (data,type,row,meta) => { return `${numeral(row.diskon).format('0,0')} <i class="fa fa-times pointer text-danger invisible" onclick=do_delete_promo('${row.rowid}')></i>` }},
+              { "render" : (data,type,row,meta) => { return `${numeral(row.harga).format('0,0')}` }},
+              { "render" : (data,type,row,meta) => { return `${numeral(row.diskon).format('0,0')} <i class="fa fa-times pointer text-danger invisible" onclick=do_delete_promo('${row.rowid}')></i>` } , "visible" : false},
               { "render" : (data,type,row,meta) => { return `<input style="height : 30px !important; width : 30px !important;" id="qty-${row.rowid}" type="text" value="${row.qty}">` }},
-              { "render" : (data,type,row,meta) => { return `${numeral(row.subtotal).format('0,0')}` }},
+              { "render" : (data,type,row,meta) => { return `${numeral(row.subharga).format('0,0')}` }},
               { "render" : (data,type,row,meta) => {return `
-                <button style="border-radius : 0 !important" class="btn btn-md btn-edit-cart"  onclick="update_cart('${row.rowid}')"><i class="fa fa-save"></i></button>
+                <button style="border-radius : 0 !important" class="btn btn-md btn-edit-cart"  onclick="update_cart('${row.rowid}', '${row.kode}')"><i class="fa fa-save"></i></button>
                 <button style="border-radius : 0 !important" class="btn btn-md btn-delete-cart"  onclick="remove_cart('${row.rowid}')"><i class="fa fa-times"></i></button>
                 <button style="border-radius : 0 !important" class="btn btn-md btn-edit-promo invisible"  onclick="update_promo('${row.rowid}','${row.kode}','${row.qty}')"><i class="fa fa-tag"></i></button>
               `} },
           ]
+      });
+    }
+
+    function gettotal() {
+        $.ajax({
+          url: `<?php echo base_url() ?>cart/totalcart`,
+          type: "GET",
+          dataType: "JSON",
+          data: {},
+          success: function(data) {
+            total_cart(data.total_harga)
+            btn_action(data.total_items)
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+                console.log('gagal')
+          }
       });
     }
 
@@ -142,20 +158,20 @@
       idx = -1;
     }
 
-    function update_cart(rowid) {
+    function update_cart(rowid, ref_brg) {
         $('.btn-edit-cart').prop('disabled',true);
         $.ajax({
           url: `<?php echo base_url() ?>cart/update`,
           type: "POST",
           dataType: "JSON",
           data: {
-            rowid: rowid,
-            jumlah: $(`#qty-${rowid}`).val(),
+            rowid   : rowid,
+            ref_brg : ref_brg,
+            jumlah  : $(`#qty-${rowid}`).val(),
           },
           success: function(data) {
               if (data.sukses == 'success') {
-                total_items(data.total_items)
-                total_cart(data.total_price)
+                gettotal()
                 refresh()
                 toastr.success('Produk Diubah')
                 $('.btn-delete-cart').prop('disabled',false);
@@ -166,57 +182,6 @@
                 $('.btn-delete-cart').prop('disabled',false);
           }
       });
-    }
-
-    function update_promo(rowid, kodebrg, qty) {
-        $('#promo_kode').val('')
-        $('#promo_qty').val(qty)
-        $('#promo_rowid').val(rowid)
-        $('#promo_kodebrg').val(kodebrg)
-        $('#modal-promo').modal('show')
-    }
-
-    function do_update_promo() {
-        $.ajax({
-            url: `<?php echo base_url() ?>cart/update_promo`,
-            type: "POST",
-            dataType: "JSON",
-            data: $('#form-promo').serializeArray(),
-            success: function(data) {
-                if (data.status == 'success') {
-                  toastr.success(data.msg)
-                  refresh()
-                  $('#modal-promo').modal('hide')
-                } else {
-                  toastr.error(data.msg)
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                  console.log('gagal')
-            }
-        });
-    }
-
-    function do_delete_promo(rowid) {
-        $.ajax({
-            url: `<?php echo base_url() ?>cart/delete_promo`,
-            type: "POST",
-            dataType: "JSON",
-            data: {
-              promo_rowid : rowid
-            },
-            success: function(data) {
-                if (data.status == 'success') {
-                  toastr.success(data.msg)
-                  refresh()
-                } else {
-                  toastr.error(data.msg)
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                  console.log('gagal')
-            }
-        });
     }
 
     function remove_cart(rowid) {
@@ -231,8 +196,7 @@
           },
           success: function(data) {
             if (data.sukses == 'success') {
-              total_items(data.total_items)
-              total_cart(data.total_price)
+              gettotal()
               refresh()
               toastr.success(data.respon)
               $('.btn-delete-cart').prop('disabled',true);
@@ -264,6 +228,57 @@
 	    }, );
 	}
 
+  function update_promo(rowid, kodebrg, qty) {
+      $('#promo_kode').val('')
+      $('#promo_qty').val(qty)
+      $('#promo_rowid').val(rowid)
+      $('#promo_kodebrg').val(kodebrg)
+      $('#modal-promo').modal('show')
+  }
+
+  function do_update_promo() {
+      $.ajax({
+          url: `<?php echo base_url() ?>cart/update_promo`,
+          type: "POST",
+          dataType: "JSON",
+          data: $('#form-promo').serializeArray(),
+          success: function(data) {
+              if (data.status == 'success') {
+                toastr.success(data.msg)
+                refresh()
+                $('#modal-promo').modal('hide')
+              } else {
+                toastr.error(data.msg)
+              }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+                console.log('gagal')
+          }
+      });
+  }
+
+  function do_delete_promo(rowid) {
+      $.ajax({
+          url: `<?php echo base_url() ?>cart/delete_promo`,
+          type: "POST",
+          dataType: "JSON",
+          data: {
+            promo_rowid : rowid
+          },
+          success: function(data) {
+              if (data.status == 'success') {
+                toastr.success(data.msg)
+                refresh()
+              } else {
+                toastr.error(data.msg)
+              }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+                console.log('gagal')
+          }
+      });
+  }
+
     function btn_action(x) {
         if(x == 0) {
             $('.btn-checkout').addClass('invisible')
@@ -272,42 +287,6 @@
             $('.btn-checkout').removeClass('invisible')
             $('.btn-clear-cart').removeClass('invisible')
         }
-    }
-
-
-
-    function load_cart() {
-        $('.tr-tb').remove();
-        $.ajax({
-          url: `<?php echo base_url() ?>cart/content_cart`,
-          type: "GET",
-          dataType: "JSON",
-          data: {},
-          success: function(data) {
-            //   console.log(data[0]['price'])
-            // $.each(data.data, function( i, v ) {
-            //     $('.body-tb').append(`
-            //         <tr class="tr-tb fadeIn animated">
-            //             <td align="center">${showimage(v.image)}</td>
-            //             <td>${v.name}</td>
-            //             <td align="right">Rp. ${numeral(v.price).format('0,0')}</td>
-            //             <td align="center"><input style="height : 30px !important; width : 30px !important;" id="qty-${v.rowid}" type="text" value="${v.qty}"></td>
-            //             <td align="right">Rp. ${numeral(v.subtotal).format('0,0')}</td>
-            //             <td align="center">
-            //                 <button style="border-radius : 0 !important" class="btn btn-md btn-edit-cart"  onclick="update_cart('${v.rowid}')"><i class="fa fa-save"></i></button>
-            //                 <button style="border-radius : 0 !important" class="btn btn-md btn-delete-cart"  onclick="remove_cart('${v.rowid}')"><i class="fa fa-times"></i></button>
-            //             </td>
-            //         </tr>
-            //     `)
-            //
-            // });
-            total_cart(data.total_price)
-            btn_action(data.total_items)
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-                console.log('gagal')
-          }
-      });
     }
 
 </script>
