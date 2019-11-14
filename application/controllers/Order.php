@@ -218,6 +218,8 @@ class Order extends CI_Controller
         $a['ref_layanan'] = $this->input->post('ref_layanan');
         $a['kirimke']   = $this->input->post('nama_penerima');
         $a['alamat']    = $this->input->post('alamat_penerima');
+        $a['email']     = $this->input->post('email_penerima');
+        $a['telp']      = $this->input->post('telp_penerima');
         $a['ref_bank']  = $this->input->post('bank');
         if ($this->input->post('ref_kirim') == 'GX0002') {
             $a['kodeprovfrom']  = $provfrom ;
@@ -263,6 +265,18 @@ class Order extends CI_Controller
             $rowb['_design_id']   = $r['_design_id'];
             $rowb['_order_id']    = $r['_order_id'];
             $b[] = $rowb;
+            // $jml_order = $this->db->get_where(
+            //   'thandlerorder',
+            //   array(
+            //     'ref_cust'  => $this->session->userdata('kodecust'),
+            //     'ref_brg'   => $kodebrg,
+            //   ))->row();
+            // $old_jml = $jml_order->order;
+            // $new_jml = $r['qty'];
+            // $w['ref_cust']    = $this->session->userdata('kodecust');
+            // $w['ref_brg']     = $kodebrg;
+            // $d['order']       = $old_jml + $new_jml;
+            // $this->db->update('thandlerorder',$d,$w);
         }
         $this->db->delete('xorderd',array('ref_order' => $kodeOrder));
         $this->db->insert_batch('xorderd',$b);
@@ -291,7 +305,8 @@ class Order extends CI_Controller
         // }
         // $d['total'] = ($this->cart->total() - $sum_diskon) + $this->input->post('bykirim');
         $hargalayanan = $this->gethargalayanan($this->input->post('ref_layanan'));
-        $d['total'] = ($this->cart->total()) + $this->input->post('bykirim')  + $hargalayanan;
+        $d['total']   = ($this->cart->total()) + $this->input->post('bykirim')  + $hargalayanan;
+        // $d['total'] = $this->input->post('total_cart') + $this->input->post('bykirim')  + $hargalayanan;
         $this->db->update('xorder',$d,array('kode' => $kodeOrder));
 
         if ($this->db->trans_status() === FALSE)

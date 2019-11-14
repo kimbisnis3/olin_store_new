@@ -150,45 +150,6 @@
                 <div class="col-md-4"></div>
             </div>
         </div>
-
-        <!-- <div class="container step step-4">
-          <table class="table-custom" id="table" style="width :100% !important; overflow-x:auto !important;">
-              <thead>
-                  <tr>
-                      <th>Item</th>
-                      <th>Product</th>
-                      <th>Harga</th>
-                      <th>Jumlah</th>
-                      <th>Subtotal</th>
-                  </tr>
-              </thead>
-              <tbody class="body-tb">
-              </tbody>
-              <tfoot>
-                  <tr class="tr-total">
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td align="center">Total</td>
-                      <td class="total-cart"> </td>
-                  </tr>
-                  <tr class="tr-total">
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td align="center">Biaya Kirim</td>
-                      <td class="bykirim"> </td>
-                  </tr>
-                  <tr class="tr-total">
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td align="center">Total Biaya</td>
-                      <td class="totbiaya"> </td>
-                  </tr>
-              </tfoot>
-          </table>
-        </div> -->
         <div class="container step step-4">
             <div class="d-flex justify-content-center py-1">
               <h4>Ringkasan Pembelian</h4>
@@ -299,7 +260,7 @@
         getbank()
         getlayanan()
         getkirim()
-        load_cart()
+        gettotal()
         // getdata()
     })
 
@@ -343,12 +304,13 @@
                 ref_layanan     : $('[name="layanan"]').val(),
                 ket             : $('[name="ket"]').val(),
                 bank            : $('[name="bank"]').val(),
+                hargalayanan    : $('[name="hargalayanan"]').val(),
+                total_cart      : $('[name="carttotal"]').val(),
                 // arr_produk      : arr_barang.content
             },
 	        success: function(data) {
                 if (data.sukses == 'success') {
                     console.log('sukses')
-                    // showNotif('Sukses', 'Pesanan Berhasil Dilakukan, Segera Masukan Data Pembayaran', 'success')
                     toastr.success("Pesanan Berhasil Dilakukan, Segera Masukan Data Pembayaran")
                     btnproc('.btn-konfirmasi',0)
                     setTimeout(function(){
@@ -377,7 +339,6 @@
         let page_datakirim = 1;
         if(page == page_datakirim && $('[name="nama_penerima"]').val() == '') {
             $('[name="nama_penerima"]').focus()
-            // showNotif('Perhatian', 'Lengkapi Data', 'warning')
             toastr.warning("Lengkapi Data")
             return false
         }
@@ -508,30 +469,17 @@
       $('#k_totalbayar').html('Rp '+ numeral(parseInt(totalcart) + parseInt(biayakirim) + parseInt(hargalayanan)).format('0,0'))
     }
 
-    function load_cart() {
-        $('.tr-tb').remove();
+    function gettotal() {
         $.ajax({
-          url: `<?php echo base_url() ?>cart/content_cart`,
+          url: `<?php echo base_url() ?>cart/totalcart`,
           type: "GET",
           dataType: "JSON",
           data: {},
           success: function(data) {
-            arr_barang = data;
-            $.each(data.data, function( i, v ) {
-                $('.body-tb').append(`
-                    <tr class="tr-tb fadeIn animated">
-                        <td align="center">${showimage(v.image)}</td>
-                        <td>${v.name}</td>
-                        <td align="right">Rp. ${numeral(v.price).format('0,0')}</td>
-                        <td align="center">${v.qty}</td>
-                        <td align="right">Rp. ${numeral(v.subtotal).format('0,0')}</td>
-                    </tr>
-                `)
-
-            });
-            total_cart(data.total_price)
+            total_cart(data.total_harga)
             $('#berattotal').val(data.berattotal)
-            $('#carttotal').val(data.total_price)
+            $('#carttotal').val(data.total_harga)
+            // $('#carttotal').val(data.total_price)
           },
           error: function(jqXHR, textStatus, errorThrown) {
                 console.log('gagal')
@@ -774,19 +722,89 @@
             $('#biaya').val(ongkos * berattotal)
             $('#kodekurir').val(arr_parse[i].service)
         }
-
     }
 
     function getselect(prop, classoption, val, caption, arr) {
 	      $(`${prop}`).after(function() { $(`.${classoption}`).remove() });
 		    $(`${prop}`).val('');
         $(`${prop}`).trigger('change');
-
         // $(`${prop}`).append(`<option class="${classoption}" value="">-</option>`);
         $.each(arr, function (i, v) {
             $(`${prop}`).append(`<option class="${classoption}" value="${v[val]}">${v[caption]}</option>`);
         })
 	}
+
+
+
+  //  <div class="container step step-4">
+  //   <table class="table-custom" id="table" style="width :100% !important; overflow-x:auto !important;">
+  //       <thead>
+  //           <tr>
+  //               <th>Item</th>
+  //               <th>Product</th>
+  //               <th>Harga</th>
+  //               <th>Jumlah</th>
+  //               <th>Subtotal</th>
+  //           </tr>
+  //       </thead>
+  //       <tbody class="body-tb">
+  //       </tbody>
+  //       <tfoot>
+  //           <tr class="tr-total">
+  //               <td></td>
+  //               <td></td>
+  //               <td></td>
+  //               <td align="center">Total</td>
+  //               <td class="total-cart"> </td>
+  //           </tr>
+  //           <tr class="tr-total">
+  //               <td></td>
+  //               <td></td>
+  //               <td></td>
+  //               <td align="center">Biaya Kirim</td>
+  //               <td class="bykirim"> </td>
+  //           </tr>
+  //           <tr class="tr-total">
+  //               <td></td>
+  //               <td></td>
+  //               <td></td>
+  //               <td align="center">Total Biaya</td>
+  //               <td class="totbiaya"> </td>
+  //           </tr>
+  //       </tfoot>
+  //   </table>
+  // </div>
+
+  // function load_cart() {
+  //     $('.tr-tb').remove();
+  //     $.ajax({
+  //       url: `<?php echo base_url() ?>cart/content_cart`,
+  //       type: "GET",
+  //       dataType: "JSON",
+  //       data: {},
+  //       success: function(data) {
+  //         arr_barang = data;
+  //         $.each(data.data, function( i, v ) {
+  //             $('.body-tb').append(`
+  //                 <tr class="tr-tb fadeIn animated">
+  //                     <td align="center">${showimage(v.image)}</td>
+  //                     <td>${v.name}</td>
+  //                     <td align="right">Rp. ${numeral(v.price).format('0,0')}</td>
+  //                     <td align="center">${v.qty}</td>
+  //                     <td align="right">Rp. ${numeral(v.subtotal).format('0,0')}</td>
+  //                 </tr>
+  //             `)
+  //
+  //         });
+  //         total_cart(data.total_price)
+  //         $('#berattotal').val(data.berattotal)
+  //         $('#carttotal').val(data.total_price)
+  //       },
+  //       error: function(jqXHR, textStatus, errorThrown) {
+  //             console.log('gagal')
+  //       }
+  //   });
+  // }
 
 </script>
 

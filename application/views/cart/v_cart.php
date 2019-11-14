@@ -130,7 +130,7 @@
               { "render" : (data,type,row,meta) => { return `${numeral(row.subharga).format('0,0')}` }},
               { "render" : (data,type,row,meta) => {return `
                 <button style="border-radius : 0 !important" class="btn btn-md btn-edit-cart"  onclick="update_cart('${row.rowid}', '${row.kode}')"><i class="fa fa-save"></i></button>
-                <button style="border-radius : 0 !important" class="btn btn-md btn-delete-cart"  onclick="remove_cart('${row.rowid}')"><i class="fa fa-times"></i></button>
+                <button style="border-radius : 0 !important" class="btn btn-md btn-delete-cart"  onclick="remove_cart('${row.rowid}', '${row.kode}')"><i class="fa fa-times"></i></button>
                 <button style="border-radius : 0 !important" class="btn btn-md btn-edit-promo invisible"  onclick="update_promo('${row.rowid}','${row.kode}','${row.qty}')"><i class="fa fa-tag"></i></button>
               `} },
           ]
@@ -184,15 +184,17 @@
       });
     }
 
-    function remove_cart(rowid) {
+    function remove_cart(rowid, ref_brg) {
         $('.btn-delete-cart').prop('disabled',true);
         $(".overlay").show();
         $.ajax({
-          url: `<?php echo base_url() ?>cart/remove`,
+          url: `<?php echo base_url() ?>cart/update`,
           type: "POST",
           dataType: "JSON",
           data: {
-            rowid: rowid,
+            rowid   : rowid,
+            ref_brg : ref_brg,
+            jumlah  : 0,
           },
           success: function(data) {
             if (data.sukses == 'success') {

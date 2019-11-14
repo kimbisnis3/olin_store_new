@@ -12,6 +12,7 @@ class Cart extends CI_Controller
     {
         parent::__construct();
         include(APPPATH . 'libraries/dbinclude.php');
+        include(APPPATH.'libraries/db_mysql.php');
     }
 
     function index()
@@ -20,10 +21,74 @@ class Cart extends CI_Controller
         $this->load->view($this->indexpage,$data);
     }
 
+    function add_by_design()
+    {
+        $sess_kode  = $this->session->userdata('kode_ref_design');
+        $q = "SELECT lumise_order_products.* FROM lumise_order_products LEFT JOIN lumise_orders ON lumise_orders.id = lumise_order_products.order_id  WHERE kode_ref = '$sess_kode' ";
+        $result = $this->dblumise->query($q)->result();
+        $cart_number = count($this->cart->contents());
+        $cart_contents = [];
+        foreach ($result as $i => $v) {
+          $product_id = $v->product_id;
+          $q        = "SELECT mbarang. ID idbarang, mbarang.kode kodebarang FROM mbarang WHERE id_prod_lumise = '$product_id'";
+          $res      = $this->db->query($q)->row();
+          $kodebrg  = $res->kodebarang;
+          $ref_cust = $this->session->userdata('kodecust');
+          $q_cart   = "SELECT
+                          msatbrg.harga,
+                          msatbrg.beratkg,
+                          mbarang. ID idbarang,
+                          mbarang.kode kodebarang,
+                          mbarang.nama namabarang,
+                          mmodesign.gambar gambardesign
+                      FROM
+                          msatbrg
+                      LEFT JOIN mbarang ON mbarang.kode = msatbrg.ref_brg
+                      LEFT JOIN mkategori ON mkategori.kode = mbarang.ref_ktg
+                      LEFT JOIN mbarangs ON mbarang.kode = mbarangs.ref_brg
+                      LEFT JOIN mmodesign ON mmodesign.kode = mbarangs.model
+                      LEFT JOIN mwarna ON mwarna.kode = mbarangs.warna
+                      LEFT JOIN msatuan ON msatuan.kode = msatbrg.ref_sat
+                      LEFT JOIN mgudang ON mgudang.kode = msatbrg.ref_gud
+                      WHERE
+                          mbarang.kode ='$kodebrg'";
+          $res_cart = $this->db->query($q_cart)->row();
+          // $harga = $res_cart->harga;
+          $data_cart = array(
+              'id'          => md5(time().$i),//kode unique
+              'kode'        => $res_cart->kodebarang,
+              'qty'         => 1,
+              'price'       => $res_cart->harga,
+              'harga'       => $harga,
+              'diskon'      => 0,
+              'kodepromo'   => '',
+              'name'        => $res_cart->namabarang,
+              'image'       => $res_cart->gambardesign,
+              'berat'       => $res_cart->beratkg,
+              '_product_id' => $v->product_id,
+              '_design_id'  => $v->design,
+              '_order_id'   => $v->order_id,
+          );
+          $add_cart = $this->cart->insert($data_cart);
+          // update harga
+          $qty_cart = $this->h_sumcontent($this->cart->contents(), $kodebrg, 'qty');
+          $harga    = $this->h_proses($ref_cust, $kodebrg, $tgl, $qty_cart);
+          $arr      = $this->h_get_content($kodebrg);
+          foreach ($arr as $i => $v) {
+            $d = array(
+                'rowid'   => $v['rowid'],
+                'harga'   => $harga
+            );
+            $res = $this->cart->update($d);
+          }
+        }
+        redirect(base_url('cart'));
+    }
+
     function content_cart()
     {
         $result = $this->cart->contents();
-        $list       = [];
+        $list   = [];
         foreach ($result as $i => $r) {
             $row['name']      = $r['name'];
             $row['price']     = $r['price'];
@@ -73,19 +138,6 @@ class Cart extends CI_Controller
         ));
     }
 
-    function remove()
-    {
-        $rowid = $this->input->post('rowid');
-        $data = array(
-            'rowid'   => $rowid,
-            'qty'     => 0
-        );
-        $result = $this->cart->update($data);
-        $r['sukses']= $result ? 'success' : 'fail' ;
-        $r['respon']=  'Produk Berhasil Dihapus Dari Keranjang' ;
-        echo json_encode($r);
-    }
-
     function update()
     {
         $rowid    = $this->input->post('rowid');
@@ -111,14 +163,7 @@ class Cart extends CI_Controller
           $res = $this->cart->update($d);
         }
         $r['sukses']  = $result ? 'success' : 'fail';
-        $r['qty_cart']= $qty_cart;
         echo json_encode($r);
-    }
-
-    function getsumc()
-    {
-        $qty_cart = $this->h_sumcontent($this->cart->contents(), 'GX0002', 'qty');
-        print_r($qty_cart);
     }
 
     function h_get_content($ref_brg)
@@ -267,24 +312,17 @@ class Cart extends CI_Controller
         return $data;
     }
 
-    public function cek_order()
+    function remove()
     {
-        $minorder   = 17;
-        $kodecust   = '000000000004';
-        $kodebrg    = 'GX0002';
-        $tgl        = '2019-10-08';
-        $hitungorder  = $this->hitung_order($kodecust, $kodebrg, $tgl);
-        $jml          = $hitungorder['jumlah'];
-        $loop = '';
-        for ($i = 0; $i < 30; $i++) {
-          $abc = new $this->hitung_order($kodecust, $kodebrg, $tgl);
-          $jml          = $abc['jumlah'];
-          $tgl          = $abc['row']['tgl'];
-          $loop[$i] = $abc['row']['tgl'];
-          // echo "tgl : ".$tgl. "<br />jml : " . $jml . "<br />".$i."<br /> <br />";
-        }
-
-        echo json_encode($loop);
+        $rowid = $this->input->post('rowid');
+        $data = array(
+            'rowid'   => $rowid,
+            'qty'     => 0
+        );
+        $result = $this->cart->update($data);
+        $r['sukses']= $result ? 'success' : 'fail' ;
+        $r['respon']=  'Produk Berhasil Dihapus Dari Keranjang' ;
+        echo json_encode($r);
     }
 
     function update_promo()
@@ -346,171 +384,5 @@ class Cart extends CI_Controller
         );
       }
     }
-
-    // ------------------TESTING PURPOSE ONLY------------------
-
-    public function tesreset()
-    {
-        $ref_cust = '000000000004';
-        $ref_brg  = 'GX0002';
-        $res = $this->h_resethandler($ref_cust, $ref_brg);
-        print_r($res);
-    }
-
-    public function tesupdate()
-    {
-        $ref_cust = '000000000004';
-        $ref_brg  = 'GX0002';
-        $qty      = '16';
-        $res = $this->h_updatehandler($ref_cust, $ref_brg, $qty);
-        print_r($res);
-    }
-
-    function add_try()
-    {
-        $data = array(
-            'id'          => 'GH55667',
-            'kode'        => 'GH55667',
-            'qty'         => 1,
-            'price'       => 20000,
-            'harga'       => 20000,
-            'diskon'      => 0,
-            'kodepromo'   => '',
-            'name'        => 'Tas A',
-            'image'       => 'kjadjjjekd.jpg',
-            'berat'       => 1,
-            '_product_id' => '12',
-            '_design_id'  => '12',
-            '_order_id'   => '7',
-        );
-        $this->cart->insert($data);
-    }
-
-    function update_try()
-    {
-        $data = array(
-            'rowid'     => '9c4a529a21163d651520820d20b74856',
-            'kodepromo' => 'zz',
-            'qty'       => 1,
-        );
-        $this->cart->update($data);
-    }
-
-    function delete_try()
-    {
-        $this->cart->destroy();
-    }
-
-    // public function h_proses()
-    // {
-    //     $harga    = '';
-    //     $ref_cust = '000000000004';
-    //     $ref_brg  = 'GX0002';
-    //     $tgl      = '13 Nov 2019';
-    //     $qty      = '2';
-    //     $barang   = $this->db->get_where('msatbrg',
-    //       array(
-    //         'ref_brg' => $ref_brg,
-    //         'def'     => 't',
-    //       ))->row();
-    //     $minorder   = $barang->minorder;
-    //     $get_harga  = $barang->harga;
-    //     $get_harga1 = $barang->harga1;
-    //     //cek apakah ada data barang dan customer di dlm tb thandlerorder
-    //     $cek = $this->h_cekorder($ref_cust, $ref_brg);
-    //     if ($cek <= 0) {
-    //       //jika tidak ada
-    //       //masukan data baru dgn qty 0
-    //       $this->h_entrybaru($ref_cust, $ref_brg);
-    //       //jika ada
-    //       //hitung order sebulan kebelakang
-    //       $jml = $this->h_hitung_order($ref_cust, $ref_brg, $tgl);
-    //       if ($jml <= 0) {
-    //         //jika tidak ada order sebulan kebelakang reset jumlah order dalam handler karna tidak ada
-    //         $this->h_resethandler($ref_cust, $ref_brg);
-    //       }
-    //       //hitung jml order di dlm tbhandler dan tmbah dgn qty yang baru
-    //       $current_qty = $this->h_curr_qty($ref_cust, $ref_brg);
-    //       $new_qty     = $qty;
-    //       if (($current_qty + $new_qty) >= $minorder) {
-    //         //jika jumlah order yg ada di tambah jumlah yg bary > minorder use harga 1(diskon)
-    //         $harga = $get_harga1;
-    //       } elseif($current_qty + $new_qty) < $minorder) {
-    //         //jika jumlah order yg ada di tambah jumlah yg bary < minorder use harga (normal)
-    //         $harga = $get_harga;
-    //       }
-    //     } else {
-    //       //jika ada
-    //       //hitung order sebulan kebelakang
-    //       $jml = $this->h_hitung_order($ref_cust, $ref_brg, $tgl);
-    //       if ($jml <= 0) {
-    //         //jika tidak ada order sebulan kebelakang reset jumlah order dalam handler karna tidak ada
-    //         $this->h_resethandler($ref_cust, $ref_brg);
-    //       }
-    //       //hitung jml order di dlm tbhandler dan tmbah dgn qty yang baru
-    //       $current_qty = $this->h_curr_qty($ref_cust, $ref_brg);
-    //       $new_qty     = $qty;
-    //       if (($current_qty + $new_qty) >= $minorder) {
-    //         //jika jumlah order yg ada di tambah jumlah yg bary > minorder use harga 1(diskon)
-    //         $harga = $get_harga1;
-    //       } elseif($current_qty + $new_qty) < $minorder) {
-    //         //jika jumlah order yg ada di tambah jumlah yg bary < minorder use harga (normal)
-    //         $harga = $get_harga;
-    //       }
-    //     }
-    //     return $harga;
-    // }
-
-
-
-    //SEDANG TIDAK DIPAKAI KARNA SUDAH DI HANDEL DI CONTROLLER DESIGN
-    // function add()
-    // {
-    //     $kode = $this->input->post('kode');
-    //     $q = "SELECT
-    //             msatbrg. ID,
-    //             msatbrg.konv,
-    //             msatbrg.ket,
-    //             msatbrg.harga,
-    //             msatbrg.beratkg,
-    //             msatbrg.def,
-    //             mbarang. ID idbarang,
-    //             mbarang.kode kodebarang,
-    //             mbarang.ket ketbarang,
-    //             mbarang.nama namabarang,
-    //             msatuan.nama namasatuan,
-    //             mgudang.nama namagudang,
-    //             mmodesign.gambar gambardesign,
-    //             mmodesign.nama namadesign,
-    //             mwarna.colorc kodewarna,
-    //             mkategori.nama kategori_nama
-    //         FROM
-    //             msatbrg
-    //         LEFT JOIN mbarang ON mbarang.kode = msatbrg.ref_brg
-    //         LEFT JOIN mkategori ON mkategori.kode = mbarang.ref_ktg
-    //         LEFT JOIN mbarangs ON mbarang.kode = mbarangs.ref_brg
-    //         LEFT JOIN mmodesign ON mmodesign.kode = mbarangs.model
-    //         LEFT JOIN mwarna ON mwarna.kode = mbarangs.warna
-    //         LEFT JOIN msatuan ON msatuan.kode = msatbrg.ref_sat
-    //         LEFT JOIN mgudang ON mgudang.kode = msatbrg.ref_gud
-    //         WHERE
-    //             msatbrg.def = 't'
-    //         AND
-    //             mbarang.kode ='$kode'";
-    //     $res = $this->db->query($q)->row();
-    //     $data = array(
-    //         'id'      => $res->kodebarang,
-    //         'qty'     => 1,
-    //         'price'   => $res->harga,
-    //         'name'    => $res->namabarang,
-    //         'image'   => $res->gambardesign,
-    //         'berat'   => $res->beratkg,
-    //     );
-    //
-    //     $result = $this->cart->insert($data);
-    //     $r['sukses']= $result ? 'success' : 'fail' ;
-    //     $r['total_items']= $this->cart->total_items() ;
-    //     echo json_encode($r);
-    // }
 
 }
