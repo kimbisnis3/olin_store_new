@@ -1,3 +1,12 @@
+<style media="screen">
+  ul.post-links li span {
+    color : #fff !important;
+  }
+
+  ul.post-links li span:hover {
+    color : #000 !important;
+  }
+</style>
 <?php
   //text
   $tx_footer  	 = $this->db->get_where('tconfigtext', array('kode' => 'tx_footer'))->row();
