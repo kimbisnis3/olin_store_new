@@ -19,7 +19,7 @@ class Billing extends CI_Controller {
     }
 
     function getlayanan() {
-        echo json_encode($this->db->get('mlayanan')->result());
+        echo json_encode($this->db->get_where('mlayanan',array('aktif' => 't' ))->result());
     }
 
     function getkirim() {
