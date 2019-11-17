@@ -74,10 +74,18 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-12">
-                    <div style="width : 30px !important ; height : 30px !important; background : <?php echo $pr->kodewarna; ?>;"></div>
+                  <?php if ($pr->kodebarang != 'GX0010'): ?>
+                  <div class="col-md-1">
+                    <div style="width : 30px !important ; height : 30px !important; background : #e16421 !important;"></div>
+                  </div>
+                  <div class="col-md-1">
+                    <div style="width : 30px !important ; height : 30px !important; background : #bfe36d !important;"></div>
+                  </div>
+                  <div class="col-md-1">
+                    <div style="width : 30px !important ; height : 30px !important; background : #e34451 !important;"></div>
                   </div>
                 </div>
+                <?php endif; ?>
               </div>
 
               <div class="mt-4">
