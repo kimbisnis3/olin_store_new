@@ -205,7 +205,7 @@ class Order extends CI_Controller
 
     public function savedata()
     {
-        $this->db->trans_begin();
+        // $this->db->trans_begin();
         $provfrom = '10';
         $cityfrom = '445';
         $prov     = 'Jawa Tengah';
@@ -234,7 +234,8 @@ class Order extends CI_Controller
             $a['kurir']         = $this->input->post('kurir');
         }
         $this->db->insert('xorder',$a);
-        $idOrder    = $this->db->insert_id();
+        // $idOrder    = $this->db->insert_id();
+        $idOrder    = insert_id('xorder');
         $kodeOrder  = $this->db->get_where('xorder',array('id' => $idOrder))->row()->kode;
         $arr_produk = $this->cart->contents();
         foreach ($this->cart->contents() as $r) {
@@ -334,5 +335,37 @@ class Order extends CI_Controller
     {
         $harga = $this->db->get_where('mlayanan',array('kode' => $ref_layanan))->row();
         return $harga->harga;
+    }
+
+    function try_save()
+    {
+      $provfrom = '10';
+      $cityfrom = '445';
+      $prov     = 'Jawa Tengah';
+      $city     = 'Surakarta (Solo)';
+      $a['ref_cust']      = '000000000004';
+      $a['tgl']           = 'now()';
+      $a['ref_gud']       = 'GX0001';
+      $a['ket']           = '';
+      $a['ref_kirim']     = 'GX0002';
+      $a['ref_layanan']   = '2019000001';
+      $a['kirimke']       = 'Roberto';
+      $a['alamat']        = 'Liverpool, England';
+      $a['email']         = 'bobby@gmail.com';
+      $a['telp']          = '234234242';
+      $a['ref_bank']      = 'GX0001';
+      $a['kodeprovfrom']  = $provfrom ;
+      $a['kodecityfrom']  = $cityfrom;
+      $a['kodeprovto']    = '7';
+      $a['kodecityto']    = '129';
+      $a['lokasidari']    = 'Jawa Tengah - Surakarta (Solo)';
+      $a['lokasike']      = 'Gorontalo - Gorontalo';
+      $a['kgkirim']       = '1';
+      $a['bykirim']       = '58000';
+      $a['kodekurir']     = 'OKE';
+      $a['kurir']         = 'jne';
+      $this->db->insert('xorder',$a);
+      $idOrder = insert_id('xorder');
+      print_r($idOrder);
     }
 }
