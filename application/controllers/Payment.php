@@ -93,9 +93,9 @@ class Payment extends CI_Controller
 
         $result = $this->db->insert('xpelunasan',$a);
         // $idpelun = $this->db->insert_id();
-        $idpelun    = insert_id('xpelunasan');
-        $kodepelun  = $this->db->get_where('xpelunasan',array('id' => $idpelun))->row()->kode;
-        $kodeunik   = $this->db->get_where('xpelunasan',array('id' => $idpelun))->row()->kodeunik;
+        $idpelun    = insert_id('xorder');
+        $kodepelun = $this->db->get_where('xpelunasan',array('id' => $idpelun))->row()->kode;
+        $kodeunik = $this->db->get_where('xpelunasan',array('id' => $idpelun))->row()->kodeunik;
         $dataOrderd = $this->db->get_where('xorderd',array('ref_order' => $this->input->post('ref_order')))->result();
         foreach ($dataOrderd as $r) {
             $row    = array(
