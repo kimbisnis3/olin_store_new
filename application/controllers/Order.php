@@ -101,11 +101,11 @@ class Order extends CI_Controller
                 msatbrg.id idsatbarang,
                 msatbrg.konv,
                 msatbrg.ket ketsat,
-                msatbrg.harga,
                 msatbrg.ref_brg,
                 msatbrg.ref_sat,
                 msatuan.nama satuan,
                 mgudang.nama gudang,
+                xorderd.harga,
                 xorderd.jumlah,
                 xorderd.statusd,
                 xorderd.jumlah * xorderd.harga subtotal

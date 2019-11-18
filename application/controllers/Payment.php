@@ -129,24 +129,39 @@ class Payment extends CI_Controller
     public function getdetail()
     {
         $kodepelunasan = $this->input->post('kodepelunasan');
-        $q = "SELECT
-                mbarang.id,
-                mbarang.kode,
-                mbarang.nama,
-                mbarang.ket,
-                msatbrg.id idsatbarang,
-                msatbrg.konv,
-                msatbrg.ket ketsat,
-                msatbrg.harga,
-                msatbrg.ref_brg,
-                msatbrg.ref_sat,
-                msatuan.nama satuan_nama
-            FROM
-                xpelunasand
-            LEFT JOIN mbarang ON mbarang.kode = xpelunasand.ref_brg
-            LEFT JOIN msatbrg ON msatbrg.kode = xpelunasand.ref_satbrg
-            LEFT JOIN msatuan ON msatuan.kode = msatbrg.ref_sat
-            WHERE xpelunasand.ref_pelun = '$kodepelunasan'";
+        // $q = "SELECT
+        //         mbarang.id,
+        //         mbarang.kode,
+        //         mbarang.nama,
+        //         mbarang.ket,
+        //         msatbrg.id idsatbarang,
+        //         msatbrg.konv,
+        //         msatbrg.ket ketsat,
+        //         msatbrg.harga,
+        //         msatbrg.ref_brg,
+        //         msatbrg.ref_sat,
+        //         msatuan.nama satuan_nama
+        //     FROM
+        //         xpelunasand
+        //     LEFT JOIN mbarang ON mbarang.kode = xpelunasand.ref_brg
+        //     LEFT JOIN msatbrg ON msatbrg.kode = xpelunasand.ref_satbrg
+        //     LEFT JOIN msatuan ON msatuan.kode = msatbrg.ref_sat
+        //     WHERE xpelunasand.ref_pelun = '$kodepelunasan'";
+        $q = "SELECT DISTINCT
+              	xorderd.harga,
+              	mbarang.nama,
+              	mbarang.ket,
+              	msatbrg.konv,
+              	msatuan.nama satuan_nama
+              FROM
+              	xpelunasand
+              LEFT JOIN xpelunasan ON xpelunasan.kode = xpelunasand.ref_pelun
+              LEFT JOIN xorder ON xorder.kode = xpelunasan.ref_jual
+              LEFT JOIN xorderd ON xorder.kode = xorderd.ref_order
+              LEFT JOIN mbarang ON mbarang.kode = xorderd.ref_brg
+              LEFT JOIN msatbrg ON msatbrg.kode = xorderd.ref_satbrg
+              LEFT JOIN msatuan ON msatuan.kode = msatbrg.ref_sat
+              WHERE xpelunasand.ref_pelun = '$kodepelunasan'";
         $result     = $this->db->query($q)->result();
         $str        = '<table class="table fadeIn animated">
                         <tr>
@@ -189,7 +204,7 @@ class Payment extends CI_Controller
             mcustomer.nama mcustomer_nama,
             case xorder.ref_kirim
             when 'GX0002' then xorder.total
-            when 'GX0001' then xorder.total - xorder.bykirim
+            when 'GX0001' then xorder.total
             end as total,
             (select sum(xpelunasan.bayar) from xpelunasan
             where xpelunasan.void is not true
