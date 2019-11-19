@@ -30,7 +30,7 @@
   </section>
   <section class="about-us-text">
     <div class="container-fluid">
-      <div class="row justify-content-center">
+      <div class="text-center">
         <h5><strong><?php echo $tx_about_head->teks ?></strong></h5>
       </div>
       <div class="row justify-content-center">
