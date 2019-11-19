@@ -16,8 +16,8 @@
   }
   @media only screen and (max-width: 600px) {
     .img-dfr {
-      height: 180px !important;
-     	width: 100%!important;
+      /* height: 180px !important;
+     	width: 100%!important; */
     }
     .img-big-home {
       width : 100% !important;
