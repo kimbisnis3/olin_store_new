@@ -65,7 +65,7 @@
             { "data": "mlayanan_nama" },
             { "data": "mkirim_nama" },
             { "data": "ket" },
-            { "data": "statusorder" }]
+            { "data": "status" }]
         });
 
         $('#table tbody').on('click', '.odd', function() {

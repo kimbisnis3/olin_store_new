@@ -81,13 +81,25 @@ class Order extends CI_Controller
             $row['pathimage']   = $r->pathimage;
             $row['kirimke']     = $r->kirimke;
             $row['mlayanan_nama']= $r->mlayanan_nama;
-            // $row['status']      = statuspo($r->status);
+            $row['status']      = $this->status_po($r->status);
             $row['jmlorder']    = $r->jmlorder;
             $row['orderdone']   = $r->orderdone;
-            $row['statusorder'] = ($r->orderdone == $r->jmlorder) ? '<span class="label label-success">Selesai Semua</span>' : '<span class="label label-warning">Belum Selesai</span>' ;
+            // $row['statusorder'] = ($r->orderdone == $r->jmlorder) ? '<span class="label label-success">Selesai Semua</span>' : '<span class="label label-warning">Belum Selesai</span>' ;
             $list[] = $row;
         }
         echo json_encode(array('data' => $list));
+    }
+
+    public function status_po($s)
+    {
+        if ($s == 0) {
+            $s = '<span class="label label-warning">Pending</span>';
+        } else if($s == 1) {
+            $s = '<span class="label label-success">Proses</span>';
+        } else if($s >= 2) {
+            $s = '<span class="label label-info">Sudah Dikirim</span>';
+        }
+        return $s;
     }
 
     public function getdetail()
@@ -310,7 +322,8 @@ class Order extends CI_Controller
         // $d['total'] = ($this->cart->total() - $sum_diskon) + $this->input->post('bykirim');
         $hargalayanan = $this->gethargalayanan($this->input->post('ref_layanan'));
         // $d['total']   = ($this->cart->total()) + $this->input->post('bykirim')  + $hargalayanan;
-        $d['total'] = $this->input->post('total_cart') + $this->input->post('bykirim')  + $hargalayanan;
+        $bykirim 	= $this->input->post('bykirim') == null || $this->input->post('bykirim') == '' ? 0 : $this->input->post('bykirim') ;
+        $d['total'] = $this->input->post('total_cart') + $bykirim  + $hargalayanan;
         $this->db->update('xorder',$d,array('kode' => $kodeOrder));
 
         if ($this->db->trans_status() === FALSE)
