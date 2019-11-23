@@ -110,6 +110,7 @@ class Product extends CI_Controller
                 mbarang.dimensi,
                 mbarang.kapasitas,
                 mbarang.id_prod_lumise,
+                mbarang.class_prod,
                 msatuan.nama namasatuan,
                 mgudang.nama namagudang,
                 mmodesign.gambar gambardesign,
@@ -132,8 +133,25 @@ class Product extends CI_Controller
 
         $q_image = "SELECT * FROM mbarangpic WHERE ref_barang = '$kode'";
 
-        $data['pr'] = $this->db->query($q)->row();
-        $data['img'] = $this->db->query($q_image)->result();
+        $class_prod = $this->db->query($q)->row()->class_prod;
+        $q_warna = "SELECT
+                    	mwarna.colorc kodewarna,
+                    	mwarna.nama warna,
+                      mbarang.kode,
+                    	mbarang.id,
+                    	mbarang.nama,
+                    	mbarang.id_prod_lumise
+                    FROM
+                    	msatbrg
+                    LEFT JOIN mbarang ON mbarang.kode = msatbrg.ref_brg
+                    LEFT JOIN mbarangs ON mbarang.kode = mbarangs.ref_brg
+                    LEFT JOIN mwarna ON mwarna.kode = mbarangs.warna
+                    WHERE
+                    	mbarang.class_prod = '$class_prod'";
+
+        $data['pr']     = $this->db->query($q)->row();
+        $data['img']    = $this->db->query($q_image)->result();
+        $data['warna']  = $this->db->query($q_warna)->result();
         $data['menuaktif'] = $this->menuaktif;
         $this->load->view($this->detailpage,$data);
     }

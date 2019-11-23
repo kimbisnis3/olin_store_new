@@ -6,14 +6,26 @@
   .img-produk {
     width: 100% !important;
   }
+
   .tx-design {
     font-size: 72px;
     background: -webkit-linear-gradient(left, pink, blue);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
   .btn-design {
     border: 0 solid #ffffff !important;
+    color : #fff;
+    background-color: #000;
+  }
+
+  .box-color {
+    width : 30px !important ; height : 30px !important;
+  }
+
+  .selected_box {
+    border: 5px solid #007bff !important;
   }
 </style>
 <body class="fadeIn animated">
@@ -75,22 +87,18 @@
                 </div>
                 <div class="row">
                   <?php if ($pr->kodebarang != 'GX0010'): ?>
-                  <div class="col-md-1">
-                    <div style="width : 30px !important ; height : 30px !important; background : #e16421 !important;"></div>
-                  </div>
-                  <div class="col-md-1">
-                    <div style="width : 30px !important ; height : 30px !important; background : #bfe36d !important;"></div>
-                  </div>
-                  <div class="col-md-1">
-                    <div style="width : 30px !important ; height : 30px !important; background : #e34451 !important;"></div>
-                  </div>
+                    <?php foreach ($warna as $i => $v): ?>
+                      <div class="col-md-1">
+                        <div style="background : <?php echo $v->kodewarna ?> !important;" class="box-color" id="box-<?php echo $v->id ?>" onclick="pilih_warna('<?php echo $v->id ?>','<?php echo $v->kodewarna ?>','<?php echo $v->id_prod_lumise ?>')"></div>
+                      </div>
+                    <?php endforeach; ?>
                 </div>
                 <?php endif; ?>
               </div>
 
               <div class="mt-4">
                 <?php if ($pr->kodebarang != 'GX0010'): ?>
-                  <button type="button" class="btn btn-warning btn-lg btn-flat" onclick="design('<?php echo $pr->id_prod_lumise ?>')">
+                  <button type="button" class="btn btn-lg btn-flat btn-design" disabled>
                     <strong>Design Sendiri</strong>
                   </button>
                 <?php endif; ?>
@@ -106,9 +114,9 @@
 </body>
 <script>
 
-    $(function(){
-      SyntaxHighlighter.all();
-    });
+    // $(function(){
+    //   SyntaxHighlighter.all();
+    // });
 
     $(window).load(function(){
       $('.flexslider').flexslider({
@@ -120,9 +128,17 @@
       });
     });
 
+    function pilih_warna(id, color, id_lumise)
+    {
+        $(`.box-color`).removeClass('selected_box');
+        $(`#box-${id}`).addClass('selected_box');
+        $('.btn-design').css({"background-color": color, "color": "#000"});
+        $('.btn-design').attr('onclick', 'design(' + id_lumise + ')');
+        $('.btn-design').removeAttr('disabled','');
+    }
+
     function design(id) {
       location.href = `<?php echo base_url(); ?>design/start?product_id=${id}`
-      // console.log(id)
     }
 
     function add_cart(kode) {

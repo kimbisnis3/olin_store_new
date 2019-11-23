@@ -42,7 +42,7 @@
     LEFT JOIN mgudang ON mgudang.kode = msatbrg.ref_gud
     WHERE
         msatbrg.def = 't'
-    AND mbarang.is_design = 't'
+    AND mbarang.show = 't'
     ORDER BY mmodesign.datei ASC";
     $pr  = $this->db->query($q)->result_array();
  ?>
