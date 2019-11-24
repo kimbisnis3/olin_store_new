@@ -71,7 +71,7 @@
                    <?php foreach ($pr as $i => $v): ?>
                      <li>
                         <a href="<?php echo base_url(); ?>product/detail?q=<?php echo $v['kodebarang'] ?>">
-                          <?php echo $v['namabarang'] ?>
+                          <?php echo $v['namadesign'] ?>
                         </a>
                      </li>
                    <?php endforeach; ?>

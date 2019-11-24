@@ -48,7 +48,7 @@
             </div>
             <div class="col-md-6 col-sm-6">
               <div class="tx-design" style="font-size: 1em !important;"><strong>Design Sendiri</strong></div>
-              <h4 class="mb-2"><strong><?php echo $pr->namabarang ?></strong></h4>
+              <h4 class="mb-2"><strong><?php echo $pr->namadesign ?></strong></h4>
               <div class="bg-gray py-0">
                 <h5 class="mb-0">
                 <strong>Rp. <?php echo number_format($pr->harga) ?></strong>

@@ -48,7 +48,7 @@
                         </a>
                         <div class="card-footer text-center p-2 border-0 bg-white">
                           <a href="<?php echo base_url(); ?>product/detail?q=<?php echo $v['kodebarang'] ?>" class="link-href">
-                            <h5><?php echo $v['namabarang'] ?></h5>
+                            <h5><?php echo $v['namadesign'] ?></h5>
                           </a>
                         </div>
                     </div>
