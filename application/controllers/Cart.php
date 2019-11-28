@@ -127,7 +127,7 @@ class Cart extends CI_Controller
         // total berat cart
         $berat = 0;
         foreach($this->cart->contents() as $i => $v) {
-            $berat += ceil($v['berat']) * $v['qty'];
+            $berat += ceil($v['berat'] * $v['qty']);
         }
         echo json_encode(
             array(
