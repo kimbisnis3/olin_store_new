@@ -27,6 +27,20 @@
   .selected_box {
     border: 5px solid #007bff !important;
   }
+
+  .img-mobile {
+    display: none !important;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .img-mobile {
+      display: inline !important;
+    }
+    .img-desktop {
+      display: none !important;
+    }
+  }
+
 </style>
 <body class="fadeIn animated">
     <?php $this->load->view('_partials/topbar.php'); ?>
@@ -40,7 +54,8 @@
                 <ul class="slides">
                   <?php foreach ($img as $i => $v): ?>
                     <li data-thumb="<?php echo prep_url(api_url()).$v->image ?>">
-          	    	    <img src="<?php echo prep_url(api_url()).$v->image ?>" data-imagezoom="true" class="img-produk"/>
+                      <img src="<?php echo prep_url(api_url()).$v->image ?>" data-imagezoom="true" class="img-produk img-desktop"/>
+          	    	    <img src="<?php echo prep_url(api_url()).$v->image ?>" class="img-produk img-mobile"/>
           	    		</li>
                   <?php endforeach; ?>
                 </ul>
@@ -117,6 +132,13 @@
     // $(function(){
     //   SyntaxHighlighter.all();
     // });
+
+    $(document).resize(function () {
+     var screen = $(window);
+     if (screen.width < 768) {
+        // $(".img-produk").remove('[data-imagezoom="true"]');
+     }
+   })
 
     $(window).load(function(){
       $('.flexslider').flexslider({
