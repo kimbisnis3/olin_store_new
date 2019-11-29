@@ -21,6 +21,20 @@
        text-decoration:none !important;
        cursor:pointer !important;
   }
+
+  .img-mobile {
+    display: none !important;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .img-mobile {
+      display: inline !important;
+    }
+    .img-desktop {
+      display: none !important;
+    }
+  }
+  
   @media only screen and (max-width: 600px) {
     .img-slide-pr {
       width : 100% !important;
@@ -131,7 +145,8 @@
             $.each(data, function( i, v ) {
                 $('.list-image').append(`
                   <div class="col-md-4 item-image">
-                    <img src="<?php echo prep_url(api_url()) ?>${v['image']}" data-imagezoom="true" class="img-fluid img-produk">
+                    <img src="<?php echo prep_url(api_url()) ?>${v['image']}" data-imagezoom="true" class="img-fluid img-produk img-desktop">
+                    <img src="<?php echo prep_url(api_url()) ?>${v['image']}" class="img-fluid img-produk img-mobile">
                   </div>
                 `)
             });
