@@ -14,6 +14,12 @@
   	height: 100% !important;
   	width: 100% !important;
   }
+
+  .slide-mobile {
+    padding-left: 10% !important;
+    padding-right: 10% !important;
+  }
+
   @media only screen and (max-width: 600px) {
     .img-dfr {
       /* height: 180px !important;
@@ -127,6 +133,7 @@
 						</div>
 					</div>
 				</section>
+    </body>
     <?php $this->load->view('_partials/foot') ?>
 		<script type="text/javascript">
         $(function(){
@@ -152,6 +159,5 @@
 
         });
 		</script>
-</body>
 
 </html>

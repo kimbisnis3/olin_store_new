@@ -21,6 +21,23 @@
     }
   }
  ?>
+ <style media="screen">
+ .main-header2 {
+    display: none;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    width: 100%;
+  }
+
+ .header2 {
+    display: none;
+    position: fixed;
+    top: 50px;
+    z-index: 98;
+    width: 100%;
+  }
+ </style>
  <div class="main-header">
  		<div class="header-top text-md-left text-center">
  				<div class="container-fluid">
@@ -49,7 +66,7 @@
  		</div>
  		<div class="before-main-header">
  			<header class="main-header">
- 					<nav class="navbar second navbar-expand-lg navbar-light pagescrollfix">
+ 					<nav class="navbar second navbar-expand-lg sticky-top navbar-light pagescrollfix">
  							<div class="container-fluid">
  									<h1>
  											<a class="navbar-brand" href="<?php echo base_url() ?>">
@@ -99,6 +116,60 @@
  					</nav>
  			</header>
  		</div>
+
+    <div class="before-main-header main-header2">
+ 			<header class="main-header">
+ 					<nav class="navbar second navbar-expand-lg sticky-top navbar-light pagescrollfix">
+ 							<div class="container-fluid">
+ 									<h1>
+ 											<a class="navbar-brand" href="<?php echo base_url() ?>">
+ 													<img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$logoheader->image ?>" class="img-logo">
+ 											</a>
+ 									</h1>
+ 									<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-toggle"
+ 											aria-controls="navbarNavAltMarkup1" aria-expanded="false" aria-label="Toggle navigation">
+ 											<span class="navbar-toggler-icon"></span>
+ 									</button>
+ 									<div class="collapse navbar-collapse navbar-toggle" id="navbarNavAltMarkup1">
+ 											<div class="navbar-nav secondfix ml-lg-auto">
+ 													<ul class="navbar-nav text-center">
+ 															<li class="nav-item menu-home mr-lg-3">
+ 																	<a class="nav-link" href="<?php echo base_url() ?>"><i class="fa fa-home"></i> Home</a>
+ 															</li>
+ 															<li class="nav-item menu-produk mr-lg-4">
+ 																	<a class="nav-link" href="<?php echo base_url() ?>product">Produk</a>
+ 															</li>
+ 															<li class="nav-item menu-custom mr-lg-4">
+ 																	<a class="nav-link" href="<?php echo base_url() ?>custom">Design Sendiri</a>
+ 															</li>
+ 															<li class="nav-item menu-karir mr-lg-4">
+ 																	<a class="nav-link" href="<?php echo base_url() ?>karir">Karir</a>
+ 															</li>
+ 															<li class="nav-item menu-aboutus">
+ 																	<a class="nav-link" href="<?php echo base_url() ?>aboutus">Tentang Kami</a>
+ 															</li>
+                              <?php if ($this->session->userdata('in') == 1): ?>
+                                <li class="nav-item dropdown">
+                                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Shop
+                                  </a>
+                                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="<?php echo base_url() ?>order">Order</a>
+                                    <a class="dropdown-item" href="<?php echo base_url() ?>payment">Pembayaran</a>
+                                  </div>
+                                </li>
+                              <?php endif; ?>
+                              <li class="nav-item menu-cart">
+ 																	<a class="nav-link text-primary" href="<?php echo base_url() ?>cart"><i class="fa fa-shopping-cart"></i> (<span class="total_items"></span>) </a>
+ 															</li>
+ 													</ul>
+ 											</div>
+ 									</div>
+ 							</div>
+ 					</nav>
+ 			</header>
+ 		</div>
+
  		<div class="middle-header">
  				<div class="container-fluid">
  						<div class="row">
@@ -109,6 +180,23 @@
  										<i class="fa fa-envelope icon-header"></i> <span class="text-header-mid"><?php echo $tx_header_bottom_2->teks ?></span> <span class="vl"></span><i class="fa fa-map-marker icon-header"></i> <span class="text-header-mid"><?php echo $tx_header_bottom_3->teks ?> </span>
  								</div>
  								<div class="col-md-1">
+ 										<div class="float-right">
+                      <?php if ($this->session->userdata('in') == 1) {
+                        echo "<a href='".base_url()."login/logout'> <strong>Logout</strong></a>";
+                      } else {
+                        echo "<a href='".base_url()."login'> <strong>Login</strong></a>";
+                      }
+                      ?>
+
+ 										</div>
+ 								</div>
+ 						</div>
+ 				</div>
+ 		</div>
+    <div class="middle-header header2">
+ 				<div class="container-fluid">
+ 						<div class="row">
+ 								<div class="col-md-12">
  										<div class="float-right">
                       <?php if ($this->session->userdata('in') == 1) {
                         echo "<a href='".base_url()."login/logout'> <strong>Logout</strong></a>";
