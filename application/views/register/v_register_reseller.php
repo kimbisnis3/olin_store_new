@@ -7,6 +7,14 @@
       animation: hue 20s infinite linear;
     }
 
+    .btn-top {
+      background-color: #5EC6C5 !important;
+      border: 2px solid #5EC6C5 !important;
+      color : #ffdc61 !important;
+      font-weight: bolder;
+      border-radius: 15px;
+    }
+
     @keyframes neon {
         from {
           filter: hue-rotate(0deg);
@@ -21,18 +29,11 @@
     <?php $this->load->view('_partials/topbar.php'); ?>
   <section class="section-x mb-5">
     <div class="container p-3">
-      <div class="box-button p-3 col-md-6 mx-auto">
+      <div class="box-button pt-3">
         <div class="row">
-          <div class="col-md-12">
-            <!-- <div class="row">
-              <div class="col-md-6 pb-3">
-                <button class="btn btn-biru btn-block" onclick="open_cust()"><i class="fa fa-user"></i> Daftar Sebagai Customer</button>
-              </div>
-              <div class="col-md-6 pb-3">
-                <button class="btn btn-teal btn-block" onclick="open_reseller()"><i class="fa fa-users"></i> Daftar Sebagai Reseller</button>
-              </div>
-            </div> -->
-          </div>
+            <div class="col-md-12 text-center">
+              <a href="<?php echo base_url() ?>uploads/pdf/rules_reseller.pdf" download><button type="button" class="btn btn-primary btn-top" onclick="get_pdf()">klik disini untuk melihat syarat dan ketentuan reseller</button></a>
+            </div>
         </div>
       </div>
     </div>
@@ -55,9 +56,17 @@
               </div>
             </div>
             <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Alamat</label>
+                  <input type="text" class="form-control" name="alamat">
+                </div>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Telp</label>
+                  <label>No. Wa</label>
                   <input type="text" class="form-control" name="telp">
                 </div>
               </div>
@@ -69,10 +78,20 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group">
-                  <label>Alamat</label>
-                  <input type="text" class="form-control" name="alamat">
+                  <label>Jenis Kelamin</label>
+                  <select type="text" class="form-control" name="jk">
+                    <option value=""></option>
+                    <option value="Laki-Laki">Laki-Laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Tanggal Lahir</label>
+                  <input type="text" class="form-control datepicker" name="dob">
                 </div>
               </div>
             </div>
@@ -119,7 +138,13 @@
     $(document).ready(function(){
       // $('.box-user').hide()
       open_reseller()
+      dpicker()
     })
+
+    function get_pdf()
+    {
+       // <a href="'.$img.'" title="ImageName"  download="img_'.time().'" ><img onerror="imgError(this)" style="max-width : 60px;" src="'.$img.'" alt="ImageName"></a>
+    }
 
     function open_reseller() {
       $('.box-user').hide()

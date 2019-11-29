@@ -36,6 +36,8 @@ class Register extends CI_Controller
         $d['email']     = $this->input->post('email');
         $d['pic']       = $this->input->post('pic');
         $d['ket']       = $this->input->post('ket');
+        $d['dob']       = dfh($this->input->post('dob'));
+        $d['jk']        = $this->input->post('jk');
         $d['ref_jenc']  = $jencust;
         $d['user']      = $this->input->post('user');
         $d['pass']      = md5($this->input->post('pass'));
