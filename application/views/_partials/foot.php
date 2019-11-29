@@ -6,6 +6,7 @@
   ul.post-links li span:hover {
     color : #000 !important;
   }
+
 </style>
 <?php
   //text
@@ -49,15 +50,21 @@
  <div class="footer-top py-lg-5 py-4">
 		 <div class="container-fluid">
 				 <div class="row">
-						 <div class="col-md-3 footer-logo mb-lg-0 mb-4">
-								 <ul class="post-links">
-									 <h5 class="footer-top-title"><img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$logofooter->image ?>" class="img-logo"></h5>
-										 <li>
-                       <?php echo $tx_footer->teks ?>
-                     </li>
-								 </ul>
+						 <div class="col-md-3 col-sm-12 col-xs-12 footer-logo mb-lg-0 mb-4">
+               <div class="row">
+                 <div class="col-md-2">
+                   <h5 class="footer-top-title"><img onerror='imgError(this)' src="<?php echo prep_url(api_url()).$logofooter->image ?>" class="img-logo"></h5>
+                 </div>
+                 <div class="col-md-12">
+                   <ul class="post-links">
+                      <li>
+                         <?php echo $tx_footer->teks ?>
+                      </li>
+                   </ul>
+                 </div>
+               </div>
 						 </div>
-						 <div class="col-md-3">
+						 <div class="col-md-3 col-4">
 								 <h5 class="footer-top-title">Produk</h5>
 								 <ul class="post-links">
                    <?php foreach ($ktg as $i => $v): ?>
@@ -65,7 +72,7 @@
                    <?php endforeach; ?>
 								 </ul>
 						 </div>
-						 <div class="col-md-3">
+						 <div class="col-md-3 col-4">
 								 <h5 class="footer-top-title">Design Sendiri</h5>
 								 <ul class="post-links">
                    <?php foreach ($pr as $i => $v): ?>
@@ -77,7 +84,7 @@
                    <?php endforeach; ?>
 								 </ul>
 						 </div>
-						 <div class="col-md-3">
+						 <div class="col-md-3 col-4">
 								 <h5 class="footer-top-title"><a href="<?php echo base_url(); ?>login" style="color : #fff;">Login</a></h5>
 								 <ul class="post-links">
 										 <li><strong><a href="<?php echo base_url() ?>karir">Karir</a></strong></li>
@@ -146,6 +153,7 @@
  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
+ <script src="<?php echo base_url() ?>assets/datepicker/js/bootstrap-datepicker.min.js"></script>
 
  <script>
  		jQuery(document).ready(function ($) {
@@ -161,6 +169,13 @@
 <script>
 	total_items(<?php echo $this->cart->total_items() ?>)
 	menuaktif('<?php echo $menuaktif ?>')
+
+  function dpicker() {
+      $('.datepicker').datepicker({
+          autoclose: true,
+          format: 'dd M yyyy'
+      })
+  }
 
 	function total_items(x) {
 		$('.total_items').html(x);

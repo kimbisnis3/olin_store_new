@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/toastr/toastr.css" />
     <link href="<?php echo base_url() ?>assets/pace/pace.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/datepicker/css/bootstrap-datepicker.min.css">
 
     <style>
         .selected {
