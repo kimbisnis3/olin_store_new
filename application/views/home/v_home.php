@@ -137,10 +137,14 @@
     <?php $this->load->view('_partials/foot') ?>
 		<script type="text/javascript">
         $(function(){
-          $(".twentytwenty-container").twentytwenty({
-            no_overlay: true,
-            default_offset_pct: 0.5,
-          });
+          setTimeout(function()
+          {
+            $(".twentytwenty-container").twentytwenty({
+              no_overlay: true,
+              default_offset_pct: 0.5,
+            });
+          }, 500);
+
 
           $(".regular").slick({
 		        dots: false,
