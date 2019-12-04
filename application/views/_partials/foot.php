@@ -166,18 +166,18 @@
  				});
  		});
 
-    $(document).scroll(function() {
-      var y = $(this).scrollTop();
-      if ($(window).width() < 700) {
-        if (y > 200) {
-          $('.header2').fadeIn();
-          $('.main-header2').fadeIn();
-        } else {
-          $('.header2').fadeOut();
-          $('.main-header2').fadeOut();
-        }
-      }
-    });
+    // $(document).scroll(function() {
+    //   var y = $(this).scrollTop();
+    //   if ($(window).width() < 700) {
+    //     if (y > 200) {
+    //       $('.header2').fadeIn();
+    //       $('.main-header2').fadeIn();
+    //     } else {
+    //       $('.header2').fadeOut();
+    //       $('.main-header2').fadeOut();
+    //     }
+    //   }
+    // });
  </script>
  <script>
 	total_items(<?php echo $this->cart->total_items() ?>)

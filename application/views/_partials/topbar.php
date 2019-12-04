@@ -37,6 +37,32 @@
     z-index: 98;
     width: 100%;
   }
+
+  @media only screen and (max-width: 600px) {
+    .main-header1 {
+      display: none;
+    }
+
+    .header1 {
+      display: none;
+    }
+
+    .main-header2 {
+       display: inline;
+       position: fixed;
+       top: 0;
+       z-index: 99;
+       width: 100%;
+     }
+
+    .header2 {
+       display: inline;
+       position: fixed;
+       top: 50px;
+       z-index: 98;
+       width: 100%;
+     }
+  }
  </style>
  <div class="main-header">
  		<div class="header-top text-md-left text-center">
@@ -64,7 +90,7 @@
  						</div>
  				</div>
  		</div>
- 		<div class="before-main-header">
+ 		<div class="before-main-header main-header1">
  			<header class="main-header">
  					<nav class="navbar second navbar-expand-lg sticky-top navbar-light pagescrollfix">
  							<div class="container-fluid">
@@ -170,7 +196,7 @@
  			</header>
  		</div>
 
- 		<div class="middle-header">
+ 		<div class="middle-header header1">
  				<div class="container-fluid">
  						<div class="row">
  								<div class="col-md-4">
