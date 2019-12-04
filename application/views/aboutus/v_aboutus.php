@@ -13,16 +13,23 @@
   	width : 100% !important;
   	height: 100% !important;
   }
+
+  @media only screen and (max-width: 600px) {
+    .a {
+      padding-left: 7% !important;
+      padding-right: 7% !important;
+    }
+  }
 </style>
 <body>
 <?php $this->load->view('_partials/topbar') ?>
   <section>
-    <div class="container-fluid">
+    <div class="container-fluid a">
       <section class="regular slider row">
         <?php foreach ($ss_about as $i => $v): ?>
           <div>
-            <img src="<?php echo prep_url(api_url()).$v->image ?>" class="img-slide">
-            <!-- <img src="https://mkj.olinbags.com/agen//uploads/slideabout/img-1573017098.png" class="img-slide"> -->
+            <!-- <img src="<?php echo prep_url(api_url()).$v->image ?>" class="img-fluid"> -->
+            <img src="https://agen.olinbags.com//uploads/slideabout/img-1573024694.png" class="img-fluid">
           </div>
         <?php endforeach; ?>
       </section>
@@ -51,7 +58,7 @@
                 <li class="tx-black"><i class="fa fa-map-marker"></i> <a href="#"><?php echo $tx_link_alamat->teks ?></a></li>
                 <li class="tx-white">spaner</li>
                 <li class="tx-white">spaner</li>
-                <li class="tx-black"><i class="fa fa-whatsapp"></i> <a href="#"><?php echo $tx_link_wa->teks ?></a></li>
+                <li class="tx-black"><i class="fa fa-whatsapp"></i> <a href="#" style="font-size : 5px !important"><?php echo $tx_link_wa->teks ?></a></li>
               </ul>
             </div>
           </div>
