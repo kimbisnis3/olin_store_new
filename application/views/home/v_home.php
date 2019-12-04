@@ -29,6 +29,9 @@
       width : 100% !important;
   	  height : 200px !important
     }
+    .home-title {
+      font-size: 0.75em !important;
+    }
   }
 </style>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -91,21 +94,21 @@
 						<div class="row head-row-home text-center justify-content-center">
 							<div class="col-lg-9 col-md-9 col-sm-6 col-xs-4 mx-auto">
 								<div class="row">
-									<div class="col-md-4">
+									<div class="col-md-4 col-4">
 										<div class="home-grid">
 											<!-- <span class="<?php echo $icon1->image; ?>" aria-hidden="true"></span> -->
                       <img src="<?php echo prep_url(api_url()).$icon1->image ?>" class="img-icon-mini">
 											<h4 class="home-title my-3"><?php echo $icon1->ket; ?></h4>
 										</div>
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-4 col-4">
 										<div class="home-grid">
 											<!-- <span class="<?php echo $icon2->image; ?>" aria-hidden="true"></span> -->
                       <img src="<?php echo prep_url(api_url()).$icon2->image ?>" class="img-icon-mini">
 											<h4 class="home-title my-3"><?php echo $icon2->ket; ?></h4>
 										</div>
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-4 col-4">
 										<div class="home-grid">
 											<!-- <span class="<?php echo $icon3->image; ?>" aria-hidden="true"></span> -->
                       <img src="<?php echo prep_url(api_url()).$icon3->image ?>" class="img-icon-mini">
@@ -114,14 +117,14 @@
 									</div>
 								</div>
                 <div class="row justify-content-center" style="margin-top : 10px;">
-									<div class="col-md-4">
+									<div class="col-md-4 col-4">
 										<div class="home-grid">
 											<!-- <span class="<?php echo $icon4->image; ?>" aria-hidden="true"></span> -->
                       <img src="<?php echo prep_url(api_url()).$icon4->image ?>" class="img-icon-mini">
 											<h4 class="home-title my-3"><?php echo $icon4->ket; ?></h4>
 										</div>
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-4 col-4">
 										<div class="home-grid">
 											<!-- <span class="<?php echo $icon5->image; ?>" aria-hidden="true"></span> -->
                       <img src="<?php echo prep_url(api_url()).$icon5->image ?>" class="img-icon-mini">
@@ -154,7 +157,7 @@
 		      });
 
           $(".regular-mobile").slick({
-		        dots: false,
+		        dots: true,
 		        infinite: true,
 		        slidesToShow: 1,
 		        slidesToScroll: 1
