@@ -5,20 +5,39 @@
   .tx-white {
     color: #fff;
   }
+  .contact-big {
+    display: none !important;
+   }
+
   .tx-black > a {
     color: black !important;
   }
+
   .img-slide {
   	/* 1400x400 */
   	width : 100% !important;
   	height: 100% !important;
   }
 
+  .contact-mobile {
+    display: none !important;
+   }
+
+   .contact-big {
+     display: inline !important;
+    }
+
   @media only screen and (max-width: 600px) {
     .a {
       padding-left: 7% !important;
       padding-right: 7% !important;
     }
+    .contact-big {
+      display: none !important;
+     }
+     .contact-mobile {
+       display: inline !important;
+      }
   }
 </style>
 <body>
@@ -28,8 +47,8 @@
       <section class="regular slider row">
         <?php foreach ($ss_about as $i => $v): ?>
           <div>
-            <!-- <img src="<?php echo prep_url(api_url()).$v->image ?>" class="img-fluid"> -->
-            <img src="https://agen.olinbags.com//uploads/slideabout/img-1573024694.png" class="img-fluid">
+            <img src="<?php echo prep_url(api_url()).$v->image ?>" class="img-fluid">
+            <!-- <img src="https://agen.olinbags.com//uploads/slideabout/img-1573024694.png" class="img-fluid"> -->
           </div>
         <?php endforeach; ?>
       </section>
@@ -53,20 +72,30 @@
             <div class="col-md-12">
               <ul>
                 <li>Contact</li>
+                <li class="tx-black contact-big"><i class="fa fa-map-marker"></i> <a href="#"><?php echo $tx_link_alamat->teks ?></a></li>
                 <li class="tx-white">spaner</li>
-                <li class="tx-white">spaner</li>
-                <li class="tx-black"><i class="fa fa-map-marker"></i> <a href="#"><?php echo $tx_link_alamat->teks ?></a></li>
-                <li class="tx-white">spaner</li>
-                <li class="tx-white">spaner</li>
-                <li class="tx-black"><i class="fa fa-whatsapp"></i> <a href="#" style="font-size : 5px !important"><?php echo $tx_link_wa->teks ?></a></li>
+                <li class="tx-black"><i class="fa fa-whatsapp"></i> <a href="#"><?php echo $tx_link_wa->teks ?></a></li>
               </ul>
             </div>
           </div>
         </div>
         <div class="col-md-8 p-1">
           <div class="mapouter">
-            <div class="gmap_canvas">
-              <iframe id="gmap_canvas" src="<?php echo $tx_link_map->teks; ?>" frameborder="0" scrolling="no" style="width : 100% !important; height : 500px !important"></iframe>
+            <div class="gmap_canvas embed-responsive embed-responsive-16by9">
+              <iframe id="gmap_canvas" class="embed-responsive-item" src="<?php echo $tx_link_map->teks; ?>" frameborder="0" scrolling="no"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 p-1">
+        </div>
+        <div class="col-md-8 p-1">
+          <div class="row">
+            <div class="col-md-12">
+              <ul>
+                <li class="tx-black contact-mobile"><a href="#" style="font-size : 5px !important"><?php echo $tx_link_alamat->teks ?></a></li>
+              </ul>
             </div>
           </div>
         </div>

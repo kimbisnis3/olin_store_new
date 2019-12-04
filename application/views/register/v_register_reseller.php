@@ -15,6 +15,12 @@
       border-radius: 15px;
     }
 
+    @media only screen and (max-width: 600px) {
+      .btn-top {
+        font-size: 67% !important;
+      }
+    }
+
     @keyframes neon {
         from {
           filter: hue-rotate(0deg);
@@ -27,105 +33,103 @@
   </style>
   <body class="fadeIn animated">
     <?php $this->load->view('_partials/topbar.php'); ?>
-  <section class="section-x mb-5">
-    <div class="container p-3">
-      <div class="box-button pt-3">
-        <div class="row">
-            <div class="col-md-12 text-center">
-              <a href="<?php echo base_url() ?>uploads/pdf/rules_reseller.pdf" download><button type="button" class="btn btn-primary btn-top" onclick="get_pdf()">klik disini untuk melihat syarat dan ketentuan reseller</button></a>
-            </div>
+  <section class="p-3">
+    <div class="container">
+      <div class="row justify-content-md-center my-3">
+        <div class="col-md-auto">
+          <a href="<?php echo base_url() ?>uploads/pdf/rules_reseller.pdf" download><button type="button" class="btn btn-primary btn-top" onclick="get_pdf()">klik disini untuk melihat syarat dan ketentuan reseller</button></a>
         </div>
       </div>
-    </div>
-    <div class="container">
-      <div class="box-input neon box-user p-3 col-md-6 mx-auto">
-        <div class="col-md-12">
-          <form id="form-register">
-            <div class="row">
-              <div class="col-md-12">
-                <h4 class="text-hijau text-user text-center"> </h4>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Nama</label>
-                  <input type="text" class="form-control" name="nama">
-                  <input type="hidden" class="form-control" name="jencust">
+      <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+          <div class="col-md-12 neon p-3">
+            <form id="form-register">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 class="text-hijau text-user text-center"> </h4>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Alamat</label>
-                  <input type="text" class="form-control" name="alamat">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Nama</label>
+                    <input type="text" class="form-control" name="nama">
+                    <input type="hidden" class="form-control" name="jencust">
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>No. Wa</label>
-                  <input type="text" class="form-control" name="telp">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Alamat</label>
+                    <input type="text" class="form-control" name="alamat">
+                  </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Email</label>
-                  <input type="text" class="form-control" name="email">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>No. Wa</label>
+                    <input type="text" class="form-control" name="telp">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control" name="email">
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Jenis Kelamin</label>
-                  <select type="text" class="form-control" name="jk">
-                    <option value=""></option>
-                    <option value="Laki-Laki">Laki-Laki</option>
-                    <option value="Perempuan">Perempuan</option>
-                  </select>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Jenis Kelamin</label>
+                    <select type="text" class="form-control" name="jk">
+                      <option value=""></option>
+                      <option value="Laki-Laki">Laki-Laki</option>
+                      <option value="Perempuan">Perempuan</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Tanggal Lahir</label>
+                    <input type="text" class="form-control datepicker" name="dob">
+                  </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Tanggal Lahir</label>
-                  <input type="text" class="form-control datepicker" name="dob">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" name="user">
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Username</label>
-                  <input type="text" class="form-control" name="user">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="pass">
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Password</label>
-                  <input type="password" class="form-control" name="pass">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Ketik Ulang Password</label>
+                    <input type="password" class="form-control" name="typepass">
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Ketik Ulang Password</label>
-                  <input type="password" class="form-control" name="typepass">
+              <div class="row">
+                <div class="col-md-12">
+                  <button class="btn btn-hijau btn-md btn-block" id="btn-sign-up" onclick="register()"><i
+                  class="fa fa-sign-in"></i> Register</button>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <button class="btn btn-hijau btn-md btn-block" id="btn-sign-up" onclick="register()"><i
-                class="fa fa-sign-in"></i> Register</button>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
