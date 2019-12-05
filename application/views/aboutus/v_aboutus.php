@@ -14,7 +14,6 @@
   }
 
   .img-slide {
-  	/* 1400x400 */
   	width : 100% !important;
   	height: 100% !important;
   }
@@ -23,9 +22,13 @@
     display: none !important;
    }
 
-   .contact-big {
-     display: inline !important;
-    }
+  .contact-big {
+    display: inline !important;
+  }
+
+  .tx_about_body {
+    text-align: center;
+  }
 
   @media only screen and (max-width: 600px) {
     .a {
@@ -35,9 +38,15 @@
     .contact-big {
       display: none !important;
      }
-     .contact-mobile {
-       display: inline !important;
-      }
+    .contact-mobile {
+      display: inline !important;
+    }
+    .tx_about_head {
+      font-size: 18px !important;
+    }
+    .tx_about_body {
+      font-size: 12px !important;
+    }
   }
 </style>
 <body>
@@ -48,7 +57,6 @@
         <?php foreach ($ss_about as $i => $v): ?>
           <div>
             <img src="<?php echo prep_url(api_url()).$v->image ?>" class="img-fluid">
-            <!-- <img src="https://agen.olinbags.com//uploads/slideabout/img-1573024694.png" class="img-fluid"> -->
           </div>
         <?php endforeach; ?>
       </section>
@@ -56,11 +64,11 @@
   </section>
   <section class="about-us-text">
     <div class="container-fluid">
-      <div class="text-center">
-        <h5><strong><?php echo $tx_about_head->teks ?></strong></h5>
+      <div class="text-center my-3">
+        <h1 class="tx_about_head"><strong><?php echo $tx_about_head->teks ?></strong></h1>
       </div>
       <div class="row justify-content-center">
-        <?php echo $tx_about_body->teks ?>
+      </h4 class="tx_about_body"><strong><?php echo $tx_about_body->teks ?></strong></h4>
       </div>
     </div>
   </section>
