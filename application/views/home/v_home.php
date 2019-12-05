@@ -18,16 +18,15 @@
   }
 
   @media only screen and (max-width: 600px) {
-    .img-dfr {
-      /* height: 180px !important;
-     	width: 100%!important; */
-    }
     .img-big-home {
       width : 100% !important;
   	  height : 200px !important
     }
     .home-title {
       font-size: 0.75em !important;
+    }
+    .text-why {
+      font-size: 14px !important;
     }
   }
 </style>

@@ -7,6 +7,12 @@
     color : #000 !important;
   }
 
+  @media only screen and (max-width: 600px) {
+    ul.post-links li .text-wa a {
+      font-size: 14px !important;
+    }
+  }
+
 </style>
 <?php
   //text
