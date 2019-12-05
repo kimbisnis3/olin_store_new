@@ -38,6 +38,7 @@
 </body>
 <script>
     var path = 'order';
+    var designUrl = "<?php echo lumise_url() ?>" + 'editor.php';
     var apiurl = "<?php echo base_url('') ?>" + path;
     $(document).ready(function() {
         maindata()
@@ -128,6 +129,13 @@
     function refresh() {
       table.ajax.reload(null, false);
       idx = -1;
+    }
+
+    function grab_design(product_id, design_id, order_id) {
+      window.open(
+        `${designUrl}?product=${product_id}&design_print=${design_id}&order_print=${order_id}`,
+        `_blank`
+      );
     }
 
 </script>
