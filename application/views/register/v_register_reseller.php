@@ -124,7 +124,7 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <button class="btn btn-hijau btn-md btn-block" id="btn-sign-up" onclick="register()"><i
+                  <button type="button" class="btn btn-hijau btn-md btn-block" id="btn-sign-up" onclick="register()"><i
                   class="fa fa-sign-in"></i> Register</button>
                 </div>
               </div>
@@ -169,37 +169,37 @@
     function register() {
       if ($('[name="nama"]').val() == '' || $('[name="nama"]').val() == null) {
         $('[name="nama"]').focus()
-        showNotif('Perhatian', 'Lengkapi Data', 'warning')
+        toastr.warning('Lengkapi Data')
         return false
       }
       if ($('[name="telp"]').val() == '' || $('[name="telp"]').val() == null) {
         $('[name="telp"]').focus()
-        showNotif('Perhatian', 'Lengkapi Data', 'warning')
+        toastr.warning('Lengkapi Data')
         return false
       }
       if ($('[name="email"]').val() == '' || $('[name="email"]').val() == null) {
         $('[name="email"]').focus()
-        showNotif('Perhatian', 'Lengkapi Data', 'warning')
+        toastr.warning('Lengkapi Data')
         return false
       }
       if ($('[name="alamat"]').val() == '' || $('[name="alamat"]').val() == null) {
         $('[name="alamat"]').focus()
-        showNotif('Perhatian', 'Lengkapi Data', 'warning')
+        toastr.warning('Lengkapi Data')
         return false
       }
       if ($('[name="user"]').val() == '' || $('[name="user"]').val() == null) {
         $('[name="user"]').focus()
-        showNotif('Perhatian', 'Lengkapi Data', 'warning')
+        toastr.warning('Lengkapi Data')
         return false
       }
       if ($('[name="pass"]').val() == '' || $('[name="pass"]').val() == null) {
         $('[name="pass"]').focus()
-        showNotif('Perhatian', 'Lengkapi Data', 'warning')
+        toastr.warning('Lengkapi Data')
         return false
       }
       if ($('[name="typepass"]').val() != $('[name="pass"]').val()) {
         $('[name="typepass"]').focus()
-        showNotif('Perhatian', 'Ketik Ulang Password Harus Sesuai Dengan Password', 'warning')
+        toastr.warning('Ketik Ulang Password Harus Sesuai Dengan Password')
         return false
       }
       $('.form-control').prop('readonly', true)
