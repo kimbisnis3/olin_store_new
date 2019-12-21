@@ -54,15 +54,21 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <div class="row" style="margin-bottom: 20px !important;">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="">Provinsi</label>
                             <select class="form-control input-kurir" name="provinsi" id="provinsi" onchange="getcity()">
                                 <option value="">-</option>
                             </select>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="">Kota</label>
-                            <select class="form-control input-kurir" name="kota" id="kota" onchange="changecity()">
+                            <select class="form-control input-kurir" name="kota" id="kota" onchange="changecity(); getdist()">
+                                <option value="">-</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Kecamatan</label>
+                            <select class="form-control input-kurir" name="kecamatan" id="kecamatan">
                                 <option value="">-</option>
                             </select>
                         </div>
@@ -686,9 +692,36 @@
 
     }
 
+    function getdist() {
+        $('#biaya').val('')
+        $('#kodekurir').val('')
+        $('#service').val('')
+        let kodecity = $(`#kota`).val()
+        $(`#kecamatan`).attr('readonly', true);
+        if ($('#kota').val().length != 0) {
+            $.ajax({
+                url: `<?php echo base_url() ?>billing/getdist?citycode=${kodecity}`,
+                type: "GET",
+                dataType: "JSON",
+                success: function(data) {
+                    let arr = data.rajaongkir.results;
+                    getselect('#kecamatan', 'kelaskecamatan', 'subdistrict_id', 'subdistrict_name', arr)
+                    $(`#kecamatan`).attr('readonly', false);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log('Error on process');
+                    $(`#kecamatan`).attr('readonly', false);
+                }
+            });
+        } else {
+            console.log('empty')
+        }
+
+    }
+
     function getservice() {
         let kodekurir       = $(`#kurir`).val()
-        let kodekota        = $(`#kota`).val()
+        let kodekota        = $(`#kecamatan`).val()
         $(`#service`).attr('readonly', true);
         $.ajax({
 	        url: `<?php echo base_url() ?>billing/getongkir?destination=${kodekota}&kurir=${kodekurir}`,

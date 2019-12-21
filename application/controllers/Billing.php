@@ -32,23 +32,31 @@ class Billing extends CI_Controller {
     }
 
     function getprov() {
-        $response = $this->libre->get_province_ro();
+        $response = $this->libre->get_province_pro();
         echo $response;
     }
 
     function getcity() {
         $provincecode = $this->input->get('provincecode');
-        $response = $this->libre->get_city_ro($provincecode);
+        $response = $this->libre->get_city_pro($provincecode);
+        echo $response;
+    }
+
+    function getdist() {
+        $citycode = $this->input->get('citycode');
+        $response = $this->libre->get_dist_pro($citycode);
         echo $response;
     }
 
     function getongkir() {
-        $origin         = '445'; //Solo / Surakarta
+        $origin         = '6164'; //Laweyan
         $destination    = $this->input->get('destination');
+        $origintype     = 'subdistrict';
+        $destinationtype= 'subdistrict';
         // $weight         = $this->input->get('weight') * 1000;
         $weight         = 1 * 1000;
         $courier        = $this->input->get('kurir');
-        $response = $this->libre->get_ongkir_ro($origin,$destination,$weight,$courier);
+        $response       = $this->libre->get_ongkir_pro($origin, $origintype, $destination, $destinationtype, $weight, $courier);
         echo $response;
     }
 

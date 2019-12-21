@@ -225,8 +225,11 @@ class Order extends CI_Controller
         // $this->db->trans_begin();
         $provfrom = '10';
         $cityfrom = '445';
+        $distfrom = '6164';
         $prov     = 'Jawa Tengah';
         $city     = 'Surakarta (Solo)';
+        $dist     = 'Laweyan';
+
         $a['ref_cust']  = $this->session->userdata('kodecust');
         $a['tgl']       = 'now()';
         $a['ref_gud']   = $this->libre->gud_def();
@@ -241,8 +244,10 @@ class Order extends CI_Controller
         if ($this->input->post('ref_kirim') == 'GX0002') {
             $a['kodeprovfrom']  = $provfrom ;
             $a['kodecityfrom']  = $cityfrom;
+            $a['kodedistfrom']  = $distfrom;
             $a['kodeprovto']    = $this->input->post('provinsito');
             $a['kodecityto']    = $this->input->post('cityto');
+            $a['kodedistto']    = $this->input->post('distto');
             $a['lokasidari']    = $prov.' - '.$city;
             $a['lokasike']      = $this->input->post('maskprovinsito').' - '.$this->input->post('maskcityto');
             $a['kgkirim']       = $this->input->post('kgkirim');
