@@ -147,7 +147,8 @@ class Product extends CI_Controller
                     LEFT JOIN mbarangs ON mbarang.kode = mbarangs.ref_brg
                     LEFT JOIN mwarna ON mwarna.kode = mbarangs.warna
                     WHERE
-                    	mbarang.class_prod = '$class_prod'";
+                    	mbarang.class_prod = '$class_prod'
+                    ORDER BY mwarna.urutan ASC";
 
         $data['pr']     = $this->db->query($q)->row();
         $data['img']    = $this->db->query($q_image)->result();

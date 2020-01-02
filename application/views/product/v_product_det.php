@@ -21,7 +21,9 @@
   }
 
   .box-color {
-    width : 30px !important ; height : 30px !important;
+    width : 60px !important ;
+    height : 60px !important;
+    cursor : pointer;
   }
 
   .selected_box {
@@ -38,6 +40,10 @@
     }
     .img-desktop {
       display: none !important;
+    }
+    .box-color {
+      width : 40px !important ;
+      height : 40px !important;
     }
   }
 
@@ -103,7 +109,7 @@
                 <div class="row">
                   <?php if ($pr->kodebarang != 'GX0010'): ?>
                     <?php foreach ($warna as $i => $v): ?>
-                      <div class="col-md-1">
+                      <div class="col-md-2 col-xs-2 col-sm-2 col-2">
                         <div style="background : <?php echo $v->kodewarna ?> !important;" class="box-color" id="box-<?php echo $v->id ?>" onclick="pilih_warna('<?php echo $v->id ?>','<?php echo $v->kodewarna ?>','<?php echo $v->id_prod_lumise ?>')"></div>
                       </div>
                     <?php endforeach; ?>
