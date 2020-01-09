@@ -44,6 +44,7 @@ class Order extends CI_Controller
                 mcustomer.nama namacust,
                 mkirim.nama mkirim_nama,
                 mlayanan.nama mlayanan_nama,
+                xsuratjalan.noresi,
                 (SELECT count(statusd) FROM xorderd WHERE xorderd.ref_order = xorder.kode) jmlorder,
                 (SELECT count(statusd) FROM xorderd WHERE xorderd.ref_order = xorder.kode AND statusd=4) orderdone
             FROM
@@ -51,10 +52,11 @@ class Order extends CI_Controller
             LEFT JOIN mcustomer ON mcustomer.kode = xorder.ref_cust
             LEFT JOIN mkirim ON mkirim.kode = xorder.ref_kirim
             LEFT JOIN mlayanan ON mlayanan.kode = xorder.ref_layanan
+            LEFT JOIN xsuratjalan ON xsuratjalan.ref_order = xorder.kode
             WHERE xorder.void IS NOT TRUE
             ";
         if ($kodecust) {
-            $q .= " AND ref_cust = '$kodecust'";
+            $q .= " AND xorder.ref_cust = '$kodecust'";
         }
         // if ($filterawal || $filterakhir) {
         //     $q .= " AND
@@ -84,6 +86,7 @@ class Order extends CI_Controller
             $row['status']      = $this->status_po($r->status);
             $row['jmlorder']    = $r->jmlorder;
             $row['orderdone']   = $r->orderdone;
+            $row['noresi']      = $r->noresi;
             // $row['statusorder'] = ($r->orderdone == $r->jmlorder) ? '<span class="label label-success">Selesai Semua</span>' : '<span class="label label-warning">Belum Selesai</span>' ;
             $list[] = $row;
         }

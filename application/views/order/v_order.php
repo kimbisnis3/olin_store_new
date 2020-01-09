@@ -24,6 +24,7 @@
                 <th>Agen</th>
                 <th>Layanan</th>
                 <th>Pengiriman</th>
+                <th>Resi</th>
                 <th>Keterangan</th>
                 <th>Status</th>
               </tr>
@@ -65,6 +66,7 @@
             { "data": "namacust", "visible" : false },
             { "data": "mlayanan_nama" },
             { "data": "mkirim_nama" },
+            { "data": "noresi" },
             { "data": "ket" },
             { "data": "status" }]
         });
