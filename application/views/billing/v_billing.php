@@ -50,6 +50,18 @@
                 </div>
                 <div class="col-md-2"></div>
             </div>
+            <div class="row box-cod fadeIn animated">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="row mb-2">
+                        <div class="col-md-8">
+                            <label for="">Alamat COD</label>
+                            <input type="text" class="form-control" name="alamatcod" id="alamatcod">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
             <div class="row box-kurir fadeIn animated">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
@@ -71,6 +83,12 @@
                             <select class="form-control input-kurir" name="kecamatan" id="kecamatan">
                                 <option value="">-</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-8">
+                            <label for="">Alamat Pengiriman</label>
+                            <input type="text" class="form-control" name="alamatkirim" id="alamatkirim">
                         </div>
                     </div>
                 </div>
@@ -178,6 +196,16 @@
                     <td>Alamat Penerima</th>
                     <td>:</th>
                     <td><span id="k_alamat_penerima"></span></td>
+                  </tr>
+                  <tr id="visible_cod">
+                    <td>Alamat COD</th>
+                    <td>:</th>
+                    <td><span id="k_alamat_cod"></span></td>
+                  </tr>
+                  <tr id="visible_kirim">
+                    <td>Alamat Pengiriman</th>
+                    <td>:</th>
+                    <td><span id="k_alamat_Kirim"></span></td>
                   </tr>
                   <tr>
                     <td>Provinsi</th>
@@ -312,6 +340,8 @@
                 bank            : $('[name="bank"]').val(),
                 hargalayanan    : $('[name="hargalayanan"]').val(),
                 total_cart      : $('[name="carttotal"]').val(),
+                alamatcod       : $('[name="alamatcod"]').val(),
+                alamatkirim     : $('[name="alamatkirim"]').val(),
                 // arr_produk      : arr_barang.content
             },
 	        success: function(data) {
@@ -473,6 +503,17 @@
       let totalcart       = $('#carttotal').val()
       let hargalayanan    = $('#hargalayanan').val()
       $('#k_totalbayar').html('Rp '+ numeral(parseInt(totalcart) + parseInt(biayakirim) + parseInt(hargalayanan)).format('0,0'))
+      if ($('#kirim').val() == 'GX0002') {
+        //kirim
+        $('#visible_cod').addClass('invisible');
+        $('#visible_kirim').removeClass('invisible');
+        $('#k_alamat_Kirim').html($('#alamatkirim').val());
+      } else {
+        //cod
+        $('#visible_cod').removeClass('invisible');
+        $('#visible_kirim').addClass('invisible');
+        $('#k_alamat_cod').html($('#alamatcod').val());
+      }
     }
 
     function gettotal() {
@@ -539,12 +580,16 @@
     }
 
     function changekirim() {
+        $('#alamatcod').val('')
+        $('#alamatcod').val('')
         let kode = $('#kirim').val();
         let label = $('#kirim option:selected').html();
         if ((kode == 'GX0002') || (label == 'kurir')) {
             $('.box-kurir').removeClass('invisible');
+            $('.box-cod').addClass('invisible');
         } else {
             $('.box-kurir').addClass('invisible');
+            $('.box-cod').removeClass('invisible');
             $('.input-kurir').val('');
             $('.kelaskota').remove('')
             $('.kelasservice').remove('')

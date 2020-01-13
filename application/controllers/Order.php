@@ -244,6 +244,7 @@ class Order extends CI_Controller
         $a['email']     = $this->input->post('email_penerima');
         $a['telp']      = $this->input->post('telp_penerima');
         $a['ref_bank']  = $this->input->post('bank');
+        $a['alamatcod'] = $this->input->post('alamatcod');
         if ($this->input->post('ref_kirim') == 'GX0002') {
             $a['kodeprovfrom']  = $provfrom ;
             $a['kodecityfrom']  = $cityfrom;
@@ -257,6 +258,7 @@ class Order extends CI_Controller
             $a['bykirim']       = $this->input->post('bykirim');
             $a['kodekurir']     = $this->input->post('kodekurir');
             $a['kurir']         = $this->input->post('kurir');
+            $a['alamatkirim']   = $this->input->post('alamatkirim');
         }
         $this->db->insert('xorder',$a);
         // $idOrder    = $this->db->insert_id();
