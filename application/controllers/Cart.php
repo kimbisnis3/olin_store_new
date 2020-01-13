@@ -154,7 +154,7 @@ class Cart extends CI_Controller
         //update harga
         $qty_cart = $this->h_sumcontent($this->cart->contents(), $ref_brg, 'qty');
         $harga    = $this->h_proses($ref_cust, $ref_brg, $tgl, $qty_cart);
-        $arr = $this->h_get_content($ref_brg);
+        $arr      = $this->h_get_content($ref_brg);
         foreach ($arr as $i => $v) {
           $d = array(
               'rowid'   => $v['rowid'],
@@ -170,11 +170,11 @@ class Cart extends CI_Controller
     {
         $list = [];
         foreach ($this->cart->contents() as $i => $r) {
-            if ($r['kode'] == $ref_brg) {
+            // if ($r['kode'] == $ref_brg) {
               $row['kode']  = $r['kode'];
               $row['rowid'] = $r['rowid'];
               $list[] = $row;
-            }
+            // }
         }
         return $list;
     }
@@ -183,10 +183,10 @@ class Cart extends CI_Controller
     {
       $list = [];
       foreach ($arr as $i => $r) {
-          if ($r['kode'] == $barang) {
+          // if ($r['kode'] == $barang) {
             $row[$key] = $r[$key];
             $list[] = $row;
-          }
+          // }
       }
       $sum_harga = array_column($list, $key);
       return array_sum($sum_harga);
@@ -231,7 +231,7 @@ class Cart extends CI_Controller
     public function h_cekorder($ref_cust, $ref_brg)
     {
         $w['ref_cust']  = $ref_cust;
-        $w['ref_brg']   = $ref_brg;
+        // $w['ref_brg']   = $ref_brg;
         $num_rows       = $this->db->get_where('thandlerorder',$w)->num_rows();
         return $num_rows;
     }
@@ -246,7 +246,7 @@ class Cart extends CI_Controller
     public function h_curr_qty($ref_cust, $ref_brg)
     {
         $w['ref_cust']  = $ref_cust;
-        $w['ref_brg']   = $ref_brg;
+        // $w['ref_brg']   = $ref_brg;
         $result = $this->db->get_where('thandlerorder',$w)->row();
         return $result->order;
     }
@@ -254,7 +254,7 @@ class Cart extends CI_Controller
     public function h_entrybaru($ref_cust, $ref_brg)
     {
         $d['ref_cust']  = $ref_cust;
-        $d['ref_brg']   = $ref_brg;
+        // $d['ref_brg']   = $ref_brg;
         $d['order']     = 0;
         $result = $this->db->insert('thandlerorder',$d);
         return $result;
@@ -263,7 +263,7 @@ class Cart extends CI_Controller
     public function h_updatehandler($ref_cust, $ref_brg, $qty)
     {
         $w['ref_cust']  = $ref_cust;
-        $w['ref_brg']   = $ref_brg;
+        // $w['ref_brg']   = $ref_brg;
         $curr           = $this->db->get_where('thandlerorder',$w)->row();
         $current_qty    = $curr->order;
         $new_qty        = $current_qty + $qty;
@@ -275,7 +275,7 @@ class Cart extends CI_Controller
     public function h_resethandler($ref_cust, $ref_brg)
     {
         $w['ref_cust']  = $ref_cust;
-        $w['ref_brg']   = $ref_brg;
+        // $w['ref_brg']   = $ref_brg;
         $d['order']     = 0;
         $result = $this->db->update('thandlerorder',$d,$w);
         return $result;

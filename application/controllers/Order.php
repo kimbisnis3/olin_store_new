@@ -300,12 +300,12 @@ class Order extends CI_Controller
               'thandlerorder',
               array(
                 'ref_cust'  => $this->session->userdata('kodecust'),
-                'ref_brg'   => $kodebrg,
+                // 'ref_brg'   => $kodebrg,
               ))->row();
             $old_jml = $jml_order->order;
             $new_jml = $r['qty'];
             $_w['ref_cust']    = $this->session->userdata('kodecust');
-            $_w['ref_brg']     = $kodebrg;
+            // $_w['ref_brg']     = $kodebrg;
             $_d['order']       = $old_jml + $new_jml;
             $this->db->update('thandlerorder',$_d,$_w);
         }
