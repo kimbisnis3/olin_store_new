@@ -192,16 +192,6 @@ class Cart extends CI_Controller
       return array_sum($sum_harga);
     }
 
-    public function getharga()
-    {
-        $ref_cust = '000000000004';
-        $ref_brg  = 'GX0002';
-        $tgl      = '13 Nov 2019';
-        $qty      = '16';
-        $harga    = $this->h_proses($ref_cust, $ref_brg, $tgl, $qty);
-        print_r($harga);
-    }
-
     public function h_proses($ref_cust, $ref_brg, $tgl, $qty)
     {
         $barang   = $this->db->get_where('msatbrg',
@@ -323,6 +313,17 @@ class Cart extends CI_Controller
         $r['sukses']= $result ? 'success' : 'fail' ;
         $r['respon']=  'Produk Berhasil Dihapus Dari Keranjang' ;
         echo json_encode($r);
+    }
+
+    //------------------------------------------TEST-----------------------------------------------
+    public function getharga()
+    {
+        $ref_cust = '000000000004';
+        $ref_brg  = 'GX0002';
+        $tgl      = '13 Nov 2019';
+        $qty      = '16';
+        $harga    = $this->h_proses($ref_cust, $ref_brg, $tgl, $qty);
+        print_r($harga);
     }
 
     function update_promo()
