@@ -11,7 +11,7 @@ class Cart extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        include(APPPATH . 'libraries/dbinclude.php');
+        include(APPPATH.'libraries/dbinclude.php');
         include(APPPATH.'libraries/db_mysql.php');
     }
 
@@ -70,17 +70,9 @@ class Cart extends CI_Controller
               '_order_id'   => $v->order_id,
           );
           $add_cart = $this->cart->insert($data_cart);
-          // update harga
-          $qty_cart = $this->h_sumcontent($this->cart->contents(), $kodebrg, 'qty');
-          $harga    = $this->h_proses($ref_cust, $kodebrg, $tgl, $qty_cart);
-          $arr      = $this->h_get_content($kodebrg);
-          foreach ($arr as $i => $v) {
-            $d = array(
-                'rowid'   => $v['rowid'],
-                'harga'   => $harga
-            );
-            $res = $this->cart->update($d);
-          }
+        }
+        if ($this->session->userdata('in') == TRUE) {
+          $this->h_diskon();
         }
         redirect(base_url('cart'));
     }
@@ -151,87 +143,83 @@ class Cart extends CI_Controller
             'qty'     => $qty,
         );
         $result = $this->cart->update($data);
-        //update harga
-        $qty_cart = $this->h_sumcontent($this->cart->contents(), $ref_brg, 'qty');
-        $harga    = $this->h_proses($ref_cust, $ref_brg, $tgl, $qty_cart);
-        $arr      = $this->h_get_content($ref_brg);
-        foreach ($arr as $i => $v) {
-          $d = array(
-              'rowid'   => $v['rowid'],
-              'harga'   => $harga
-          );
-          $res = $this->cart->update($d);
+        if ($this->session->userdata('in') == TRUE) {
+          $this->h_diskon();
         }
         $r['sukses']  = $result ? 'success' : 'fail';
         echo json_encode($r);
     }
 
-    function h_get_content($ref_brg)
+    function h_diskon()
     {
-        $list = [];
-        foreach ($this->cart->contents() as $i => $r) {
-            // if ($r['kode'] == $ref_brg) {
-              $row['kode']  = $r['kode'];
-              $row['rowid'] = $r['rowid'];
-              $list[] = $row;
-            // }
+        // KHUSUS MEMBER LOGIN
+        $tgl      = date("d M Y");
+        $minorder = 17;
+        $ref_cust = $this->session->userdata('kodecust');
+        $cekcust  = $this->h_cekcust($ref_cust);
+        if ($cekcust > 0) {
+          $cek = $this->h_cekorder($ref_cust);
+          if ($cek <= 0) {
+            $this->h_entrybaru($ref_cust);
+          }
+          $jml = $this->h_hitung_order($ref_cust, $tgl);
+          if ($jml <= 0) {
+            $this->h_resethandler($ref_cust);
+          }
+          $arr      = $this->cart->contents();
+          $list     = [];
+          foreach ($arr as $i => $r) {
+              $row['qty'] = $r['qty'];
+              $list[]     = $row;
+          }
+          $sum_qty  = array_column($list, 'qty');
+          $qty_now  = array_sum($sum_qty);
+          $qty_old  = $this->db->get_where('thandlerorder', array('ref_cust' =>$ref_cust ))->row()->order;
+          if (($qty_old + $qty_now) >= $minorder) {
+            //DAPAT DISKON
+            foreach ($arr as $i => $v) {
+              $d = array(
+                  'rowid'   => $v['rowid'],
+                  'harga'   => $this->get_harga_diskon($v['kode'])
+              );
+              $res = $this->cart->update($d);
+            }
+          } else {
+            //TIDAK DAPAT DISKON
+            foreach ($arr as $i => $v) {
+              $d = array(
+                  'rowid'   => $v['rowid'],
+                  'harga'   => $this->get_harga_biasa($v['kode'])
+              );
+              $res = $this->cart->update($d);
+            }
+          }
         }
-        return $list;
     }
 
-    public function h_sumcontent($arr, $barang, $key)
-    {
-      $list = [];
-      foreach ($arr as $i => $r) {
-          // if ($r['kode'] == $barang) {
-            $row[$key] = $r[$key];
-            $list[] = $row;
-          // }
-      }
-      $sum_harga = array_column($list, $key);
-      return array_sum($sum_harga);
-    }
-
-    public function h_proses($ref_cust, $ref_brg, $tgl, $qty)
+    public function get_harga_diskon($ref_brg)
     {
         $barang   = $this->db->get_where('msatbrg',
           array(
             'ref_brg' => $ref_brg,
             'def'     => 't',
           ))->row();
-        $minorder   = $barang->minorder;
-        $get_harga  = $barang->harga;
-        $get_harga1 = $barang->harga1;
-
-        $cekcust = $this->h_cekcust($ref_cust);
-        if ($cekcust > 0) {
-          $cek = $this->h_cekorder($ref_cust, $ref_brg);
-          if ($cek <= 0) {
-            $this->h_entrybaru($ref_cust, $ref_brg);
-          }
-
-          $jml = $this->h_hitung_order($ref_cust, $ref_brg, $tgl);
-          if ($jml <= 0) {
-            $this->h_resethandler($ref_cust, $ref_brg);
-          }
-
-          $current_qty = $this->h_curr_qty($ref_cust, $ref_brg);
-          $new_qty     = $qty;
-          if (($current_qty + $new_qty) >= $minorder) {
-            $harga = $get_harga1;
-          } elseif (($current_qty + $new_qty) < $minorder) {
-            $harga = $get_harga;
-          }
-        } else {
-          $harga = $barang->harga;
-        }
-        return $harga;
+        return $barang->harga1;
     }
 
-    public function h_cekorder($ref_cust, $ref_brg)
+    public function get_harga_biasa($ref_brg)
+    {
+        $barang   = $this->db->get_where('msatbrg',
+          array(
+            'ref_brg' => $ref_brg,
+            'def'     => 't',
+          ))->row();
+        return $barang->harga;
+    }
+
+    public function h_cekorder($ref_cust)
     {
         $w['ref_cust']  = $ref_cust;
-        // $w['ref_brg']   = $ref_brg;
         $num_rows       = $this->db->get_where('thandlerorder',$w)->num_rows();
         return $num_rows;
     }
@@ -243,18 +231,16 @@ class Cart extends CI_Controller
         return $num_rows;
     }
 
-    public function h_curr_qty($ref_cust, $ref_brg)
+    public function h_curr_qty($ref_cust)
     {
         $w['ref_cust']  = $ref_cust;
-        // $w['ref_brg']   = $ref_brg;
         $result = $this->db->get_where('thandlerorder',$w)->row();
         return $result->order;
     }
 
-    public function h_entrybaru($ref_cust, $ref_brg)
+    public function h_entrybaru($ref_cust)
     {
         $d['ref_cust']  = $ref_cust;
-        // $d['ref_brg']   = $ref_brg;
         $d['order']     = 0;
         $result = $this->db->insert('thandlerorder',$d);
         return $result;
@@ -272,16 +258,15 @@ class Cart extends CI_Controller
         return $result;
     }
 
-    public function h_resethandler($ref_cust, $ref_brg)
+    public function h_resethandler($ref_cust)
     {
         $w['ref_cust']  = $ref_cust;
-        // $w['ref_brg']   = $ref_brg;
         $d['order']     = 0;
         $result = $this->db->update('thandlerorder',$d,$w);
         return $result;
     }
 
-    public function h_hitung_order($kodecust, $kodebrg, $tgl)
+    public function h_hitung_order($kodecust, $tgl)
     {
         $tglstart = date('Y-m-d', strtotime("-30 day", strtotime($tgl))); //tgl minus 30 days;
         $tglend   = date('Y-m-d', strtotime($tgl));
@@ -292,7 +277,6 @@ class Cart extends CI_Controller
               LEFT JOIN xorder ON xorder.kode = xorderd.ref_order
               WHERE
               	xorder.ref_cust = '$kodecust'
-              AND xorderd.ref_brg = '$kodebrg'
               AND xorder.tgl BETWEEN '$tglstart' AND '$tglend'
               ORDER BY xorder.tgl DESC";
         $jumlah         = $this->db->query($q)->num_rows();
