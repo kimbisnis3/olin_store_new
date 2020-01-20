@@ -59,7 +59,7 @@ class Cart extends CI_Controller
               'kode'        => $res_cart->kodebarang,
               'qty'         => 1,
               'price'       => $res_cart->harga,
-              'harga'       => $harga,
+              'harga'       => $res_cart->harga,
               'diskon'      => 0,
               'kodepromo'   => '',
               'name'        => $res_cart->namabarang,
