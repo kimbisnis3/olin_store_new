@@ -25,6 +25,8 @@
                 <th>Layanan</th>
                 <th>Pengiriman</th>
                 <th>Resi</th>
+                <th>Ongkir</th>
+                <th>Total</th>
                 <th>Keterangan</th>
                 <th>Status</th>
               </tr>
@@ -67,6 +69,8 @@
             { "data": "mlayanan_nama" },
             { "data": "mkirim_nama" },
             { "data": "noresi" },
+            { "data": "bykirim" },
+            { "data": "totalall" },
             { "data": "ket" },
             { "data": "status" }]
         });

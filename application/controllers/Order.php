@@ -41,6 +41,7 @@ class Order extends CI_Controller
                 xorder.pathcorel,
                 xorder.pathimage,
                 xorder.status,
+                xorder.total,
                 mcustomer.nama namacust,
                 mkirim.nama mkirim_nama,
                 mlayanan.nama mlayanan_nama,
@@ -87,6 +88,7 @@ class Order extends CI_Controller
             $row['jmlorder']    = $r->jmlorder;
             $row['orderdone']   = $r->orderdone;
             $row['noresi']      = $r->noresi;
+            $row['totalall']    = number_format($r->total + $r->bykirim);
             // $row['statusorder'] = ($r->orderdone == $r->jmlorder) ? '<span class="label label-success">Selesai Semua</span>' : '<span class="label label-warning">Belum Selesai</span>' ;
             $list[] = $row;
         }
