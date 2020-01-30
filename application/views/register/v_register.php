@@ -35,11 +35,11 @@
     <?php $this->load->view('_partials/topbar.php'); ?>
   <section class="p-3">
     <div class="container">
-      <div class="row justify-content-md-center my-3">
+      <!-- <div class="row justify-content-md-center my-3">
         <div class="col-md-auto">
           <a href="<?php echo base_url() ?>uploads/pdf/rules_reseller.pdf" download><button type="button" class="btn btn-primary btn-top" onclick="get_pdf()">klik disini untuk melihat syarat dan ketentuan reseller</button></a>
         </div>
-      </div>
+      </div> -->
       <div class="row justify-content-md-center">
         <div class="col-md-auto">
           <div class="col-md-12 neon p-3">
