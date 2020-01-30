@@ -361,6 +361,7 @@
                 alamat_penerima : $('[name="alamat_penerima"]').val() ,
                 provinsito      : $('[name="provinsi"]').val(),
                 cityto          : $('[name="kota"]').val(),
+                kecato          : $('[name="kecamatan"]').val(),
                 maskprovinsito  : $('[name="provinsi"] option:selected').html(),
                 maskcityto      : $('[name="kota"] option:selected').html(),
                 kgkirim         : $('[name="berattotal"]').val(),
