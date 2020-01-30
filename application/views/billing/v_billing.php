@@ -8,21 +8,28 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="row" style="margin-bottom: 20px !important;">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label for="">Nama Penerima</label>
                             <input type="text" class="form-control" name="nama_penerima">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label for="">Telp Penerima</label>
                             <input type="text" class="form-control" name="telp_penerima">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label for="">Email Penerima</label>
                             <input type="text" class="form-control" name="email_penerima">
                         </div>
-                        <div class="col-md-3">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row" style="margin-bottom: 20px !important;">
+                        <div class="col-md-8">
                             <label for="">Alamat Lengkap Penerima</label>
                             <input type="text" class="form-control" name="alamat_penerima">
+                            <!-- <textarea name="alamat_penerima" rows="4" class="form-control"></textarea> -->
                         </div>
                     </div>
                 </div>
@@ -85,12 +92,12 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row mb-2">
+                    <!-- <div class="row mb-2">
                         <div class="col-md-8">
                             <label for="">Alamat Pengiriman</label>
                             <input type="text" class="form-control" name="alamatkirim" id="alamatkirim">
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-md-2"></div>
             </div>
@@ -105,6 +112,8 @@
                                 <option value="jne">JNE</option>
                                 <option value="tiki">TIKI</option>
                                 <option value="pos">POS</option>
+                                <option value="jnt">J&T</option>
+                                <option value="sicepat">SICEPAT</option>
                             </select>
                         </div>
                         <div class="col-md-4">
@@ -119,6 +128,22 @@
                             <input type="text" class="form-control input-kurir" name="biaya" id="biaya" readonly="true"/>
                             <!-- <input type="hidden" class="form-control" name="kodekurir" id="kodekurir" readonly="true"/>
                             <input type="text" class="form-control" name="berattotal" id="berattotal" readonly="true"/> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="row box-kurir fadeIn animated">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="row" style="margin-bottom: 20px !important;">
+                        <div class="col-md-4">
+                            <label>Nama Pengirim</label>
+                            <input type="text" class="form-control" name="namakirim">
+                        </div>
+                        <div class="col-md-4">
+                            <label>No. HP Pengirim</label>
+                            <input type="text" class="form-control" name="hpkirim" onkeypress="return inputangka(event)">
                         </div>
                     </div>
                 </div>
@@ -202,10 +227,18 @@
                     <td>:</th>
                     <td><span id="k_alamat_cod"></span></td>
                   </tr>
-                  <tr id="visible_kirim">
+                  <!-- <tr id="visible_kirim">
                     <td>Alamat Pengiriman</th>
                     <td>:</th>
                     <td><span id="k_alamat_Kirim"></span></td>
+                  </tr> -->
+                  <tr>
+                    <td>Nama Pengirim</th>
+                    <td>:</th>
+                    <td><span id="k_namakirim"></span></td>
+                    <td>HP Pengirim</th>
+                    <td>:</th>
+                    <td><span id="k_hpkirim"></span></td>
                   </tr>
                   <tr>
                     <td>Provinsi</th>
@@ -341,7 +374,9 @@
                 hargalayanan    : $('[name="hargalayanan"]').val(),
                 total_cart      : $('[name="carttotal"]').val(),
                 alamatcod       : $('[name="alamatcod"]').val(),
-                alamatkirim     : $('[name="alamatkirim"]').val(),
+                namakirim       : $('[name="namakirim"]').val(),
+                hpkirim         : $('[name="hpkirim"]').val(),
+                // alamatkirim     : $('[name="alamatkirim"]').val(),
                 // arr_produk      : arr_barang.content
             },
 	        success: function(data) {
@@ -482,6 +517,8 @@
 
     function load_konfirmasi()
     {
+      $('#k_namakirim').html($('[name="namakirim"]').val())
+      $('#k_hpkirim').html($('[name="hpkirim"]').val())
       $('#k_nama_penerima').html($('[name="nama_penerima"]').val())
       $('#k_telp_penerima').html($('[name="telp_penerima"]').val())
       $('#k_email_penerima').html($('[name="email_penerima"]').val())

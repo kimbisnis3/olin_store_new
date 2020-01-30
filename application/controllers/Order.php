@@ -260,7 +260,9 @@ class Order extends CI_Controller
             $a['bykirim']       = $this->input->post('bykirim');
             $a['kodekurir']     = $this->input->post('kodekurir');
             $a['kurir']         = $this->input->post('kurir');
-            $a['alamatkirim']   = $this->input->post('alamatkirim');
+            $a['namakirim']     = $this->input->post('namakirim');
+            $a['hpkirim']       = $this->input->post('hpkirim');
+            // $a['alamatkirim']   = $this->input->post('alamatkirim');
         }
         $this->db->insert('xorder',$a);
         // $idOrder    = $this->db->insert_id();
