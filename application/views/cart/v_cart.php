@@ -122,7 +122,8 @@
           },
           "columns": [
               { "data": "id", "visible" : false },
-              { "render" : (data,type,row,meta) => { return `${showimage(row.image)}` }},
+              // { "render" : (data,type,row,meta) => { return `${showimage(row.image)}` }},
+              { "render" : (data,type,row,meta) => { return `<img class="img-responsive" onerror="this.onerror=null; this.src='assets/noimage.png'" style="max-width : 60px;" src="${row.imagedsgn}" >` }},
               { "data": "name" },
               { "render" : (data,type,row,meta) => { return `${numeral(row.harga).format('0,0')}` }},
               { "render" : (data,type,row,meta) => { return `${numeral(row.diskon).format('0,0')} <i class="fa fa-times pointer text-danger invisible" onclick=do_delete_promo('${row.rowid}')></i>` } , "visible" : false},

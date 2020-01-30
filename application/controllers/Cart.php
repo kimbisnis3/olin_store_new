@@ -64,6 +64,7 @@ class Cart extends CI_Controller
               'kodepromo'   => '',
               'name'        => $res_cart->namabarang,
               'image'       => $res_cart->gambardesign,
+              'imagedsgn'   => $v->screenshots,
               'berat'       => $res_cart->beratkg,
               '_product_id' => $v->product_id,
               '_design_id'  => $v->design,
@@ -82,12 +83,17 @@ class Cart extends CI_Controller
         $result = $this->cart->contents();
         $list   = [];
         foreach ($result as $i => $r) {
+            $string = $r['imagedsgn'];
+            $ns = str_replace('[','',$string);
+            $ns = str_replace(']','',$ns);
+            $imgdsgn = explode(",",$ns);
             $row['name']      = $r['name'];
             $row['price']     = $r['price'];
             $row['harga']     = $r['harga'];
             $row['diskon']    = $r['diskon'] * $r['qty'];
             $row['kodepromo'] = $r['kodepromo'];
             $row['image']     = $r['image'];
+            $row['imagedsgn'] = lumise_url().'data/orders/'.str_replace('"','',$imgdsgn[0]);
             $row['qty']       = $r['qty'];
             $row['berat']     = $r['berat'] * $r['qty'];
             $row['sub_total_after'] = $r['subtotal'] - ($r['diskon'] * $r['qty']);
