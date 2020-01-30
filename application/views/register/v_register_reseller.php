@@ -191,6 +191,7 @@
     $(document).ready(function(){
       dpicker()
       $('[name="jencust"]').val('res')
+      $('.text-user').html('<i class="fa fa-users"></i> Reseller')
       get_prov()
       $('#prov').prop('disabled', true);
       $('#city').prop('disabled', true);
