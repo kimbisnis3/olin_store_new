@@ -38,6 +38,16 @@ class Register extends CI_Controller
         $d['ket']       = $this->input->post('ket');
         $d['dob']       = dfh($this->input->post('dob'));
         $d['jk']        = $this->input->post('jk');
+        $d['provkode']  = $this->input->post('provkode');
+        $d['provenama'] = $this->input->post('provenama');
+        $d['citykode']  = $this->input->post('citykode');
+        $d['citynama']  = $this->input->post('citynama');
+        $d['keckode']   = $this->input->post('keckode');
+        $d['kecnama']   = $this->input->post('kecnama');
+        $d['kelkode']   = $this->input->post('kelkode');
+        $d['kelnama']   = $this->input->post('kelnama');
+        $d['kodepos']   = $this->input->post('kodepos');
+        $d['jeniskerja']= $this->input->post('jeniskerja');
         $d['ref_jenc']  = $jencust;
         $d['user']      = $this->input->post('user');
         $d['pass']      = md5($this->input->post('pass'));

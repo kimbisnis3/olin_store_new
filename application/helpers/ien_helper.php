@@ -244,4 +244,51 @@ if (!function_exists('status')) {
         return $text;
     }
 
+    function compdata($param)
+    {
+        $ci =& get_instance();
+        $result = $ci->db->get('tcompany')->row_array();
+        return $result[$param];
+    }
+
+    function epost($param) {
+        $ci =& get_instance();
+        return $ci->input->post($param);
+    }
+
+    function eget($param) {
+        $ci =& get_instance();
+        return $ci->input->get($param);
+    }
+
+    function db_query($db) {
+        $ci =& get_instance();
+        return $ci->db->query($db);
+    }
+
+    function db_get($db) {
+        $ci =& get_instance();
+        return $ci->db->get($db);
+    }
+
+    function db_get_where($db, $where) {
+        $ci =& get_instance();
+        return $ci->db->get_where($db, $where);
+    }
+
+    function db_insert($db, $data) {
+        $ci =& get_instance();
+        return $ci->db->insert($db, $data);
+    }
+
+    function db_update($db, $data, $where) {
+        $ci =& get_instance();
+        return $ci->db->update($db, $data, $where);
+    }
+
+    function db_delete($db, $where) {
+        $ci =& get_instance();
+        return $ci->db->delete($db, $where);
+    }
+
 }
