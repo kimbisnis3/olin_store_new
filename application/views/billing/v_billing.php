@@ -126,8 +126,8 @@
                         <div class="col-md-4">
                             <label for="">Biaya Kirim</label>
                             <input type="text" class="form-control input-kurir" name="biaya" id="biaya" readonly="true"/>
-                            <!-- <input type="hidden" class="form-control" name="kodekurir" id="kodekurir" readonly="true"/>
-                            <input type="text" class="form-control" name="berattotal" id="berattotal" readonly="true"/> -->
+<!--                             <input type="text" class="form-control" name="kodekurir" id="kodekurir" readonly="true"/>
+                            <input type="hidden" class="form-control" name="berattotal" id="berattotal" readonly="true"/> -->
                         </div>
                     </div>
                 </div>
@@ -364,7 +364,8 @@
                 kecato          : $('[name="kecamatan"]').val(),
                 maskprovinsito  : $('[name="provinsi"] option:selected').html(),
                 maskcityto      : $('[name="kota"] option:selected').html(),
-                kgkirim         : $('[name="berattotal"]').val(),
+                maskkecato      : $('[name="kecamatan"] option:selected').html(),
+                kgkirim         : Math.ceil($('[name="berattotal"]').val()),
                 bykirim         : $('[name="biaya"]').val(),
                 kodekurir       : $('[name="kodekurir"]').val(),
                 kurir           : $('[name="kurir"]').val(),
@@ -835,7 +836,7 @@
             let ongkos  = (arr_parse[i].cost[0].value);
             let etd     = (arr_parse[i].cost[0].etd);
             let berattotal = $('#berattotal').val()
-            $('#biaya').val(ongkos * berattotal)
+            $('#biaya').val(ongkos * Math.ceil(berattotal))
             $('#kodekurir').val(arr_parse[i].service)
         }
     }
