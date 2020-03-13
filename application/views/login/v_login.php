@@ -107,5 +107,23 @@
         }
       });
     }
+
+    $('[name="user"]').keypress(function(e) {
+  	    var key = e.which;
+  	    if (key == 13)
+  	    {
+  	        login();
+  	        return false;
+  	    }
+  	});
+
+  	$('[name="pass"]').keypress(function(e) {
+  	    var key = e.which;
+  	    if (key == 13)
+  	    {
+  	        login();
+  	        return false;
+  	    }
+  	});
 	</script>
 </html>
