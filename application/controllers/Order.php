@@ -47,7 +47,8 @@ class Order extends CI_Controller
                 mlayanan.nama mlayanan_nama,
                 xsuratjalan.noresi,
                 (SELECT count(statusd) FROM xorderd WHERE xorderd.ref_order = xorder.kode) jmlorder,
-                (SELECT count(statusd) FROM xorderd WHERE xorderd.ref_order = xorder.kode AND statusd=4) orderdone
+                (SELECT count(statusd) FROM xorderd WHERE xorderd.ref_order = xorder.kode AND statusd=4) orderdone,
+                (SELECT count(ref_jual) FROM xpelunasan WHERE xorder.kode = xpelunasan.ref_jual) sdhbayar
             FROM
                 xorder
             LEFT JOIN mcustomer ON mcustomer.kode = xorder.ref_cust
@@ -88,6 +89,7 @@ class Order extends CI_Controller
             $row['jmlorder']    = $r->jmlorder;
             $row['orderdone']   = $r->orderdone;
             $row['noresi']      = $r->noresi;
+            $row['sdhbayar']    = $r->sdhbayar;
             $row['totalall']    = number_format($r->total + $r->bykirim);
             // $row['statusorder'] = ($r->orderdone == $r->jmlorder) ? '<span class="label label-success">Selesai Semua</span>' : '<span class="label label-warning">Belum Selesai</span>' ;
             $list[] = $row;
@@ -105,6 +107,16 @@ class Order extends CI_Controller
             $s = '<span class="label label-info">Sudah Dikirim</span>';
         }
         return $s;
+    }
+
+    public function deletedata()
+    {
+        $d['void']    = 't';
+        $d['tglvoid'] = 'now()';
+        $w['id']      = $this->input->post('id');
+        $result       = $this->db->update($this->table,$d,$w);
+        $r['sukses']  = $result ? 'success' : 'fail' ;
+        echo json_encode($r);
     }
 
     public function getdetail()
